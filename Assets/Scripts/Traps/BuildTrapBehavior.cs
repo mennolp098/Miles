@@ -4,6 +4,8 @@ using System.Collections.Generic;
 
 public class BuildTrapBehavior : MonoBehaviour {
 	public bool buildAble;
+	public bool hasToRotate = false;
+
 	private bool hitting = false;
 	private List<Material> allChildrenMaterials = new List<Material>();
 	void Start()
