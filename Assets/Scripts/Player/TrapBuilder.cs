@@ -69,7 +69,7 @@ public class TrapBuilder : MonoBehaviour {
 	{
 		RaycastHit hit;
 		Ray ray;
-		
+
 		ray = Camera.main.ScreenPointToRay(new Vector2(Screen.width/2,Screen.height/2));
 		ray.origin = Camera.main.transform.position;
 		if(Physics.Raycast(ray, out hit))
@@ -83,18 +83,13 @@ public class TrapBuilder : MonoBehaviour {
 						//check hit position for the wall
 						Vector3 newPos = hit.point;
 						newPos.y = spawnY;
-						Vector3 newRot = hit.transform.eulerAngles;
-						if(hit.transform.name == "leftWall") //check wall direction
-						{
-							newRot.y = 270;
-						} else if(hit.transform.name == "rightWall")
-						{
-							newRot.y = 90;
-						} else if(hit.transform.name == "frontWall")
-						{
-							newRot.y = 0;
-						} else {
-							newRot.y = 180;
+						Vector3 newRot = this.transform.eulerAngles;
+						newRot.z = 0f;
+						newRot.x = 0f;
+						newRot.y *= -1;
+						newRot.y = Mathf.Round (newRot.y / 90.0f) * 90.0f;
+						if(_currentTrap.GetComponent<BuildTrapBehavior>().hasToRotate){
+							newRot.y += 90;
 						}
 						//change position and rotation to respective wall direction
 						_currentTrap.transform.position = newPos;
