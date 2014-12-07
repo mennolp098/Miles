@@ -1,7 +1,8 @@
 using UnityEngine;
 using System.Collections;
 
-public class Movment : MonoBehaviour {
+public class PlayerController : MonoBehaviour
+{
 	public Texture2D cursorTexture;
 
 	private  enum RotationAxes { MouseXAndY = 0, MouseX = 1, MouseY = 2 }
@@ -15,10 +16,14 @@ public class Movment : MonoBehaviour {
     private float rotationY = 0F;
     private float speed = 10;
 	private float gravity = 10f;
+    [SerializeField]
+    private GameObject spell;
+    [SerializeField]
+    private Transform spawn;
 
 	void OnGUI()
 	{
-		GUI.DrawTexture(new Rect(Screen.width/2, Screen.height/2, 32, 32), cursorTexture);
+		GUI.DrawTexture(new Rect(Screen.width/2 -16, Screen.height/2 -16, 32, 32), cursorTexture);
 	}
 	void Awake()
 	{
@@ -31,7 +36,10 @@ public class Movment : MonoBehaviour {
     }
 	void Update ()
 	{
-        
+        if(Input.GetKeyDown(KeyCode.Mouse0))
+        {
+            Instantiate(spell, spawn.position,transform.rotation);
+        }
 		Vector3 movement = new Vector3(Input.GetAxis("Horizontal"), 0, Input.GetAxis("Vertical"));
 		movement = transform.TransformDirection(movement);
 		movement *= speed;
