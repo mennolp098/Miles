@@ -19,7 +19,6 @@ public class EnemyBehavior : MonoBehaviour, IComparable<EnemyBehavior> {
 	private DateTime TimeAdded;
 	private NavMeshAgent _navMesh;
 	private float counter = 1;
-	private float oldspeed;
    
 	public int CompareTo(EnemyBehavior other)
 	{
@@ -45,7 +44,6 @@ public class EnemyBehavior : MonoBehaviour, IComparable<EnemyBehavior> {
         _navMesh = GetComponent<NavMeshAgent>();
         _navMesh.SetDestination(target.transform.position);
 		_navMesh.speed += _speed;
-		oldspeed = _navMesh.speed;
 		Renderer[] allChildrenRenderers = GetComponentsInChildren<Renderer>();
 		foreach(Renderer renderer in allChildrenRenderers)
 		{
@@ -94,12 +92,18 @@ public class EnemyBehavior : MonoBehaviour, IComparable<EnemyBehavior> {
 			Die();
 		}
 	}
+	public void GetPushed(Quaternion rotation)
+	{
+		//this.transform.position += 
+		//TODO: pushed from rotation angle
+	}
 	private void Die()
 	{
 		//TODO: give score or money?
-		audio.Play();
+		//audio.Play();
 		Destroy(this.rigidbody);
 		Destroy(_navMesh);
+		Destroy(this.collider);
 		Destroy(greenbar.gameObject);
 		Destroy(redbar.gameObject);
 		isOnStage = false;

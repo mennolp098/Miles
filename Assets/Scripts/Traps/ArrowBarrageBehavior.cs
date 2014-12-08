@@ -12,7 +12,6 @@ public class ArrowBarrageBehavior : MonoBehaviour {
 
 	void OnTriggerStay(Collider other)
 	{
-		Debug.Log(other.transform.tag);
 		if(other.transform.tag == "Enemy" && timeStamp <= Time.time)
 		{
 			ShootBarrage();
@@ -30,6 +29,11 @@ public class ArrowBarrageBehavior : MonoBehaviour {
 	}
 	void OnParticleCollision(GameObject other)
 	{
-		EnemyBehavior enemyScript = other.GetComponent<EnemyBehavior>();
+		if(other.transform.tag == "Enemy")
+		{
+			EnemyBehavior enemyScript = other.GetComponent<EnemyBehavior>();
+			enemyScript.GetDmg(1f);
+			enemyScript.GetPushed(this.transform.rotation);
+		}
 	}
 }

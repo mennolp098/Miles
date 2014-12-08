@@ -4,7 +4,6 @@ using System.Collections.Generic;
 
 public class BuildTrapBehavior : MonoBehaviour {
 	public bool buildAble;
-	public bool hasToRotate = false;
 
 	private bool hitting = false;
 	private List<Material> allChildrenMaterials = new List<Material>();
@@ -22,8 +21,11 @@ public class BuildTrapBehavior : MonoBehaviour {
 		for (int i = 0; i < hitColliders.Length; i++) {
 			if(hitColliders[i].transform.tag != "Wall" && hitColliders[i].transform.tag != "BuildTrap")
 			{
-				hitting = true;
-				break;
+				if(hitColliders[i].isTrigger == false)
+				{
+					hitting = true;
+					break;
+				}
 			} else {
 				hitting = false;
 			}

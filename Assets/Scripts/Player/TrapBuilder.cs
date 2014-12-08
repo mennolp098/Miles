@@ -9,8 +9,8 @@ public class TrapBuilder : MonoBehaviour {
 	public GameObject[] buildArrowTrap = new GameObject[0];
 
 	public GUIStyle textStyle;
-	public float spawnY;
 
+	private float spawnY;
 	private int _trapToBuild = -1;
 	private bool _isBuilding = false;
 	private GameObject _currentTrap;
@@ -39,9 +39,12 @@ public class TrapBuilder : MonoBehaviour {
 		KeyInput();
 		if(Input.GetMouseButtonDown(0) && _isBuilding)
 		{
-			if(_currentTrap.GetComponent<BuildTrapBehavior>().buildAble)
+			if(_currentTrap != null)
 			{
-				SpawnTrap();
+				if(_currentTrap.GetComponent<BuildTrapBehavior>().buildAble)
+				{
+					SpawnTrap();
+				}
 			}
 		}
 		if(_isBuilding)
@@ -78,38 +81,32 @@ public class TrapBuilder : MonoBehaviour {
 			{
 				if(hit.distance <= 10f) //is in range of wall
 				{
-					if(_currentTrap != null)
+					if(_currentTrap == null)
 					{
-						//check hit position for the wall
-						Vector3 newPos = hit.point;
-						newPos.y = spawnY;
-						Vector3 newRot = this.transform.eulerAngles;
-						newRot.z = 0f;
-						newRot.x = 0f;
-						newRot.y *= -1;
-						newRot.y = Mathf.Round (newRot.y / 90.0f) * 90.0f;
-						if(_currentTrap.GetComponent<BuildTrapBehavior>().hasToRotate){
-							newRot.y += 90;
-						}
-						//change position and rotation to respective wall direction
-						_currentTrap.transform.position = newPos;
-						_currentTrap.transform.eulerAngles = newRot;
-					} else { //if buildtrap is not yet instantiated then
 						_currentTrap = Instantiate(buildTraps[_trapToBuild], Vector3.zero, Quaternion.identity) as GameObject;
 					}
-				} else {
-					if(_currentTrap != null) //is not in range of wall
-					{
-						Destroy(_currentTrap.gameObject);
-					}
-				}
-			} else {
-				if(_currentTrap != null && hit.transform.tag != "BuildTrap")
-				{
+					ChangeTrapPos(hit);
+				} else if(_currentTrap != null){
 					Destroy(_currentTrap.gameObject);
 				}
+			} 
+			else if(_currentTrap != null) 
+			{
+				Destroy(_currentTrap.gameObject);
 			}
 		}
+	}
+	private void ChangeTrapPos(RaycastHit hit)
+	{
+		//check hit position for the wall
+		Vector3 newPos = hit.point;
+		spawnY = 2.5f + this.transform.position.y; 
+		newPos.y = spawnY;
+		Vector3 newRot = hit.transform.eulerAngles;
+		newRot.y -= 90;
+		//change position and rotation to respective wall direction
+		_currentTrap.transform.position = newPos;
+		_currentTrap.transform.eulerAngles = newRot;
 	}
 	//spawn new trap
 	private void SpawnTrap()
