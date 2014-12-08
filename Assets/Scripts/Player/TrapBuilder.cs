@@ -56,16 +56,16 @@ public class TrapBuilder : MonoBehaviour {
 	{
 		if(Input.GetKeyDown(KeyCode.Alpha1))
 		{
-			BuildTrap(0);
+            BuildTrap(PlayerPrefs.GetInt("hotBar1"));
 		} else if(Input.GetKeyDown(KeyCode.Alpha2)) 
 		{
-			BuildTrap(1);
+            BuildTrap(PlayerPrefs.GetInt("hotBar2"));
 		} else if(Input.GetKeyDown(KeyCode.Alpha3)) 
 		{
-			BuildTrap(2);
+            BuildTrap(PlayerPrefs.GetInt("hotBar3"));
 		} else if(Input.GetKeyDown(KeyCode.Alpha4)) 
 		{
-			ClearTrap();
+            BuildTrap(PlayerPrefs.GetInt("hotBar4"));
 		}
 	}
 	private void CheckWhereToBuild()

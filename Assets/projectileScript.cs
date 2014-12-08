@@ -13,6 +13,10 @@ public class projectileScript : MonoBehaviour {
     {
         transform.Translate(Vector3.forward);
 	}
+    void OnCollisionEnter(Collision collision)
+    {
+        kill();
+    }
     void kill()
     {
         Destroy(this.gameObject);
