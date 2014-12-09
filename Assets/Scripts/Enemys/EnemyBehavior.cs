@@ -12,6 +12,7 @@ public class EnemyBehavior : MonoBehaviour, IComparable<EnemyBehavior> {
 	public GameObject redbar;
 
 	protected float _speed = 0.03f;
+	protected float _oldSpeed;
 	protected float _myGold = 0;
 	protected List<Material> allChildrenMaterials = new List<Material>();
 
@@ -37,13 +38,14 @@ public class EnemyBehavior : MonoBehaviour, IComparable<EnemyBehavior> {
 	}
 
 	protected virtual void Start () {
-		target = GameObject.Find ("Waypoint-1");
+		target = GameObject.Find ("Waypoint-" + UnityEngine.Random.Range(1,3));
 		thisTransform = this.transform;
 		TimeAdded = DateTime.Now;
 		isOnStage = true;
         _navMesh = GetComponent<NavMeshAgent>();
         _navMesh.SetDestination(target.transform.position);
 		_navMesh.speed += _speed;
+		_oldSpeed = _navMesh.speed;
 		Renderer[] allChildrenRenderers = GetComponentsInChildren<Renderer>();
 		foreach(Renderer renderer in allChildrenRenderers)
 		{
@@ -90,6 +92,18 @@ public class EnemyBehavior : MonoBehaviour, IComparable<EnemyBehavior> {
 		if(health <= 0)
 		{
 			Die();
+		}
+	}
+	public void GetStunned(float time)
+	{
+		_navMesh.speed = 0;
+		Invoke("StopStun", time);
+	}
+	private void StopStun()
+	{
+		if(_navMesh != null)
+		{
+			_navMesh.speed = _oldSpeed;
 		}
 	}
 	public void GetPushed(Quaternion rotation)
