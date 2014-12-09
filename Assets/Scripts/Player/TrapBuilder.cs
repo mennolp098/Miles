@@ -25,13 +25,17 @@ public class TrapBuilder : MonoBehaviour {
 	void Start()
 	{
 		GetTraps();
-		if(buildTraps[0] == null)
+		int trapcounter = 0;
+		foreach(GameObject trap in buildTraps)
+		{
+			if(trap == null)
+			{
+				trapcounter++;
+			}
+		}
+		if(trapcounter >= 4)
 		{
 			Debug.LogError("No buildtraps assigned!");
-		}
-		if(allTraps[0] == null)
-		{
-			Debug.LogError("No traps assigned!");
 		}
         for (int i = 0; i <= 3; i++)
         {
@@ -60,6 +64,7 @@ public class TrapBuilder : MonoBehaviour {
 	{
 		if(Input.GetKeyDown(KeyCode.Alpha1))
 		{
+<<<<<<< HEAD
             BuildTrap(PlayerPrefs.GetInt("hotBar0"));
 		} else if(Input.GetKeyDown(KeyCode.Alpha2)) 
 		{
@@ -70,6 +75,18 @@ public class TrapBuilder : MonoBehaviour {
 		} else if(Input.GetKeyDown(KeyCode.Alpha4)) 
 		{
             BuildTrap(PlayerPrefs.GetInt("hotBar3"));
+=======
+			BuildTrap(0);
+		} else if(Input.GetKeyDown(KeyCode.Alpha2)) 
+		{
+			BuildTrap(1);
+		} else if(Input.GetKeyDown(KeyCode.Alpha3)) 
+		{
+			BuildTrap(2);
+		} else if(Input.GetKeyDown(KeyCode.Alpha4)) 
+		{
+			BuildTrap(3);
+>>>>>>> origin/master
 		}
 	}
 	private void CheckWhereToBuild()
@@ -81,7 +98,7 @@ public class TrapBuilder : MonoBehaviour {
 		ray.origin = Camera.main.transform.position;
 		if(Physics.Raycast(ray, out hit))
 		{
-			if(hit.transform.tag == "Wall")
+			if(hit.transform.tag == "Wall" && buildTraps[_trapToBuild].transform.tag == "WallTrap")
 			{
 				if(hit.distance <= 10f) //is in range of wall
 				{
@@ -94,6 +111,19 @@ public class TrapBuilder : MonoBehaviour {
 					Destroy(_currentTrap.gameObject);
 				}
 			} 
+			else if(hit.transform.tag == "Floor" && buildTraps[_trapToBuild].transform.tag == "FloorTrap")
+			{
+				if(hit.distance <= 10f) //is in range of wall
+				{
+					if(_currentTrap == null)
+					{
+						_currentTrap = Instantiate(buildTraps[_trapToBuild], Vector3.zero, Quaternion.identity) as GameObject;
+					}
+					ChangeTrapPos(hit);
+				} else if(_currentTrap != null){
+					Destroy(_currentTrap.gameObject);
+				}
+			}
 			else if(_currentTrap != null) 
 			{
 				Destroy(_currentTrap.gameObject);
@@ -104,8 +134,6 @@ public class TrapBuilder : MonoBehaviour {
 	{
 		//check hit position for the wall
 		Vector3 newPos = hit.point;
-		spawnY = 2.5f + this.transform.position.y; 
-		newPos.y = spawnY;
 		Vector3 newRot = hit.transform.eulerAngles;
 		newRot.y -= 90;
 		//change position and rotation to respective wall direction
@@ -115,8 +143,6 @@ public class TrapBuilder : MonoBehaviour {
 	//spawn new trap
 	private void SpawnTrap()
 	{
-		Vector3 spawnPos = _currentTrap.transform.position;
-		spawnPos.y = spawnY;
 		GameObject newTrap = Instantiate(allTraps[_trapToBuild], _currentTrap.transform.position,_currentTrap.transform.rotation) as GameObject;
 		GameObject hierachyTraps = GameObject.FindGameObjectWithTag("AllTraps");
 		newTrap.transform.parent = hierachyTraps.transform;
@@ -132,18 +158,22 @@ public class TrapBuilder : MonoBehaviour {
 			Destroy(_currentTrap.gameObject);
 			_isBuilding = false;
 			_trapToBuild = -1;
-
 		}
 	}
 	//check wich trap to build
 	private void BuildTrap(int trapSort)
 	{
-		_isBuilding = true;
-		_trapToBuild = trapSort;
-		if(_currentTrap != null)
+		if(buildTraps[trapSort] != null)
 		{
-			Destroy(_currentTrap.gameObject);
-			_currentTrap = Instantiate(buildTraps[_trapToBuild], Vector3.zero, Quaternion.identity) as GameObject;
+			_isBuilding = true;
+			_trapToBuild = trapSort;
+			if(_currentTrap != null)
+			{
+				Destroy(_currentTrap.gameObject);
+				_currentTrap = Instantiate(buildTraps[_trapToBuild], Vector3.zero, Quaternion.identity) as GameObject;
+			}
+		} else {
+			ClearTrap();
 		}
 	}
 	//get all traps from playerprefs
@@ -151,20 +181,19 @@ public class TrapBuilder : MonoBehaviour {
 	{
 		for(int i = 0; i < 4; i++)
 		{
-			int trapId = PlayerPrefs.GetInt("trap-" + i);
-			allTraps.Add(arrowTrap[trapId]);
-			buildTraps.Add(buildArrowTrap[trapId]);
+			int trapId = PlayerPrefs.GetInt("hotBar"+i);
+			allTraps.Add(arrowTrap[trapId-1]);
+			buildTraps.Add(buildArrowTrap[trapId-1]);
 		}
 	}
-	/*
 	//UI
     void OnGUI()
     {
-        GUI.DrawTexture(new Rect(Screen.width /2 - 150, Screen.height - UiBack.height /2, UiBack.width/2, UiBack.height/2), UiBack);
-        GUI.DrawTexture(new Rect(Screen.width /2 - 150, Screen.height - UiBack.height /2, UiBack.width / 2, UiBack.height / 2), UiBack);
-        if (_trapToBuild >= 0)
+        GUI.DrawTexture(new Rect(0, Screen.height - UiBack.height /2, Screen.width, UiBack.height/2), UiBack);
+		//GUI.DrawTexture(new Rect(Screen.width /2 - 150, Screen.height - UiBack.height /2, Screen.width, UiBack.height / 2), UiBack);
+        /*if (_trapToBuild >= 0)
         {
             GUI.DrawTexture(new Rect(Screen.width / 2 - 150 + 17 + (45 * _trapToBuild), Screen.height - UiBack.height / 2 + 13, 40, 30), UIButtons[_trapToBuild]);
-        }
-    } */
+        } */
+    }
 }

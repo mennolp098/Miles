@@ -17,9 +17,24 @@ public class BuildTrapBehavior : MonoBehaviour {
 	}
 	void Update()
 	{
+		CheckCollision();
+
+		if(!hitting)
+		{
+			ChangeColor(Color.green);
+			buildAble = true;
+		} else {
+			ChangeColor(Color.red);
+			buildAble = false;
+		}
+	}
+	private void CheckCollision()
+	{
 		Collider[] hitColliders = Physics.OverlapSphere(this.transform.position, 1f);
+		int wallcounter = 0;
 		for (int i = 0; i < hitColliders.Length; i++) {
-			if(hitColliders[i].transform.tag != "Wall" && hitColliders[i].transform.tag != "BuildTrap")
+			string colliderTag = hitColliders[i].transform.tag;
+			if(colliderTag != "Wall" && colliderTag != "WallTrap" && colliderTag != "Floor" && colliderTag != "FloorTrap")
 			{
 				if(hitColliders[i].isTrigger == false)
 				{
@@ -29,24 +44,22 @@ public class BuildTrapBehavior : MonoBehaviour {
 			} else {
 				hitting = false;
 			}
+			if(colliderTag == "Wall") {
+				wallcounter++;
+				if(wallcounter > 2)
+				{
+					hitting = true;
+				}
+			} 
 		}
-		if(!hitting)
+	}
+	private void ChangeColor(Color color)
+	{
+		Color newColor = color;
+		newColor.a = 0.5f;
+		foreach(Material material in allChildrenMaterials)
 		{
-			Color newColor = Color.green;
-			newColor.a = 0.5f;
-			foreach(Material material in allChildrenMaterials)
-			{
-				material.color = newColor;
-			}
-			buildAble = true;
-		} else {
-			Color newColor = Color.red;
-			newColor.a = 0.5f;
-			foreach(Material material in allChildrenMaterials)
-			{
-				material.color = newColor;
-			}
-			buildAble = false;
+			material.color = newColor;
 		}
 	}
 }

@@ -4,7 +4,8 @@ using System.Collections;
 public class PlayerController : MonoBehaviour
 {
 	public Texture2D cursorTexture;
-	public Transform camera;
+	public Transform playerCamera;
+	public Animator animator;
 
 	private  enum RotationAxes { MouseXAndY = 0, MouseX = 1, MouseY = 2 }
     private RotationAxes axes = RotationAxes.MouseXAndY;
@@ -39,6 +40,9 @@ public class PlayerController : MonoBehaviour
 	{
         if(Input.GetKeyDown(KeyCode.Mouse0))
         {
+			animator.SetTrigger("shootTrigger");
+			animator.SetBool("isShooting", true);
+			Invoke("StopShooting", 1f);
             Instantiate(spell, spawn.position,transform.rotation);
         }
 		Vector3 movement = new Vector3(Input.GetAxis("Horizontal"), 0, Input.GetAxis("Vertical"));
@@ -47,6 +51,12 @@ public class PlayerController : MonoBehaviour
 		movement.y = -gravity;
 		CharacterController controller = GetComponent<CharacterController>();
 		controller.Move(movement*Time.deltaTime);
+		if(movement.x > 0 || movement.z > 0 || movement.x < 0 || movement.z < 0)
+		{
+			animator.SetBool("isWalking", true);
+		} else {
+			animator.SetBool("isWalking", false);
+		}
 		if (axes == RotationAxes.MouseXAndY)
 		{
 			float rotationX = transform.localEulerAngles.y + Input.GetAxis("Mouse X") * sensitivityX;
@@ -55,7 +65,7 @@ public class PlayerController : MonoBehaviour
 			rotationY = Mathf.Clamp (rotationY, minimumY, maximumY);
 			
 			transform.localEulerAngles = new Vector3(0, rotationX, 0);
-			camera.localEulerAngles = new Vector3(-rotationY,0,0);
+			playerCamera.localEulerAngles = new Vector3(-rotationY,0,0);
 		}
 		else if (axes == RotationAxes.MouseX)
 		{
@@ -68,5 +78,9 @@ public class PlayerController : MonoBehaviour
 			
 			transform.localEulerAngles = new Vector3(-rotationY, transform.localEulerAngles.y, 0);
 		}
+	}
+	private void StopShooting()
+	{
+		animator.SetBool("isShooting", false);
 	}
 }
