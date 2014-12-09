@@ -37,10 +37,6 @@ public class TrapBuilder : MonoBehaviour {
 		{
 			Debug.LogError("No buildtraps assigned!");
 		}
-        for (int i = 0; i <= 3; i++)
-        {
-            Debug.Log(PlayerPrefs.GetInt("hotBar" + i));
-        }
 	}
 
 	void Update () {
@@ -64,7 +60,6 @@ public class TrapBuilder : MonoBehaviour {
 	{
 		if(Input.GetKeyDown(KeyCode.Alpha1))
 		{
-<<<<<<< HEAD
             BuildTrap(PlayerPrefs.GetInt("hotBar0"));
 		} else if(Input.GetKeyDown(KeyCode.Alpha2)) 
 		{
@@ -75,18 +70,6 @@ public class TrapBuilder : MonoBehaviour {
 		} else if(Input.GetKeyDown(KeyCode.Alpha4)) 
 		{
             BuildTrap(PlayerPrefs.GetInt("hotBar3"));
-=======
-			BuildTrap(0);
-		} else if(Input.GetKeyDown(KeyCode.Alpha2)) 
-		{
-			BuildTrap(1);
-		} else if(Input.GetKeyDown(KeyCode.Alpha3)) 
-		{
-			BuildTrap(2);
-		} else if(Input.GetKeyDown(KeyCode.Alpha4)) 
-		{
-			BuildTrap(3);
->>>>>>> origin/master
 		}
 	}
 	private void CheckWhereToBuild()
