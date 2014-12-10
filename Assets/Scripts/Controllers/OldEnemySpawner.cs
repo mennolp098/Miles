@@ -56,7 +56,6 @@ public class OldEnemySpawner : MonoBehaviour {
             }
             _currentEnemys = 0;
             _wave++;
-			Debug.Log(_wave);
             _maxEnemys += _enemyMultiplayer * _wave;
             
             Invoke("startWave", _waveCoolDown);
