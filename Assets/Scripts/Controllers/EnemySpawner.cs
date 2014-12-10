@@ -10,14 +10,11 @@ public class EnemySpawner : MonoBehaviour
     private int wave;
     void Start()
     {
-        Invoke("spawner",5);
+        Invoke("spawner",3);
     }
     private void spawner()
     {
-        for(int a = 0;a < beginningEnemies +(enrmyMultiplayer * wave);a++)
-        {
-            Debug.Log(beginningEnemies + (enrmyMultiplayer * wave));
-        }
+        
     }
         
 
