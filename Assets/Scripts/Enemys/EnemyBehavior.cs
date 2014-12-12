@@ -10,6 +10,8 @@ public class EnemyBehavior : MonoBehaviour, IComparable<EnemyBehavior> {
 	public int sort;
 	public GameObject greenbar;
 	public GameObject redbar;
+	public GameObject goldPrefab;
+	public Animator childAnims;
 
 	protected float _speed = 0.03f;
 	protected float _oldSpeed;
@@ -119,7 +121,17 @@ public class EnemyBehavior : MonoBehaviour, IComparable<EnemyBehavior> {
 	private void Die()
 	{
 		//TODO: give score or money?
+		for(int i = 0; i < _myGold; i++)
+		{
+			Vector3 randomSpawnPos = this.transform.position;
+			randomSpawnPos.x += UnityEngine.Random.Range(-3,3);
+			randomSpawnPos.z += UnityEngine.Random.Range(-3,3);
+			randomSpawnPos.y += UnityEngine.Random.Range(1,5);
+			GameObject newGoldCoin = Instantiate(goldPrefab, randomSpawnPos,Quaternion.identity) as GameObject;
+			newGoldCoin.rigidbody.AddExplosionForce(200f,this.transform.position,10f);
+		}
 		//audio.Play();
+		childAnims.SetTrigger("dead");
 		Destroy(this.rigidbody);
 		Destroy(_navMesh);
 		Destroy(this.collider);

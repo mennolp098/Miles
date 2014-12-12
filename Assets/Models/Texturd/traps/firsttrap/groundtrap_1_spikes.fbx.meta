@@ -1,0 +1,217 @@
+fileFormatVersion: 2
+guid: 8bdb28e30d9ff174a9dbe83d08270e7c
+ModelImporter:
+  serializedVersion: 16
+  fileIDToRecycleName:
+    100000: //RootNode
+    100002: spike
+    100004: spike_1
+    100006: spike_2
+    100008: spike_3
+    100010: spike_4
+    100012: spike_5
+    100014: spike_6
+    100016: spike_7
+    100018: spike_8
+    100020: spikes
+    100022: Tube
+    400000: //RootNode
+    400002: spike
+    400004: spike_1
+    400006: spike_2
+    400008: spike_3
+    400010: spike_4
+    400012: spike_5
+    400014: spike_6
+    400016: spike_7
+    400018: spike_8
+    400020: spikes
+    400022: Tube
+    2300000: spike
+    2300002: spike_1
+    2300004: spike_2
+    2300006: spike_3
+    2300008: spike_4
+    2300010: spike_5
+    2300012: spike_6
+    2300014: spike_7
+    2300016: spike_8
+    2300018: Tube
+    3300000: spike
+    3300002: spike_1
+    3300004: spike_2
+    3300006: spike_3
+    3300008: spike_4
+    3300010: spike_5
+    3300012: spike_6
+    3300014: spike_7
+    3300016: spike_8
+    3300018: Tube
+    4300000: spike_1
+    4300002: spike_2
+    4300004: spike_3
+    4300006: spike_4
+    4300008: spike_5
+    4300010: spike_6
+    4300012: spike_7
+    4300014: spike_8
+    4300016: spike
+    4300018: Tube
+    7400000: C4D Animation Take
+    7400002: C4D Animation Take0
+    9500000: //RootNode
+    11100000: //RootNode
+  materials:
+    importMaterials: 1
+    materialName: 0
+    materialSearch: 1
+  animations:
+    legacyGenerateAnimations: 4
+    bakeSimulation: 0
+    optimizeGameObjects: 0
+    motionNodeName: 
+    animationCompression: 3
+    animationRotationError: .5
+    animationPositionError: .5
+    animationScaleError: .5
+    animationWrapMode: 0
+    extraExposedTransformPaths: []
+    clipAnimations:
+    - serializedVersion: 16
+      name: C4D Animation Take
+      takeName: C4D Animation Take
+      firstFrame: 0
+      lastFrame: 9
+      wrapMode: 0
+      orientationOffsetY: 0
+      level: 0
+      cycleOffset: 0
+      loop: 0
+      loopTime: 0
+      loopBlend: 0
+      loopBlendOrientation: 0
+      loopBlendPositionY: 0
+      loopBlendPositionXZ: 0
+      keepOriginalOrientation: 0
+      keepOriginalPositionY: 1
+      keepOriginalPositionXZ: 0
+      heightFromFeet: 0
+      mirror: 0
+      bodyMask: 01000000010000000100000001000000010000000100000001000000010000000100000001000000010000000100000001000000
+      curves: []
+      events: []
+      transformMask:
+      - path: 
+        weight: 1
+      - path: spikes
+        weight: 1
+      - path: spikes/spike
+        weight: 1
+      - path: spikes/spike_1
+        weight: 1
+      - path: spikes/spike_2
+        weight: 1
+      - path: spikes/spike_3
+        weight: 1
+      - path: spikes/spike_4
+        weight: 1
+      - path: spikes/spike_5
+        weight: 1
+      - path: spikes/spike_6
+        weight: 1
+      - path: spikes/spike_7
+        weight: 1
+      - path: spikes/spike_8
+        weight: 1
+      - path: Tube
+        weight: 1
+      maskType: 0
+      maskSource: {instanceID: 0}
+    - serializedVersion: 16
+      name: C4D Animation Take0
+      takeName: C4D Animation Take
+      firstFrame: 0
+      lastFrame: .100000001
+      wrapMode: 0
+      orientationOffsetY: 0
+      level: 0
+      cycleOffset: 0
+      loop: 0
+      loopTime: 0
+      loopBlend: 0
+      loopBlendOrientation: 0
+      loopBlendPositionY: 0
+      loopBlendPositionXZ: 0
+      keepOriginalOrientation: 0
+      keepOriginalPositionY: 1
+      keepOriginalPositionXZ: 0
+      heightFromFeet: 0
+      mirror: 0
+      bodyMask: 01000000010000000100000001000000010000000100000001000000010000000100000001000000010000000100000001000000
+      curves: []
+      events: []
+      transformMask:
+      - path: 
+        weight: 1
+      - path: spikes
+        weight: 1
+      - path: spikes/spike
+        weight: 1
+      - path: spikes/spike_1
+        weight: 1
+      - path: spikes/spike_2
+        weight: 1
+      - path: spikes/spike_3
+        weight: 1
+      - path: spikes/spike_4
+        weight: 1
+      - path: spikes/spike_5
+        weight: 1
+      - path: spikes/spike_6
+        weight: 1
+      - path: spikes/spike_7
+        weight: 1
+      - path: spikes/spike_8
+        weight: 1
+      - path: Tube
+        weight: 1
+      maskType: 0
+      maskSource: {instanceID: 0}
+    isReadable: 1
+  meshes:
+    lODScreenPercentages: []
+    globalScale: .00999999978
+    meshCompression: 0
+    addColliders: 0
+    importBlendShapes: 1
+    swapUVChannels: 0
+    generateSecondaryUV: 0
+    useFileUnits: 1
+    optimizeMeshForGPU: 1
+    weldVertices: 1
+    secondaryUVAngleDistortion: 8
+    secondaryUVAreaDistortion: 15.000001
+    secondaryUVHardAngle: 88
+    secondaryUVPackMargin: 4
+  tangentSpace:
+    normalSmoothAngle: 60
+    splitTangentsAcrossUV: 1
+    normalImportMode: 0
+    tangentImportMode: 1
+  importAnimation: 1
+  copyAvatar: 0
+  humanDescription:
+    human: []
+    skeleton: []
+    armTwist: .5
+    foreArmTwist: .5
+    upperLegTwist: .5
+    legTwist: .5
+    armStretch: .0500000007
+    legStretch: .0500000007
+    feetSpacing: 0
+    rootMotionBoneName: 
+  lastHumanDescriptionAvatarSource: {instanceID: 0}
+  animationType: 2
+  additionalBone: 0
+  userData: 

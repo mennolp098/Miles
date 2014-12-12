@@ -37,6 +37,7 @@ public class SpikeTrapBehavior : MonoBehaviour {
 	void TriggerSpikes()
 	{
 		_spikeCooldown = Time.time + spikeCooldown;
+		GetComponentInChildren<Animator>().SetTrigger("shoot");
 		for(int i = 0; i < _enemyScripts.Count; i++)
 		{
 			_enemyScripts[i].GetDmg(spikeDmg);
