@@ -1,0 +1,207 @@
+fileFormatVersion: 2
+guid: e90708477c8a3a34dbb2d1fcdcbf38cb
+ModelImporter:
+  serializedVersion: 16
+  fileIDToRecycleName:
+    100000: foot
+    100002: foot_2
+    100004: head
+    100006: head_tip
+    100008: heel
+    100010: heel_2
+    100012: Joint
+    100014: joint
+    100016: Joint_1
+    100018: Joint_1_2
+    100020: Joint_1_3
+    100022: Joint_1_4
+    100024: Joint_2
+    100026: Joint_2_2
+    100028: Joint_2_3
+    100030: Joint_2_4
+    100032: knee
+    100034: knee_2
+    100036: left_arm
+    100038: left_leg
+    100040: neck
+    100042: //RootNode
+    100044: orc_1
+    100046: right_arm
+    100048: right_leg
+    100050: Skin
+    100052: toe
+    100054: toe_2
+    100056: torso
+    100058: character
+    400000: foot
+    400002: foot_2
+    400004: head
+    400006: head_tip
+    400008: heel
+    400010: heel_2
+    400012: Joint
+    400014: joint
+    400016: Joint_1
+    400018: Joint_1_2
+    400020: Joint_1_3
+    400022: Joint_1_4
+    400024: Joint_2
+    400026: Joint_2_2
+    400028: Joint_2_3
+    400030: Joint_2_4
+    400032: knee
+    400034: knee_2
+    400036: left_arm
+    400038: left_leg
+    400040: neck
+    400042: //RootNode
+    400044: orc_1
+    400046: right_arm
+    400048: right_leg
+    400050: Skin
+    400052: toe
+    400054: toe_2
+    400056: torso
+    400058: character
+    4300000: orc_1
+    7400000: dead
+    9500000: //RootNode
+    13700000: orc_1
+  materials:
+    importMaterials: 1
+    materialName: 0
+    materialSearch: 1
+  animations:
+    legacyGenerateAnimations: 4
+    bakeSimulation: 0
+    optimizeGameObjects: 0
+    motionNodeName: 
+    animationCompression: 1
+    animationRotationError: .5
+    animationPositionError: .5
+    animationScaleError: .5
+    animationWrapMode: 0
+    extraExposedTransformPaths: []
+    clipAnimations:
+    - serializedVersion: 16
+      name: dead
+      takeName: C4D Animation Take
+      firstFrame: 0
+      lastFrame: 40
+      wrapMode: 0
+      orientationOffsetY: 0
+      level: 0
+      cycleOffset: 0
+      loop: 0
+      loopTime: 1
+      loopBlend: 0
+      loopBlendOrientation: 0
+      loopBlendPositionY: 0
+      loopBlendPositionXZ: 0
+      keepOriginalOrientation: 0
+      keepOriginalPositionY: 1
+      keepOriginalPositionXZ: 0
+      heightFromFeet: 0
+      mirror: 0
+      bodyMask: 01000000010000000100000001000000010000000100000001000000010000000100000001000000010000000100000001000000
+      curves: []
+      events: []
+      transformMask:
+      - path: 
+        weight: 1
+      - path: Joint
+        weight: 1
+      - path: Joint/left_leg
+        weight: 1
+      - path: Joint/left_leg/knee
+        weight: 1
+      - path: Joint/left_leg/knee/heel
+        weight: 1
+      - path: Joint/left_leg/knee/heel/foot
+        weight: 1
+      - path: Joint/left_leg/knee/heel/foot/toe
+        weight: 1
+      - path: Joint/right_leg
+        weight: 1
+      - path: Joint/right_leg/knee_2
+        weight: 1
+      - path: Joint/right_leg/knee_2/heel_2
+        weight: 1
+      - path: Joint/right_leg/knee_2/heel_2/foot_2
+        weight: 1
+      - path: Joint/right_leg/knee_2/heel_2/foot_2/toe_2
+        weight: 1
+      - path: Joint/torso
+        weight: 1
+      - path: Joint/torso/Joint_2
+        weight: 1
+      - path: Joint/torso/Joint_2/left_arm
+        weight: 1
+      - path: Joint/torso/Joint_2/left_arm/Joint_1
+        weight: 1
+      - path: Joint/torso/Joint_2/left_arm/Joint_1/Joint_1_2
+        weight: 1
+      - path: Joint/torso/Joint_2/left_arm/Joint_1/Joint_1_2/Joint_1_3
+        weight: 1
+      - path: Joint/torso/Joint_2/left_arm/Joint_1/Joint_1_2/Joint_1_3/Joint_1_4
+        weight: 1
+      - path: Joint/torso/Joint_2/neck
+        weight: 1
+      - path: Joint/torso/Joint_2/neck/head
+        weight: 1
+      - path: Joint/torso/Joint_2/neck/head/head_tip
+        weight: 1
+      - path: Joint/torso/Joint_2/right_arm
+        weight: 1
+      - path: Joint/torso/Joint_2/right_arm/joint
+        weight: 1
+      - path: Joint/torso/Joint_2/right_arm/joint/Joint_2_2
+        weight: 1
+      - path: Joint/torso/Joint_2/right_arm/joint/Joint_2_2/Joint_2_3
+        weight: 1
+      - path: Joint/torso/Joint_2/right_arm/joint/Joint_2_2/Joint_2_3/Joint_2_4
+        weight: 1
+      - path: orc_1
+        weight: 1
+      - path: orc_1/Skin
+        weight: 1
+      maskType: 0
+      maskSource: {instanceID: 0}
+    isReadable: 1
+  meshes:
+    lODScreenPercentages: []
+    globalScale: .00999999978
+    meshCompression: 0
+    addColliders: 0
+    importBlendShapes: 1
+    swapUVChannels: 0
+    generateSecondaryUV: 0
+    useFileUnits: 1
+    optimizeMeshForGPU: 1
+    weldVertices: 1
+    secondaryUVAngleDistortion: 8
+    secondaryUVAreaDistortion: 15.000001
+    secondaryUVHardAngle: 88
+    secondaryUVPackMargin: 4
+  tangentSpace:
+    normalSmoothAngle: 60
+    splitTangentsAcrossUV: 1
+    normalImportMode: 0
+    tangentImportMode: 1
+  importAnimation: 1
+  copyAvatar: 0
+  humanDescription:
+    human: []
+    skeleton: []
+    armTwist: .5
+    foreArmTwist: .5
+    upperLegTwist: .5
+    legTwist: .5
+    armStretch: .0500000007
+    legStretch: .0500000007
+    feetSpacing: 0
+    rootMotionBoneName: 
+  lastHumanDescriptionAvatarSource: {instanceID: 0}
+  animationType: 2
+  additionalBone: 0
+  userData: 
