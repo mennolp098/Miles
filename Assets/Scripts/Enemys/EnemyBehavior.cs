@@ -38,7 +38,7 @@ public class EnemyBehavior : MonoBehaviour, IComparable<EnemyBehavior> {
 	}
 
 	protected virtual void Start () {
-		target = GameObject.Find ("Waypoint-" + UnityEngine.Random.Range(1,3));
+		target = GameObject.Find ("Waypoint-1");
 		thisTransform = this.transform;
 		TimeAdded = DateTime.Now;
 		isOnStage = true;
