@@ -40,7 +40,7 @@ public class TrapBuilder : MonoBehaviour {
 	}
 
 	void Update () {
-		KeyInput();
+            KeyInput();
 		if(Input.GetMouseButtonDown(0) && _isBuilding)
 		{
 			if(_currentTrap != null)
@@ -60,16 +60,16 @@ public class TrapBuilder : MonoBehaviour {
 	{
 		if(Input.GetKeyDown(KeyCode.Alpha1))
 		{
-			BuildTrap(0);
+            BuildTrap(PlayerPrefs.GetInt("hotBar0"));
 		} else if(Input.GetKeyDown(KeyCode.Alpha2)) 
 		{
-			BuildTrap(1);
+            BuildTrap(PlayerPrefs.GetInt("hotBar1"));
 		} else if(Input.GetKeyDown(KeyCode.Alpha3)) 
 		{
-			BuildTrap(2);
+            BuildTrap(PlayerPrefs.GetInt("hotBar2"));
 		} else if(Input.GetKeyDown(KeyCode.Alpha4)) 
 		{
-			BuildTrap(3);
+            BuildTrap(PlayerPrefs.GetInt("hotBar3"));
 		}
 	}
 	private void CheckWhereToBuild()

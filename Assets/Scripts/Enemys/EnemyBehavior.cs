@@ -79,9 +79,14 @@ public class EnemyBehavior : MonoBehaviour, IComparable<EnemyBehavior> {
     {
 		if (other.gameObject.tag == "Portal")
         {
-			//TODO: check onportal
+            other.gameObject.GetComponent<GateScript>().hit();
 			Destroy(this.gameObject);
 			isOnStage = false;
+        }
+        if (other.gameObject.tag == "spell")
+        {
+            Destroy(other.gameObject);
+            GetDmg(1);
         }
     }
 	public void SetHealth(float newHealth)

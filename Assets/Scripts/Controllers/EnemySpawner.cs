@@ -1,69 +1,45 @@
 ﻿using UnityEngine;
 using System.Collections;
 
-public class EnemySpawner : MonoBehaviour {
+public class EnemySpawner : MonoBehaviour 
+{
     [SerializeField]
     private GameObject[] _enemys;
-    [SerializeField]
-    private float _enemyCoolDown;
-    [SerializeField]
-    private float _waveCoolDown;
-    [SerializeField]
-    private int _startingEnemys;
-    [SerializeField]
-    private int _enemyMultiplayer;
-    private int _maxEnemys;
-    private int _currentEnemys;
+     [SerializeField]
+    private float _groepMultiplayer;
+     [SerializeField]
+    private int _groepSize;
     private int _wave;
-	// Use this for initialization
-	void Start () 
+     [SerializeField]
+    private int _waveTimer;
+    private int _goepsInWave;
+     [SerializeField]
+    private int _maxGoepsInWave;
+     [SerializeField]
+    private float _groepTimer;
+    void Start()
     {
-        Invoke("startWave", _waveCoolDown);
-        _maxEnemys = _startingEnemys;
-	}
-	
-    void startWave()
-    {
-        Invoke("spawnEnemy", _enemyCoolDown);
+        Invoke("spawner", _waveTimer);
     }
-	void spawnEnemy () 
+    private void spawner()
     {
-        _currentEnemys++;
-		float newHealth;
-		int random = Random.Range (0, _enemys.Length);
-		GameObject newEnemy = Instantiate(_enemys[random].gameObject,this.transform.position,this.transform.rotation) as GameObject;
-		newEnemy.transform.parent = GameObject.FindGameObjectWithTag ("Enemys").transform;
-        if (random == 0)
+        for (int a = 0; a < _groepSize;a++)
         {
-			newHealth = 3 * _wave + 7 - (_wave/4);
-			newEnemy.GetComponent<EnemyBehavior>().SetHealth(newHealth);
+            Instantiate(_enemys[Random.Range(0, -_enemys.Length)],new Vector3(transform.position.x + Random.Range(-15,15),transform.position.y,transform.position.z),transform.rotation);
         }
-        if (random == 1)
+        _goepsInWave++;
+        if (_goepsInWave <= _maxGoepsInWave)
         {
-			newHealth = 2.5f* _wave + 5 - (_wave/4);
-			newEnemy.GetComponent<EnemyBehavior>().SetHealth(newHealth);
-        }
-        if (random == 2)
-        {
-			newHealth = 5 *_wave + 10 - (_wave/4);
-			newEnemy.GetComponent<EnemyBehavior>().SetHealth(newHealth);
-        }
-        if(_currentEnemys == _maxEnemys)
-        {
-            if(_wave == 10)
-            {
-                Application.LoadLevel("win");
-            }
-            _currentEnemys = 0;
-            _wave++;
-            _maxEnemys += _enemyMultiplayer * _wave;
-            
-            Invoke("startWave", _waveCoolDown);
+            Invoke("spawner", _groepTimer);
         }
         else
         {
-            Invoke("spawnEnemy", _enemyCoolDown);
+            _wave++;
+            _maxGoepsInWave += Mathf.FloorToInt( _groepMultiplayer * _wave);
+            _goepsInWave = 0;
+            Invoke("spawner", _waveTimer);
         }
+    }
         
-	}
+
 }

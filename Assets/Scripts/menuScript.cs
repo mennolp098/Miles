@@ -57,29 +57,34 @@ public class menuScript : MonoBehaviour {
             {
                 for(int c = 0;c < _hotBar.Length;c++)
                 {
+                    Debug.Log(_hotBar[0]);
                     PlayerPrefs.SetInt("hotBar"+c, _hotBar[c]);
+                }
+                for (int i = 0; i <= 3; i++)
+                {
+                    Debug.Log(PlayerPrefs.GetInt("hotBar"+i));
                 }
                 Application.LoadLevel("Game");
             }
             //hotbar
-            if (GUI.Button(new Rect(_middelPoint.x, _middelPoint.y + Screen.height / 2 - _trapButtonsize, _trapButtonsize, _trapButtonsize), _Traps[_hotBar[0]]))
-            {
-                _hotBar[0] = _selectedtrap;
-                _selectedtrap = 0;
-            }
-            if (GUI.Button(new Rect(_middelPoint.x + _trapButtonsize, _middelPoint.y + Screen.height / 2 - _trapButtonsize, _trapButtonsize, _trapButtonsize), _Traps[_hotBar[1]]))
-            {
-                _hotBar[1] = _selectedtrap;
-                _selectedtrap = 0;
-            }
-            if (GUI.Button(new Rect(_middelPoint.x - _trapButtonsize, _middelPoint.y + Screen.height / 2 - _trapButtonsize, _trapButtonsize, _trapButtonsize), _Traps[_hotBar[2]]))
+            if (GUI.Button(new Rect(_middelPoint.x, _middelPoint.y + Screen.height / 2 - _trapButtonsize, _trapButtonsize, _trapButtonsize), _Traps[_hotBar[2 ]]))
             {
                 _hotBar[2] = _selectedtrap;
                 _selectedtrap = 0;
             }
-            if (GUI.Button(new Rect(_middelPoint.x - (_trapButtonsize * 2), _middelPoint.y + Screen.height / 2 - _trapButtonsize, _trapButtonsize, _trapButtonsize), _Traps[_hotBar[3]]))
+            if (GUI.Button(new Rect(_middelPoint.x + _trapButtonsize, _middelPoint.y + Screen.height / 2 - _trapButtonsize, _trapButtonsize, _trapButtonsize), _Traps[_hotBar[3]]))
             {
                 _hotBar[3] = _selectedtrap;
+                _selectedtrap = 0;
+            }
+            if (GUI.Button(new Rect(_middelPoint.x - _trapButtonsize, _middelPoint.y + Screen.height / 2 - _trapButtonsize, _trapButtonsize, _trapButtonsize), _Traps[_hotBar[1]]))
+            {
+                _hotBar[1] = _selectedtrap;
+                _selectedtrap = 0;
+            }
+            if (GUI.Button(new Rect(_middelPoint.x - (_trapButtonsize * 2), _middelPoint.y + Screen.height / 2 - _trapButtonsize, _trapButtonsize, _trapButtonsize), _Traps[_hotBar[0]]))
+            {
+                _hotBar[0] = _selectedtrap;
                 _selectedtrap = 0;
             }
             //selctionbuttions
