@@ -18,6 +18,7 @@ public class EnemyBehavior : MonoBehaviour, IComparable<EnemyBehavior> {
 	protected float _myGold = 0;
 	protected List<Material> allChildrenMaterials = new List<Material>();
 
+	private Transform allCoins;
 	private GameObject target;
 	private DateTime TimeAdded;
 	private NavMeshAgent _navMesh;
@@ -41,6 +42,7 @@ public class EnemyBehavior : MonoBehaviour, IComparable<EnemyBehavior> {
 
 	protected virtual void Start () {
 		target = GameObject.Find ("Waypoint-" + UnityEngine.Random.Range(1,3));
+		allCoins = GameObject.FindGameObjectWithTag("allCoins").transform;
 		thisTransform = this.transform;
 		TimeAdded = DateTime.Now;
 		isOnStage = true;
@@ -128,7 +130,8 @@ public class EnemyBehavior : MonoBehaviour, IComparable<EnemyBehavior> {
 			randomSpawnPos.z += UnityEngine.Random.Range(-3,3);
 			randomSpawnPos.y += UnityEngine.Random.Range(1,5);
 			GameObject newGoldCoin = Instantiate(goldPrefab, randomSpawnPos,Quaternion.identity) as GameObject;
-			newGoldCoin.rigidbody.AddExplosionForce(200f,this.transform.position,10f);
+			newGoldCoin.rigidbody.AddExplosionForce(200f,this.transform.position,20f);
+			newGoldCoin.transform.parent = allCoins;
 		}
 		//audio.Play();
 		childAnims.SetTrigger("dead");
@@ -137,6 +140,7 @@ public class EnemyBehavior : MonoBehaviour, IComparable<EnemyBehavior> {
 		Destroy(this.collider);
 		Destroy(greenbar.gameObject);
 		Destroy(redbar.gameObject);
+		Destroy(this.gameObject, 20f);
 		isOnStage = false;
 	}
 }

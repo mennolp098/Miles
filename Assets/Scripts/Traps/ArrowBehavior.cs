@@ -21,16 +21,18 @@ public class ArrowBehavior : MonoBehaviour {
 	}
 	void OnTriggerEnter(Collider other) 
 	{
-		if(other.transform == target)
+		if(other.transform.tag == "Enemy")
 		{
 			other.gameObject.GetComponent<EnemyBehavior>().GetDmg(damage);
+			Destroy(this.gameObject);
+		} else {
 			Destroy(this.gameObject);
 		}
 	}
 	// Update is called once per frame
 	void Update () 
 	{
-		if(target != null)
+		if(target.rigidbody != null)
 		{
 			transform.position = Vector3.MoveTowards(transform.position, target.position, speed * Time.deltaTime);
 		} else {

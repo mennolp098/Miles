@@ -30,11 +30,11 @@ public class BuildTrapBehavior : MonoBehaviour {
 	}
 	private void CheckCollision()
 	{
-		Collider[] hitColliders = Physics.OverlapSphere(this.transform.position, 1f);
+		Collider[] hitColliders = Physics.OverlapSphere(this.transform.position, 2f);
 		int wallcounter = 0;
 		for (int i = 0; i < hitColliders.Length; i++) {
 			string colliderTag = hitColliders[i].transform.tag;
-			if(colliderTag != "Wall" && colliderTag != "WallTrap" && colliderTag != "Floor" && colliderTag != "FloorTrap")
+			if(colliderTag != "Wall" && colliderTag != "WallTrap" && colliderTag != "Floor" && colliderTag != "FloorTrap" && colliderTag != "Enemy" && colliderTag != "GoldCoin")
 			{
 				if(hitColliders[i].isTrigger == false)
 				{
