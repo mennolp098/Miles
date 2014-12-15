@@ -1,5 +1,4 @@
-﻿
-using UnityEngine;
+﻿using UnityEngine;
 using System.Collections;
 using System.Collections.Generic;
 
@@ -7,15 +6,16 @@ public class TrapBuilder : MonoBehaviour {
 
 	public GameObject[] arrowTrap = new GameObject[0];
 	public GameObject[] buildArrowTrap = new GameObject[0];
+	public float[] trapPrices = new float[0];
 
 	public GUIStyle textStyle;
 
-	private float spawnY;
+	private float _spawnY;
 	private int _trapToBuild = -1;
 	private bool _isBuilding = false;
 	private GameObject _currentTrap;
-	private List<GameObject> buildTraps = new List<GameObject>();
-	private List<GameObject> allTraps = new List<GameObject>();
+	private List<GameObject> _buildTraps = new List<GameObject>();
+	private List<GameObject> _allTraps = new List<GameObject>();
 
     [SerializeField]
     private Texture2D[] UIButtons;
@@ -26,7 +26,7 @@ public class TrapBuilder : MonoBehaviour {
 	{
 		GetTraps();
 		int trapcounter = 0;
-		foreach(GameObject trap in buildTraps)
+		foreach(GameObject trap in _buildTraps)
 		{
 			if(trap == null)
 			{
@@ -40,7 +40,7 @@ public class TrapBuilder : MonoBehaviour {
 	}
 
 	void Update () {
-            KeyInput();
+        KeyInput();
 		if(Input.GetMouseButtonDown(0) && _isBuilding)
 		{
 			if(_currentTrap != null)
@@ -81,26 +81,26 @@ public class TrapBuilder : MonoBehaviour {
 		ray.origin = Camera.main.transform.position;
 		if(Physics.Raycast(ray, out hit))
 		{
-			if(hit.transform.tag == "Wall" && buildTraps[_trapToBuild].transform.tag == "WallTrap")
+			if(hit.transform.tag == "Wall" && _buildTraps[_trapToBuild].transform.tag == "WallTrap")
 			{
 				if(hit.distance <= 10f) //is in range of wall
 				{
 					if(_currentTrap == null)
 					{
-						_currentTrap = Instantiate(buildTraps[_trapToBuild], Vector3.zero, Quaternion.identity) as GameObject;
+						_currentTrap = Instantiate(_buildTraps[_trapToBuild], Vector3.zero, Quaternion.identity) as GameObject;
 					}
 					ChangeTrapPos(hit);
 				} else if(_currentTrap != null){
 					Destroy(_currentTrap.gameObject);
 				}
 			} 
-			else if(hit.transform.tag == "Floor" && buildTraps[_trapToBuild].transform.tag == "FloorTrap")
+			else if(hit.transform.tag == "Floor" && _buildTraps[_trapToBuild].transform.tag == "FloorTrap")
 			{
 				if(hit.distance <= 10f) //is in range of wall
 				{
 					if(_currentTrap == null)
 					{
-						_currentTrap = Instantiate(buildTraps[_trapToBuild], Vector3.zero, Quaternion.identity) as GameObject;
+						_currentTrap = Instantiate(_buildTraps[_trapToBuild], Vector3.zero, Quaternion.identity) as GameObject;
 					}
 					ChangeTrapPos(hit);
 				} else if(_currentTrap != null){
@@ -126,12 +126,20 @@ public class TrapBuilder : MonoBehaviour {
 	//spawn new trap
 	private void SpawnTrap()
 	{
-		GameObject newTrap = Instantiate(allTraps[_trapToBuild], _currentTrap.transform.position,_currentTrap.transform.rotation) as GameObject;
-		GameObject hierachyTraps = GameObject.FindGameObjectWithTag("AllTraps");
-		newTrap.transform.parent = hierachyTraps.transform;
-		Destroy(_currentTrap.gameObject);
-		_isBuilding = false;
-		_trapToBuild = -1;
+		if(trapPrices[_trapToBuild] <= this.GetComponent<GoldController>().GetGold())
+		{
+			GetComponent<GoldController>().SubtractGold(trapPrices[_trapToBuild]);
+			GameObject newTrap = Instantiate(_allTraps[_trapToBuild], _currentTrap.transform.position,_currentTrap.transform.rotation) as GameObject;
+			GameObject hierachyTraps = GameObject.FindGameObjectWithTag("AllTraps");
+			newTrap.transform.parent = hierachyTraps.transform;
+			Destroy(_currentTrap.gameObject);
+			_isBuilding = false;
+			_trapToBuild = -1;
+		} else {
+			Destroy(_currentTrap.gameObject);
+			_isBuilding = false;
+			_trapToBuild = -1;
+		}
 	}
 	//clear building
 	private void ClearTrap()
@@ -146,14 +154,14 @@ public class TrapBuilder : MonoBehaviour {
 	//check wich trap to build
 	private void BuildTrap(int trapSort)
 	{
-		if(buildTraps[trapSort] != null)
+		if(_buildTraps[trapSort] != null)
 		{
 			_isBuilding = true;
 			_trapToBuild = trapSort;
 			if(_currentTrap != null)
 			{
 				Destroy(_currentTrap.gameObject);
-				_currentTrap = Instantiate(buildTraps[_trapToBuild], Vector3.zero, Quaternion.identity) as GameObject;
+				_currentTrap = Instantiate(_buildTraps[_trapToBuild], Vector3.zero, Quaternion.identity) as GameObject;
 			}
 		} else {
 			ClearTrap();
@@ -165,8 +173,8 @@ public class TrapBuilder : MonoBehaviour {
 		for(int i = 0; i < 4; i++)
 		{
 			int trapId = PlayerPrefs.GetInt("hotBar"+i);
-			allTraps.Add(arrowTrap[trapId-1]);
-			buildTraps.Add(buildArrowTrap[trapId-1]);
+			_allTraps.Add(arrowTrap[trapId-1]);
+			_buildTraps.Add(buildArrowTrap[trapId-1]);
 		}
 	}
 	//UI

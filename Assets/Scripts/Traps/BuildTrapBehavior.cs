@@ -5,7 +5,7 @@ using System.Collections.Generic;
 public class BuildTrapBehavior : MonoBehaviour {
 	public bool buildAble;
 
-	private bool hitting = false;
+	private bool _hitting = false;
 	private List<Material> allChildrenMaterials = new List<Material>();
 	void Start()
 	{
@@ -19,7 +19,7 @@ public class BuildTrapBehavior : MonoBehaviour {
 	{
 		CheckCollision();
 
-		if(!hitting)
+		if(!_hitting)
 		{
 			ChangeColor(Color.green);
 			buildAble = true;
@@ -38,17 +38,17 @@ public class BuildTrapBehavior : MonoBehaviour {
 			{
 				if(hitColliders[i].isTrigger == false)
 				{
-					hitting = true;
+					_hitting = true;
 					break;
 				}
 			} else {
-				hitting = false;
+				_hitting = false;
 			}
 			if(colliderTag == "Wall") {
 				wallcounter++;
 				if(wallcounter > 2)
 				{
-					hitting = true;
+					_hitting = true;
 				}
 			} 
 		}
