@@ -172,7 +172,7 @@ public class TrapBuilder : MonoBehaviour {
 	//UI
     void OnGUI()
     {
-        GUI.DrawTexture(new Rect(0, Screen.height - UiBack.height /2, Screen.width, UiBack.height/2), UiBack);
+        //GUI.DrawTexture(new Rect(0,Screen.height - UiBack.height,), UiBack);
 		//GUI.DrawTexture(new Rect(Screen.width /2 - 150, Screen.height - UiBack.height /2, Screen.width, UiBack.height / 2), UiBack);
         /*if (_trapToBuild >= 0)
         {
