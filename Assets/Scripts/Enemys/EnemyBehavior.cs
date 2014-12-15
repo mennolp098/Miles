@@ -13,16 +13,16 @@ public class EnemyBehavior : MonoBehaviour, IComparable<EnemyBehavior> {
 	public GameObject goldPrefab;
 	public Animator childAnims;
 
+	protected bool _dead;
 	protected float _speed = 0.03f;
 	protected float _oldSpeed;
 	protected float _myGold = 0;
 	protected List<Material> allChildrenMaterials = new List<Material>();
-
-	private Transform allCoins;
-	private GameObject target;
-	private DateTime TimeAdded;
-	private NavMeshAgent _navMesh;
-	private float counter = 1;
+	protected NavMeshAgent _navMesh;
+	protected Transform allCoins;
+	protected GameObject target;
+	protected DateTime TimeAdded;
+	protected float counter = 1;
    
 	public int CompareTo(EnemyBehavior other)
 	{
@@ -39,42 +39,17 @@ public class EnemyBehavior : MonoBehaviour, IComparable<EnemyBehavior> {
 			return other.sort.CompareTo(this.sort);
 		}
 	}
-
-	protected virtual void Start () {
-		target = GameObject.Find ("Waypoint-" + UnityEngine.Random.Range(1,3));
+	protected virtual void Start () 
+	{
 		allCoins = GameObject.FindGameObjectWithTag("allCoins").transform;
 		thisTransform = this.transform;
 		TimeAdded = DateTime.Now;
 		isOnStage = true;
-        _navMesh = GetComponent<NavMeshAgent>();
-        _navMesh.SetDestination(target.transform.position);
-		_navMesh.speed += _speed;
-		_oldSpeed = _navMesh.speed;
+		_oldSpeed = _speed;
 		Renderer[] allChildrenRenderers = GetComponentsInChildren<Renderer>();
 		foreach(Renderer renderer in allChildrenRenderers)
 		{
 			allChildrenMaterials.Add(renderer.material);
-		}
-	}
-	void Update () {
-		if(target)
-		{
-			if(Vector2.Distance (new Vector2(transform.position.x,transform.position.z), new Vector2(target.transform.position.x,target.transform.position.z)) < 1.5f)
-			{
-				counter++;
-				var newWaypointName = "Waypoint-" + counter;
-				GameObject newWaypoint = GameObject.Find(newWaypointName);
-				target = newWaypoint;
-                
-				if(target == null)
-				{
-					Debug.LogWarning("no waypoints found!");
-				}
-                else
-                {
-                    _navMesh.SetDestination(target.transform.position);
-                }
-			}
 		}
 	}
     private void OnTriggerEnter(Collider other)
@@ -105,7 +80,12 @@ public class EnemyBehavior : MonoBehaviour, IComparable<EnemyBehavior> {
 	}
 	public void GetStunned(float time)
 	{
-		_navMesh.speed = 0;
+		if(_navMesh != null)
+		{
+			_navMesh.speed = 0;
+		} else {
+			_speed = 0;
+		}
 		Invoke("StopStun", time);
 	}
 	private void StopStun()
@@ -113,6 +93,8 @@ public class EnemyBehavior : MonoBehaviour, IComparable<EnemyBehavior> {
 		if(_navMesh != null)
 		{
 			_navMesh.speed = _oldSpeed;
+		} else {
+			_speed = _oldSpeed;
 		}
 	}
 	public void GetPushed(Quaternion rotation)
@@ -120,7 +102,7 @@ public class EnemyBehavior : MonoBehaviour, IComparable<EnemyBehavior> {
 		//this.transform.position += 
 		//TODO: pushed from rotation angle
 	}
-	private void Die()
+	protected virtual void Die()
 	{
 		//TODO: give score or money?
 		for(int i = 0; i < _myGold; i++)
@@ -135,8 +117,8 @@ public class EnemyBehavior : MonoBehaviour, IComparable<EnemyBehavior> {
 		}
 		//audio.Play();
 		childAnims.SetTrigger("dead");
+		_dead = true;
 		Destroy(this.rigidbody);
-		Destroy(_navMesh);
 		Destroy(this.collider);
 		Destroy(greenbar.gameObject);
 		Destroy(redbar.gameObject);

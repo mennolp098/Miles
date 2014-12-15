@@ -1,7 +1,7 @@
 ﻿using UnityEngine;
 using System.Collections;
 
-public class NormalEnemy : EnemyBehavior {
+public class NormalEnemy : GroundEnemy {
 
 	// Use this for initialization
 	protected override void Start () {
