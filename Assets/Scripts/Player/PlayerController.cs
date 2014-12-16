@@ -25,7 +25,7 @@ public class PlayerController : MonoBehaviour
 
 	void OnGUI()
 	{
-		GUI.DrawTexture(new Rect(Screen.width/2 -16, Screen.height/2 - 16, 32, 32), cursorTexture);
+		GUI.DrawTexture(new Rect(Screen.width/2 -16, Screen.height/2 , 32, 32), cursorTexture);
 	}
 	void Awake()
 	{
