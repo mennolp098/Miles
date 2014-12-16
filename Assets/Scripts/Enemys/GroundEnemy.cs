@@ -11,7 +11,7 @@ public class GroundEnemy : EnemyBehavior {
 		_navMesh.speed += _speed;
 		_oldSpeed = _navMesh.speed;
 	}
-	void Update () {
+	protected virtual void Update () {
 		if(target)
 		{
 			if(Vector2.Distance (new Vector2(transform.position.x,transform.position.z), new Vector2(target.transform.position.x,target.transform.position.z)) < 1.5f)

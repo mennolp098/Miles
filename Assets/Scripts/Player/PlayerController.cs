@@ -35,6 +35,7 @@ public class PlayerController : MonoBehaviour
     {
         if (GetComponent<Rigidbody>())
             GetComponent<Rigidbody>().freezeRotation = true;
+		particleSystem.enableEmission = false;
     }
 	void Update ()
 	{
@@ -43,7 +44,7 @@ public class PlayerController : MonoBehaviour
 			animator.SetTrigger("shootTrigger");
 			animator.SetBool("isShooting", true);
 			Invoke("StopShooting", 1f);
-            Instantiate(spell, spawn.position, new Quaternion(Camera.main.transform.rotation.x, transform.rotation.y, transform.rotation.z, transform.rotation.w));
+            Instantiate(spell, spawn.position, spawn.rotation);
         }
 		Vector3 movement = new Vector3(Input.GetAxis("Horizontal"), 0, Input.GetAxis("Vertical"));
 		movement = transform.TransformDirection(movement);
@@ -82,5 +83,26 @@ public class PlayerController : MonoBehaviour
 	private void StopShooting()
 	{
 		animator.SetBool("isShooting", false);
+	}
+	public void SetOnFire()
+	{
+		if(!particleSystem.enableEmission)
+		{
+			particleSystem.enableEmission = true;
+			StartCoroutine("OnFire");
+			Invoke("StopFire", 3f);
+		}
+	}
+	public IEnumerator OnFire()
+	{
+		while(particleSystem.enableEmission)
+		{
+			GetComponent<HealthController>().SubtractHealth(1f);
+			yield return new WaitForSeconds(0.25f);
+		}
+	}
+	public void StopFire()
+	{
+		particleSystem.enableEmission = false;
 	}
 }

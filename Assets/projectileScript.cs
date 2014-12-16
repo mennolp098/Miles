@@ -6,19 +6,22 @@ public class projectileScript : MonoBehaviour {
 	// Use this for initialization
 	void Start () 
     {
-        Invoke("kill", 10);
+		Destroy(this.gameObject, 10f);
 	}
 	
 	void Update () 
     {
         transform.Translate(Vector3.forward);
 	}
-    void OnCollisionEnter(Collision collision)
+    void OnTriggerEnter(Collider other)
     {
-        kill();
-    }
-    void kill()
-    {
-        Destroy(this.gameObject);
+		if(!other.isTrigger)
+		{
+	        if(other.transform.tag == "Enemy")
+			{
+				other.GetComponent<EnemyBehavior>().GetDmg(1);
+				Destroy(this.gameObject);
+			}
+		}
     }
 }

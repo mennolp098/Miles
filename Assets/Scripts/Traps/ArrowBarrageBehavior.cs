@@ -33,7 +33,6 @@ public class ArrowBarrageBehavior : MonoBehaviour {
 		{
 			EnemyBehavior enemyScript = other.GetComponent<EnemyBehavior>();
 			enemyScript.GetDmg(1f);
-			enemyScript.GetPushed(this.transform.rotation);
 		}
 	}
 }

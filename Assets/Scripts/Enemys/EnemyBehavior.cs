@@ -52,18 +52,13 @@ public class EnemyBehavior : MonoBehaviour, IComparable<EnemyBehavior> {
 			allChildrenMaterials.Add(renderer.material);
 		}
 	}
-    private void OnTriggerEnter(Collider other)
+    protected virtual void OnTriggerEnter(Collider other)
     {
 		if (other.gameObject.tag == "Portal")
         {
             other.gameObject.GetComponent<GateScript>().hit();
 			Destroy(this.gameObject);
 			isOnStage = false;
-        }
-        if (other.gameObject.tag == "spell")
-        {
-            Destroy(other.gameObject);
-            GetDmg(1);
         }
     }
 	public void SetHealth(float newHealth)
@@ -97,15 +92,10 @@ public class EnemyBehavior : MonoBehaviour, IComparable<EnemyBehavior> {
 			_speed = _oldSpeed;
 		}
 	}
-	public void GetPushed(Quaternion rotation)
-	{
-		//this.transform.position += 
-		//TODO: pushed from rotation angle
-	}
 	protected virtual void Die()
 	{
 		//TODO: give score or money?
-		for(int i = 0; i < _myGold; i++)
+		for(int i = 0; i < _myGold/5; i++)
 		{
 			Vector3 randomSpawnPos = this.transform.position;
 			randomSpawnPos.x += UnityEngine.Random.Range(-3,3);

@@ -34,7 +34,7 @@ public class FlyingEnemy : EnemyBehavior {
 				this.transform.position += movement * Time.deltaTime;
 			}
 		}
-		if(_dead && this.transform.position.y >= 2)
+		if(_dead && this.transform.position.y >= 3)
 		{
 			Vector3 fallmovement = Vector3.zero;
 			fallmovement.y = -6;

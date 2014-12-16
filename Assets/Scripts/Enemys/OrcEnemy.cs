@@ -1,13 +1,13 @@
 ﻿using UnityEngine;
 using System.Collections;
 
-public class FastEnemy : FlyingEnemy {
+public class OrcEnemy : GroundEnemy {
 
 	// Use this for initialization
 	protected override void Start () {
-		_speed = 3f;
-		_myGold = 10f;
-		sort = 1;
+		_myGold = 20f;
+		_speed = 0.5f;
+		sort = 2;
 		base.Start();
 	}
 }
