@@ -7,12 +7,11 @@ public class TrapBuilder : MonoBehaviour {
 	public GameObject[] arrowTrap = new GameObject[0];
 	public GameObject[] buildArrowTrap = new GameObject[0];
 	public float[] trapPrices = new float[0];
-
+	public bool isBuilding = false;
 	public GUIStyle textStyle;
 
 	private float _spawnY;
 	private int _trapToBuild = -1;
-	private bool _isBuilding = false;
 	private GameObject _currentTrap;
 	private List<GameObject> _buildTraps = new List<GameObject>();
 	private List<GameObject> _allTraps = new List<GameObject>();
@@ -41,17 +40,23 @@ public class TrapBuilder : MonoBehaviour {
 
 	void Update () {
         KeyInput();
-		if(Input.GetMouseButtonDown(0) && _isBuilding)
+		if(Input.GetMouseButtonDown(0) && isBuilding)
 		{
 			if(_currentTrap != null)
 			{
 				if(_currentTrap.GetComponent<BuildTrapBehavior>().buildAble)
 				{
 					SpawnTrap();
+				} else {
+					ClearTrap();
 				}
 			}
+			else
+			{
+				ClearTrap();
+			}
 		}
-		if(_isBuilding)
+		if(isBuilding)
 		{
 			CheckWhereToBuild();
 		}
@@ -133,11 +138,11 @@ public class TrapBuilder : MonoBehaviour {
 			GameObject hierachyTraps = GameObject.FindGameObjectWithTag("AllTraps");
 			newTrap.transform.parent = hierachyTraps.transform;
 			Destroy(_currentTrap.gameObject);
-			_isBuilding = false;
+			isBuilding = false;
 			_trapToBuild = -1;
 		} else {
 			Destroy(_currentTrap.gameObject);
-			_isBuilding = false;
+			isBuilding = false;
 			_trapToBuild = -1;
 		}
 	}
@@ -147,16 +152,16 @@ public class TrapBuilder : MonoBehaviour {
 		if(_currentTrap != null)
 		{
 			Destroy(_currentTrap.gameObject);
-			_isBuilding = false;
-			_trapToBuild = -1;
 		}
+		isBuilding = false;
+		_trapToBuild = -1;
 	}
 	//check wich trap to build
 	private void BuildTrap(int trapSort)
 	{
 		if(_buildTraps[trapSort] != null)
 		{
-			_isBuilding = true;
+			isBuilding = true;
 			_trapToBuild = trapSort;
 			if(_currentTrap != null)
 			{

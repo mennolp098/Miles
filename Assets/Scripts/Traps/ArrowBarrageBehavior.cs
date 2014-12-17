@@ -2,9 +2,8 @@
 using System.Collections;
 
 public class ArrowBarrageBehavior : MonoBehaviour {
-	private float shootCooldown = 5;
-	private float timeStamp = 0;
-
+	private float _shootCooldown = 5;
+	private float _timeStamp = 0;
 	void Start()
 	{
 		particleSystem.enableEmission = false;
@@ -12,14 +11,14 @@ public class ArrowBarrageBehavior : MonoBehaviour {
 
 	void OnTriggerStay(Collider other)
 	{
-		if(other.transform.tag == "Enemy" && timeStamp <= Time.time)
+		if(other.transform.tag == "Enemy" && _timeStamp <= Time.time)
 		{
 			ShootBarrage();
 		}
 	}
 	private void ShootBarrage()
 	{
-		timeStamp = Time.time + shootCooldown;
+		_timeStamp = Time.time + _shootCooldown;
 		particleSystem.enableEmission = true;
 		Invoke("StopBarrage", 1f);
 	}
@@ -31,8 +30,7 @@ public class ArrowBarrageBehavior : MonoBehaviour {
 	{
 		if(other.transform.tag == "Enemy")
 		{
-			EnemyBehavior enemyScript = other.GetComponent<EnemyBehavior>();
-			enemyScript.GetDmg(1f);
+			other.GetComponent<EnemyBehavior>().GetDmg(1);
 		}
 	}
 }

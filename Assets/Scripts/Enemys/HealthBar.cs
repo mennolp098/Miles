@@ -11,7 +11,7 @@ public class HealthBar : MonoBehaviour {
 	void Start(){
 		health = GetComponentInParent<EnemyBehavior>().health;
 		maxHealth = health;
-		initialGreenLength = greenBar.transform.localScale.z;
+		initialGreenLength = greenBar.transform.localScale.x;
 	}
 	
 	void Update(){
@@ -19,7 +19,7 @@ public class HealthBar : MonoBehaviour {
 		if(health >= 1)
 		{
 			Vector3 newScale = greenBar.transform.localScale;
-			newScale.z = initialGreenLength*(health/maxHealth);
+			newScale.x = initialGreenLength*(health/maxHealth);
 			greenBar.transform.localScale = newScale;
 		}
 	}

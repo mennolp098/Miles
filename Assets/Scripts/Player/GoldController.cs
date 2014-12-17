@@ -32,7 +32,7 @@ public class GoldController : MonoBehaviour {
 	{
 		if(this.transform != null)
 		{
-			other.transform.position = Vector3.MoveTowards(other.transform.position,this.transform.position, 6 * Time.deltaTime);
+			other.transform.position = Vector3.MoveTowards(other.transform.position,this.transform.position, 12 * Time.deltaTime);
 			if(Vector3.Distance(other.transform.position,this.transform.position) <= 3)
 			{
 				AddGold(5);

@@ -21,6 +21,8 @@ public class projectileScript : MonoBehaviour {
 			{
 				other.GetComponent<EnemyBehavior>().GetDmg(1);
 				Destroy(this.gameObject);
+			} else {
+				Destroy(this.gameObject);
 			}
 		}
     }
