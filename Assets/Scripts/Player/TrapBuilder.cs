@@ -181,6 +181,10 @@ public class TrapBuilder : MonoBehaviour {
 			_allTraps.Add(arrowTrap[trapId-1]);
 			_buildTraps.Add(buildArrowTrap[trapId-1]);
 		}
+        for(int g = 0; g<_allTraps.Count; g++)
+        {
+            Debug.Log(_buildTraps[g]);
+        }
 	}
 	//UI
     void OnGUI()
