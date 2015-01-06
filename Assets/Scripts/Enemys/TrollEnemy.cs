@@ -58,6 +58,7 @@ public class TrollEnemy : GroundEnemy {
 		{
 			childAnims.SetBool("Attacking", true);
 			trollAttack.attacking = true;
+			audio.Play();
 			Invoke("StopAttacking", 2f);
 		}
 	}

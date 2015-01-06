@@ -45,6 +45,7 @@ public class PlayerController : MonoBehaviour
 			animator.SetBool("isShooting", true);
 			Invoke("StopShooting", 1f);
             Instantiate(spell, spawn.position, spawn.rotation);
+			audio.Play();
         }
 		Vector3 movement = new Vector3(Input.GetAxis("Horizontal"), 0, Input.GetAxis("Vertical"));
 		movement = transform.TransformDirection(movement);

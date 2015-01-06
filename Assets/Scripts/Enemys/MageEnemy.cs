@@ -34,6 +34,7 @@ public class MageEnemy : GroundEnemy {
 	void Shoot() 
 	{
 		_shootCoolDown = Time.time + shootCooldown;
+		audio.Play();
 		GameObject newMageSpell = Instantiate (mageSpellPrefab, spawnpoint.position, spawnpoint.rotation) as GameObject;
 		newMageSpell.transform.parent = GameObject.FindGameObjectWithTag("MageSpells").transform;
 		MageSpellBehavior newMageSpellScript = newMageSpell.GetComponent<MageSpellBehavior>();

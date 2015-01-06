@@ -55,6 +55,7 @@ public class ArcherEnemy : GroundEnemy {
 	public void Shoot() 
 	{
 		//_shootCoolDown = Time.time + shootCooldown;
+		audio.Play();
 		GameObject newArcherArrow = Instantiate (arrowPrefab, spawnpoint.position, spawnpoint.rotation) as GameObject;
 		newArcherArrow.transform.parent = GameObject.FindGameObjectWithTag("ArcherArrows").transform;
 		ArcherArrowBehavior newArcherArrowScript = newArcherArrow.GetComponent<ArcherArrowBehavior>();

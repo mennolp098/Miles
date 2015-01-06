@@ -42,5 +42,6 @@ public class GroundTrapBehavior : MonoBehaviour {
 	}
 	protected virtual void DoAttack()
 	{
+		audio.Play();
 	}
 }

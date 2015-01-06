@@ -19,6 +19,7 @@ public class DragonEnemy : FlyingEnemy {
 			childAnims.SetBool("attacking", true);
 			flames.particleSystem.enableEmission = true;
 			Invoke("StopFlames", 4f);
+			audio.Play();
 			Invoke("FireFlames", Random.Range(3,20));
 		}
 	}

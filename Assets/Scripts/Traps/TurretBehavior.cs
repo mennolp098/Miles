@@ -69,6 +69,7 @@ public class TurretBehavior : MonoBehaviour {
 	}
 	void Shoot() 
 	{
+		audio.Play();
 		_shootCoolDown = Time.time + shootCooldown;
 		GameObject newBullet = Instantiate (bulletPrefab, spawnpoint.position, spawnpoint.rotation) as GameObject;
 		newBullet.transform.parent = GameObject.FindGameObjectWithTag("Bullets").transform;
