@@ -2,7 +2,7 @@
 using System.Collections;
 
 public class HealthController : MonoBehaviour {
-	private float _health;
+	public float _health;
 	// Use this for initialization
 	void Start () {
 		_health = 100;
