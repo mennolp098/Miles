@@ -1,0 +1,197 @@
+fileFormatVersion: 2
+guid: 5d9b2a63090b44b45bbfe13c1ae26ff3
+ModelImporter:
+  serializedVersion: 16
+  fileIDToRecycleName:
+    100000: ankle
+    100002: ankle_2
+    100004: belly
+    100006: bow_1
+    100008: chest
+    100010: //RootNode
+    100012: elbow
+    100014: elbow_2
+    100016: foot
+    100018: foot_2
+    100020: hand
+    100022: hand_2
+    100024: hand_tip
+    100026: hand_tip_2
+    100028: head
+    100030: head_tip
+    100032: hips
+    100034: knee
+    100036: knee_2
+    100038: left_arm
+    100040: left_leg
+    100042: neck
+    100044: right_arm
+    100046: right_leg
+    100048: Skin
+    100050: toe
+    100052: toe_2
+    400000: ankle
+    400002: ankle_2
+    400004: belly
+    400006: bow_1
+    400008: chest
+    400010: //RootNode
+    400012: elbow
+    400014: elbow_2
+    400016: foot
+    400018: foot_2
+    400020: hand
+    400022: hand_2
+    400024: hand_tip
+    400026: hand_tip_2
+    400028: head
+    400030: head_tip
+    400032: hips
+    400034: knee
+    400036: knee_2
+    400038: left_arm
+    400040: left_leg
+    400042: neck
+    400044: right_arm
+    400046: right_leg
+    400048: Skin
+    400050: toe
+    400052: toe_2
+    4300000: bow_1
+    7400000: ArcherDeath
+    9500000: //RootNode
+    13700000: bow_1
+  materials:
+    importMaterials: 1
+    materialName: 0
+    materialSearch: 1
+  animations:
+    legacyGenerateAnimations: 4
+    bakeSimulation: 0
+    optimizeGameObjects: 0
+    motionNodeName: 
+    animationCompression: 1
+    animationRotationError: .5
+    animationPositionError: .5
+    animationScaleError: .5
+    animationWrapMode: 0
+    extraExposedTransformPaths: []
+    clipAnimations:
+    - serializedVersion: 16
+      name: ArcherDeath
+      takeName: C4D Animation Take
+      firstFrame: 0
+      lastFrame: 40
+      wrapMode: 0
+      orientationOffsetY: 0
+      level: 0
+      cycleOffset: 0
+      loop: 0
+      loopTime: 0
+      loopBlend: 0
+      loopBlendOrientation: 0
+      loopBlendPositionY: 0
+      loopBlendPositionXZ: 0
+      keepOriginalOrientation: 0
+      keepOriginalPositionY: 1
+      keepOriginalPositionXZ: 0
+      heightFromFeet: 0
+      mirror: 0
+      bodyMask: 01000000010000000100000001000000010000000100000001000000010000000100000001000000010000000100000001000000
+      curves: []
+      events: []
+      transformMask:
+      - path: 
+        weight: 1
+      - path: bow_1
+        weight: 1
+      - path: bow_1/Skin
+        weight: 1
+      - path: hips
+        weight: 1
+      - path: hips/belly
+        weight: 1
+      - path: hips/belly/chest
+        weight: 1
+      - path: hips/belly/chest/left_arm
+        weight: 1
+      - path: hips/belly/chest/left_arm/elbow
+        weight: 1
+      - path: hips/belly/chest/left_arm/elbow/hand
+        weight: 1
+      - path: hips/belly/chest/left_arm/elbow/hand/hand_tip
+        weight: 1
+      - path: hips/belly/chest/neck
+        weight: 1
+      - path: hips/belly/chest/neck/head
+        weight: 1
+      - path: hips/belly/chest/neck/head/head_tip
+        weight: 1
+      - path: hips/belly/chest/right_arm
+        weight: 1
+      - path: hips/belly/chest/right_arm/elbow_2
+        weight: 1
+      - path: hips/belly/chest/right_arm/elbow_2/hand_2
+        weight: 1
+      - path: hips/belly/chest/right_arm/elbow_2/hand_2/hand_tip_2
+        weight: 1
+      - path: hips/left_leg
+        weight: 1
+      - path: hips/left_leg/knee
+        weight: 1
+      - path: hips/left_leg/knee/ankle
+        weight: 1
+      - path: hips/left_leg/knee/ankle/foot
+        weight: 1
+      - path: hips/left_leg/knee/ankle/foot/toe
+        weight: 1
+      - path: hips/right_leg
+        weight: 1
+      - path: hips/right_leg/knee_2
+        weight: 1
+      - path: hips/right_leg/knee_2/ankle_2
+        weight: 1
+      - path: hips/right_leg/knee_2/ankle_2/foot_2
+        weight: 1
+      - path: hips/right_leg/knee_2/ankle_2/foot_2/toe_2
+        weight: 1
+      maskType: 0
+      maskSource: {instanceID: 0}
+    isReadable: 1
+  meshes:
+    lODScreenPercentages: []
+    globalScale: .00999999978
+    meshCompression: 0
+    addColliders: 0
+    importBlendShapes: 1
+    swapUVChannels: 0
+    generateSecondaryUV: 0
+    useFileUnits: 1
+    optimizeMeshForGPU: 1
+    weldVertices: 1
+    secondaryUVAngleDistortion: 8
+    secondaryUVAreaDistortion: 15.000001
+    secondaryUVHardAngle: 88
+    secondaryUVPackMargin: 4
+  tangentSpace:
+    normalSmoothAngle: 60
+    splitTangentsAcrossUV: 1
+    normalImportMode: 0
+    tangentImportMode: 1
+  importAnimation: 1
+  copyAvatar: 0
+  humanDescription:
+    human: []
+    skeleton: []
+    armTwist: .5
+    foreArmTwist: .5
+    upperLegTwist: .5
+    legTwist: .5
+    armStretch: .0500000007
+    legStretch: .0500000007
+    feetSpacing: 0
+    rootMotionBoneName: 
+  lastHumanDescriptionAvatarSource: {instanceID: 0}
+  animationType: 2
+  additionalBone: 0
+  userData: 

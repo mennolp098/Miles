@@ -22,24 +22,20 @@ public class TrollEnemy : GroundEnemy {
 		if(_attackTarget != null && !_dead && Vector3.Distance(this.transform.position,_attackTarget.transform.position) <= 4f)
 		{
 			_speed = 0;
-			Vector3 relativePos = _attackTarget.position - this.transform.position;
-			Quaternion enemyLookAt = Quaternion.LookRotation(relativePos);
-			//check rotation relative to the pos to slerp towards enemypos
-			this.transform.rotation = Quaternion.Slerp(this.transform.rotation, enemyLookAt, Time.deltaTime * 1f);
+			LookAtTarget();
 			if (Time.time > _attackCooldown) 
 			{
 				Attack ();
 			}
-		} else if(_attackTarget != null && !_dead)
+		} 
+		else if(_attackTarget != null && !_dead)
 		{
 			_speed = 0;
-			Vector3 relativePos = _attackTarget.position - this.transform.position;
-			Quaternion enemyLookAt = Quaternion.LookRotation(relativePos);
-			//check rotation relative to the pos to slerp towards enemypos
-			this.transform.rotation = Quaternion.Slerp(this.transform.rotation, enemyLookAt, Time.deltaTime * 1f);
+			LookAtTarget();
 			if(Vector3.Dot(this.transform.forward, (_attackTarget.position - this.transform.position).normalized) >= 0.85f)
 				this.transform.position = Vector3.MoveTowards(this.transform.position, _attackTarget.position, 3 * Time.deltaTime);
-		} else if(!_dead)
+		} 
+		else if(!_dead)
 		{
 			_speed = _oldSpeed;
 		}
@@ -47,6 +43,13 @@ public class TrollEnemy : GroundEnemy {
 		{
 			_navMesh.speed = _speed;
 		}
+	}
+	void LookAtTarget()
+	{
+		Vector3 relativePos = _attackTarget.position - this.transform.position;
+		Quaternion enemyLookAt = Quaternion.LookRotation(relativePos);
+		//check rotation relative to the pos to slerp towards enemypos
+		this.transform.rotation = Quaternion.Slerp(this.transform.rotation, enemyLookAt, Time.deltaTime * 1f);
 	}
 	void Attack() 
 	{
@@ -82,7 +85,7 @@ public class TrollEnemy : GroundEnemy {
 	{
 		base.Die ();
 		Invoke ("CreateClouds", 2.5f);
-		Destroy(this.gameObject,2.633f);
+		Destroy(this.gameObject, 2.633f);
 	}
 	private void CreateClouds()
 	{
