@@ -184,14 +184,4 @@ public class TrapBuilder : MonoBehaviour {
 			_buildTraps.Add(buildArrowTrap[trapId-1]);
 		}
 	}
-	//UI
-    void OnGUI()
-    {
-        //GUI.DrawTexture(new Rect(0,Screen.height - UiBack.height,), UiBack);
-		//GUI.DrawTexture(new Rect(Screen.width /2 - 150, Screen.height - UiBack.height /2, Screen.width, UiBack.height / 2), UiBack);
-        /*if (_trapToBuild >= 0)
-        {
-            GUI.DrawTexture(new Rect(Screen.width / 2 - 150 + 17 + (45 * _trapToBuild), Screen.height - UiBack.height / 2 + 13, 40, 30), UIButtons[_trapToBuild]);
-        } */
-    }
 }
