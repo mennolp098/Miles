@@ -1,5 +1,5 @@
 fileFormatVersion: 2
-guid: 17db62c0cda32d94bba00896232bfc46
+guid: c449af0d746cded47a00b36ed1750584
 ModelImporter:
   serializedVersion: 16
   fileIDToRecycleName:
@@ -58,7 +58,7 @@ ModelImporter:
     400050: toe
     400052: toe_2
     4300000: bow_1
-    7400000: ArcherAttackLoop
+    7400000: ArcherAttackLoopo
     9500000: //RootNode
     13700000: bow_1
   materials:
@@ -78,10 +78,10 @@ ModelImporter:
     extraExposedTransformPaths: []
     clipAnimations:
     - serializedVersion: 16
-      name: ArcherAttackLoop
+      name: ArcherAttackLoopo
       takeName: C4D Animation Take
       firstFrame: 0
-      lastFrame: 90
+      lastFrame: 70
       wrapMode: 0
       orientationOffsetY: 0
       level: 0
@@ -93,14 +93,14 @@ ModelImporter:
       loopBlendPositionY: 0
       loopBlendPositionXZ: 0
       keepOriginalOrientation: 0
-      keepOriginalPositionY: 1
+      keepOriginalPositionY: 0
       keepOriginalPositionXZ: 0
       heightFromFeet: 0
       mirror: 0
       bodyMask: 01000000010000000100000001000000010000000100000001000000010000000100000001000000010000000100000001000000
       curves: []
       events:
-      - time: .578260839
+      - time: .5826087
         functionName: Shoot
         data: 
         objectReferenceParameter: {instanceID: 0}

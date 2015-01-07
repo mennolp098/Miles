@@ -94,7 +94,6 @@ public class EnemyBehavior : MonoBehaviour, IComparable<EnemyBehavior> {
 	}
 	protected virtual void Die()
 	{
-		//TODO: give score or money?
 		for(int i = 0; i < _myGold/5; i++)
 		{
 			Vector3 randomSpawnPos = this.transform.position;
@@ -114,5 +113,29 @@ public class EnemyBehavior : MonoBehaviour, IComparable<EnemyBehavior> {
 		Destroy(redbar.gameObject);
 		Destroy(this.gameObject, 20f);
 		isOnStage = false;
+	}
+	public void SetOnFire()
+	{
+		if(this.GetComponent<GroundEnemy>())
+		{
+			if(!particleSystem.enableEmission)
+			{
+				particleSystem.enableEmission = true;
+				StartCoroutine("OnFire");
+				Invoke("StopFire", 3f);
+			}
+		}
+	}
+	public IEnumerator OnFire()
+	{
+		while(particleSystem.enableEmission)
+		{
+			GetDmg(0.5f);
+			yield return new WaitForSeconds(0.25f);
+		}
+	}
+	public void StopFire()
+	{
+		particleSystem.enableEmission = false;
 	}
 }

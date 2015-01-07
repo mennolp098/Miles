@@ -108,7 +108,8 @@ public class TrapBuilder : MonoBehaviour {
 						_currentTrap = Instantiate(_buildTraps[_trapToBuild], Vector3.zero, Quaternion.identity) as GameObject;
 					}
 					ChangeTrapPos(hit);
-				} else if(_currentTrap != null){
+				} else if(_currentTrap != null)
+				{
 					Destroy(_currentTrap.gameObject);
 				}
 			}
@@ -163,6 +164,7 @@ public class TrapBuilder : MonoBehaviour {
 		{
 			isBuilding = true;
 			_trapToBuild = trapSort;
+			Debug.Log(_buildTraps[_trapToBuild]);
 			if(_currentTrap != null)
 			{
 				Destroy(_currentTrap.gameObject);
@@ -181,10 +183,6 @@ public class TrapBuilder : MonoBehaviour {
 			_allTraps.Add(arrowTrap[trapId-1]);
 			_buildTraps.Add(buildArrowTrap[trapId-1]);
 		}
-        for(int g = 0; g<_allTraps.Count; g++)
-        {
-            Debug.Log(_buildTraps[g]);
-        }
 	}
 	//UI
     void OnGUI()

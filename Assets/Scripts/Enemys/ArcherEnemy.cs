@@ -3,13 +3,11 @@ using System.Collections;
 
 public class ArcherEnemy : GroundEnemy {
 	private Transform _attackTarget;
-	//private float _shootCoolDown;
 	private bool _bowIsDrawn;
 
 	public GameObject arrowPrefab;
 	public Transform spawnpoint;
 	public float attackDamage;
-	//public float shootCooldown;
 	// Use this for initialization
 	protected override void Start () {
 		_speed = 0.5f;
@@ -33,15 +31,19 @@ public class ArcherEnemy : GroundEnemy {
 			Quaternion enemyLookAt = Quaternion.LookRotation(relativePos);
 			//check rotation relative to the pos to slerp towards enemypos
 			this.transform.rotation = Quaternion.Slerp(this.transform.rotation, enemyLookAt, Time.deltaTime * 25f);
-		} else 
+		} 
+		else if(!_dead)
 		{
 			if(_bowIsDrawn)
 			{
 				childAnims.SetTrigger("withdrawBow");
-				Invoke ("setWithdrawBow", 1f);
+				Invoke ("setWithdrawBow", 0.5f);
 			} else {
 				_navMesh.speed = _oldSpeed;
 			}
+			Quaternion newRot = this.transform.rotation;
+			newRot.y += 270;
+			this.transform.rotation = newRot;
 		}
 	}
 	void setWithdrawBow()
@@ -54,7 +56,6 @@ public class ArcherEnemy : GroundEnemy {
 	}
 	public void Shoot() 
 	{
-		//_shootCoolDown = Time.time + shootCooldown;
 		audio.Play();
 		GameObject newArcherArrow = Instantiate (arrowPrefab, spawnpoint.position, spawnpoint.rotation) as GameObject;
 		newArcherArrow.transform.parent = GameObject.FindGameObjectWithTag("ArcherArrows").transform;
@@ -78,5 +79,5 @@ public class ArcherEnemy : GroundEnemy {
 			_attackTarget = null;
 			childAnims.SetBool("foundPlayer", false);
 		}
-	}
+	} 
 }

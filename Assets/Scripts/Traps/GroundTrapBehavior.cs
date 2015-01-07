@@ -37,7 +37,6 @@ public class GroundTrapBehavior : MonoBehaviour {
 	protected virtual void TriggerTrap()
 	{
 		_coolDown = Time.time + coolDown;
-		GetComponentInChildren<Animator>().SetTrigger("shoot");
 		DoAttack();
 	}
 	protected virtual void DoAttack()
