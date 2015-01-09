@@ -14,10 +14,12 @@ public class PlayerController : MonoBehaviour
 
     private float minimumY = -20F;
     private float maximumY = 20F;
-
     private float rotationY = 0F;
     private float speed = 10;
-	private float gravity = 10f;
+	private float gravity = 25f;
+	private float cooldown;
+	private float shootCooldown = 0.5f;
+
     [SerializeField]
     private GameObject spell;
     [SerializeField]
@@ -39,13 +41,9 @@ public class PlayerController : MonoBehaviour
     }
 	void Update ()
 	{
-        if(Input.GetKeyDown(KeyCode.Mouse0))
+        if(Input.GetKey(KeyCode.Mouse0))
         {
-			animator.SetTrigger("shootTrigger");
-			animator.SetBool("isShooting", true);
-			Invoke("StopShooting", 1f);
-            Instantiate(spell, spawn.position, spawn.rotation);
-			audio.Play();
+			ShootSpell();
         }
 		Vector3 movement = new Vector3(Input.GetAxis("Horizontal"), 0, Input.GetAxis("Vertical"));
 		movement = transform.TransformDirection(movement);
@@ -79,6 +77,18 @@ public class PlayerController : MonoBehaviour
 			rotationY = Mathf.Clamp (rotationY, minimumY, maximumY);
 			
 			transform.localEulerAngles = new Vector3(-rotationY, transform.localEulerAngles.y, 0);
+		}
+	}
+	private void ShootSpell()
+	{
+		if(cooldown <= Time.time)
+		{
+			cooldown = Time.time + shootCooldown;
+			animator.SetTrigger("shootTrigger");
+			animator.SetBool("isShooting", true);
+			Invoke("StopShooting", 1f);
+			Instantiate(spell, spawn.position, spawn.rotation);
+			audio.Play();
 		}
 	}
 	private void StopShooting()

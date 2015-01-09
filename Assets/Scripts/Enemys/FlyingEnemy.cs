@@ -16,14 +16,28 @@ public class FlyingEnemy : EnemyBehavior {
 			this.transform.position = Vector3.MoveTowards(this.transform.position,target.transform.position, _speed * Time.deltaTime);
 			if(Vector2.Distance (new Vector2(transform.position.x,transform.position.z), new Vector2(target.transform.position.x,target.transform.position.z)) < 1.5f)
 			{
-				counter++;
+				if(counter == 1)
+				{
+					counter = Random.Range(2,4);
+				} else if(counter == 2)
+				{
+					counter = 4;
+				} else if(counter == 3)
+				{
+					counter = 5;
+				} else if(counter == 4)
+				{
+					counter = 6;
+				} else {
+					counter++;
+				}
 				var newWaypointName = "FlyWaypoint-" + counter;
 				GameObject newWaypoint = GameObject.Find(newWaypointName);
 				target = newWaypoint;
 				
 				if(target == null)
 				{
-					//Debug.LogWarning("no waypoints found!");
+					Debug.LogWarning("no waypoints found!");
 					Destroy(this.gameObject);
 				}
 			}
@@ -37,7 +51,7 @@ public class FlyingEnemy : EnemyBehavior {
 		if(_dead && this.transform.position.y >= 3)
 		{
 			Vector3 fallmovement = Vector3.zero;
-			fallmovement.y = -6;
+			fallmovement.y = -10;
 			this.transform.position += fallmovement * Time.deltaTime;
 		}
 	}
