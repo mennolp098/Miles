@@ -57,9 +57,9 @@ public class menuScript : MonoBehaviour {
             {
                 for(int c = 0;c < _hotBar.Length;c++)
                 {
-                    PlayerPrefs.SetInt("hotBar"+c, _hotBar[c-1]);
+                    PlayerPrefs.SetInt("hotBar"+c, _hotBar[c]);
                 }
-                Application.LoadLevel("Game");
+                Application.LoadLevel("levelOne");
             }
             //hotbar
             if (GUI.Button(new Rect(_middelPoint.x, _middelPoint.y + Screen.height / 2 - _trapButtonsize, _trapButtonsize, _trapButtonsize), _Traps[_hotBar[2 ]]))
