@@ -4,6 +4,8 @@ using System.Collections;
 public class MageSpellBehavior : MonoBehaviour {
 	public float destroyTime;
 	public float speed;
+	public GameObject hitExplosionPrefab;
+
 	private float damage;
 	private Transform target;
 	// Use this for initialization
@@ -23,8 +25,15 @@ public class MageSpellBehavior : MonoBehaviour {
 	{
 		if(other.transform.tag == "Player")
 		{
-			other.gameObject.GetComponent<HealthController>().SubtractHealth(damage);
-			Destroy(this.gameObject);
+			if(!other.isTrigger)
+			{
+				other.gameObject.GetComponent<HealthController>().SubtractHealth(damage);
+				GameObject hitExplosion = Instantiate(hitExplosionPrefab,this.transform.position,this.transform.rotation) as GameObject;
+				Vector3 newRot = this.transform.eulerAngles;
+				newRot.y -= 180;
+				hitExplosion.transform.eulerAngles = newRot;
+				Destroy(this.gameObject);
+			}
 		}
 	}
 	void Update () 

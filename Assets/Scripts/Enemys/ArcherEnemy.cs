@@ -5,11 +5,13 @@ public class ArcherEnemy : GroundEnemy {
 	private Transform _attackTarget;
 	private bool _bowIsDrawn;
 
+	public GameObject archerModel;
 	public GameObject arrowPrefab;
 	public Transform spawnpoint;
 	public float attackDamage;
 	// Use this for initialization
 	protected override void Start () {
+		health = 35f;
 		_speed = 0.5f;
 		_myGold = 20f;
 		sort = 3;
@@ -20,7 +22,10 @@ public class ArcherEnemy : GroundEnemy {
 		base.Update ();
 		if(_attackTarget != null && !_dead)
 		{
-
+			Vector3 fixedEulerRot = new Vector3(0,180,0);
+			Vector3 lerpRotation = Vector3.Lerp(archerModel.transform.localEulerAngles,fixedEulerRot, 0.5f * Time.deltaTime);
+			archerModel.transform.localEulerAngles = lerpRotation;
+			//draw bow if it isn't drawn
 			if(!_bowIsDrawn)
 			{
 				childAnims.SetTrigger("drawBow");
@@ -41,9 +46,10 @@ public class ArcherEnemy : GroundEnemy {
 			} else {
 				_navMesh.speed = _oldSpeed;
 			}
-			Quaternion newRot = this.transform.rotation;
-			newRot.y += 270;
-			this.transform.rotation = newRot;
+			//fixed rotation because model is rotated
+			Vector3 fixedEulerRot = new Vector3(0,120,0);
+			Vector3 lerpRotation = Vector3.Lerp(archerModel.transform.localEulerAngles,fixedEulerRot, 0.5f * Time.deltaTime);
+			archerModel.transform.localEulerAngles = lerpRotation;
 		}
 	}
 	void setWithdrawBow()
@@ -54,6 +60,7 @@ public class ArcherEnemy : GroundEnemy {
 	{
 		_bowIsDrawn = true;
 	}
+	//shoot function gets triggered by event handler
 	public void Shoot() 
 	{
 		audio.Play();

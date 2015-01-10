@@ -19,12 +19,15 @@ public class ArcherArrowBehavior : MonoBehaviour {
 	{
 		if(other.transform.tag == "Player")
 		{
-			other.gameObject.GetComponent<HealthController>().SubtractHealth(_damage);
-			Destroy(this.gameObject);
+			if(!other.isTrigger)
+			{
+				other.gameObject.GetComponent<HealthController>().SubtractHealth(_damage);
+				Destroy(this.gameObject);
+			}
 		}
 	}
 	void Update () 
 	{
-		transform.Translate(Vector3.forward);
+		transform.Translate(Vector3.forward * speed);
 	}
 }

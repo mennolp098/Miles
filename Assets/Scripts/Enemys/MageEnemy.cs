@@ -11,6 +11,7 @@ public class MageEnemy : GroundEnemy {
 	public float shootCooldown;
 	// Use this for initialization
 	protected override void Start () {
+		health = 30f;
 		_speed = 0.5f;
 		_myGold = 20f;
 		sort = 3;

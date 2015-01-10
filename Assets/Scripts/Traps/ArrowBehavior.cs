@@ -32,10 +32,18 @@ public class ArrowBehavior : MonoBehaviour {
 	// Update is called once per frame
 	void Update () 
 	{
-		if(target.rigidbody != null)
+		if(target != null)
 		{
-			transform.position = Vector3.MoveTowards(transform.position, target.position, speed * Time.deltaTime);
-		} else {
+			if(target.rigidbody != null)
+			{
+				transform.position = Vector3.MoveTowards(transform.position, target.position, speed * Time.deltaTime);
+			} else 
+			{
+				transform.Translate(Vector3.forward * speed * Time.deltaTime);
+			}
+		} 
+		else 
+		{
 			transform.Translate(Vector3.forward * speed * Time.deltaTime);
 		}
 	}

@@ -13,12 +13,12 @@ public class EnemyBehavior : MonoBehaviour, IComparable<EnemyBehavior> {
 	public GameObject goldPrefab;
 	public Animator childAnims;
 
+	protected NavMeshAgent _navMesh;
 	protected bool _dead;
 	protected float _speed = 0.03f;
 	protected float _oldSpeed;
 	protected float _myGold = 0;
 	protected List<Material> allChildrenMaterials = new List<Material>();
-	protected NavMeshAgent _navMesh;
 	protected Transform allCoins;
 	protected GameObject target;
 	protected DateTime TimeAdded;

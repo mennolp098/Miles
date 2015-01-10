@@ -11,6 +11,7 @@ public class TrollEnemy : GroundEnemy {
 	public float attackCooldown;
 	// Use this for initialization
 	protected override void Start () {
+		health = 100f;
 		_speed = 0.5f;
 		_myGold = 50f;
 		sort = 3;
