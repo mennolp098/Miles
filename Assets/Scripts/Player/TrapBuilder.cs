@@ -16,11 +16,6 @@ public class TrapBuilder : MonoBehaviour {
 	private List<GameObject> _buildTraps = new List<GameObject>();
 	private List<GameObject> _allTraps = new List<GameObject>();
 
-    [SerializeField]
-    private Texture2D[] UIButtons;
-    [SerializeField]
-    private Texture2D UiBack;
-
 	void Start()
 	{
 		GetTraps();

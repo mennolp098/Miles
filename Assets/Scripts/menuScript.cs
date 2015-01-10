@@ -57,12 +57,7 @@ public class menuScript : MonoBehaviour {
             {
                 for(int c = 0;c < _hotBar.Length;c++)
                 {
-                    Debug.Log(_hotBar[0]);
-                    PlayerPrefs.SetInt("hotBar"+c, _hotBar[c]);
-                }
-                for (int i = 0; i <= 3; i++)
-                {
-                    Debug.Log(PlayerPrefs.GetInt("hotBar"+i));
+                    PlayerPrefs.SetInt("hotBar"+c, _hotBar[c-1]);
                 }
                 Application.LoadLevel("Game");
             }
