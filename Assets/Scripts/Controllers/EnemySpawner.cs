@@ -11,44 +11,52 @@ public class EnemySpawner : MonoBehaviour
     [SerializeField]
     private GameObject[] _bosses;
     private float timeLastSubtracted;
-    private float waveTime = 3;
+    private float waveTime = 4;
     private int wave;
     private bool spawningWave = false;
     private int waveTillBoss = 5;
     private bool spawnWave;
     private int bossesKilled = 1;
     private int gropes = 3;
+    private bool spawning = true;
     void Update()
     {
-        if (spawningWave == false && Time.time >= timeLastSubtracted + waveTime)
+        if (spawning == true)
         {
-            if(waveTillBoss>0)
+            if (spawningWave == false && Time.time >= timeLastSubtracted + waveTime)
             {
-                spawningWave = true;
-                waveTillBoss--;
+                if (waveTillBoss > 0)
+                {
+                    spawningWave = true;
+                    waveTillBoss--;
+                }
+                else
+                {
+                    Wave(true, 5, 2);
+                    waveTillBoss = 5;
+                    bossesKilled++;
+                    if(bossesKilled == 2)
+                    {
+                        spawning = false;
+                    }
+                }
+                timeLastSubtracted = Time.time;
             }
-            else
+            if (spawningWave == true && Time.time >= timeLastSubtracted + 2)
             {
-                Wave(true, 5, 2);
-                waveTillBoss = 5;
-                bossesKilled++;
-            }
-            timeLastSubtracted = Time.time;
-        }
-        if (spawningWave == true && Time.time >= timeLastSubtracted + 2)
-        {
 
-            if(gropes>0)
-            {
-                Wave(false, 3, 0);
-                gropes--;
+                if (gropes > 0)
+                {
+                    Wave(false, 3, 0);
+                    gropes--;
+                }
+                else
+                {
+                    gropes = 3;
+                    spawningWave = false;
+                }
+                timeLastSubtracted = Time.time;
             }
-            else
-            {
-                gropes = 3;
-                spawningWave = false;
-            }
-            timeLastSubtracted = Time.time;
         }
     }
     private void Wave(bool bossWave,int numEnemys,int numBosses)

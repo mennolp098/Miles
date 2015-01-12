@@ -1,8 +1,11 @@
 ﻿using UnityEngine;
+using UnityEngine.UI;
 using System.Collections;
 
 public class GoldController : MonoBehaviour {
 	private float gold;
+    [SerializeField]
+    private Text money;
 	void Start () {
 		gold = 50;
 	}
@@ -28,6 +31,10 @@ public class GoldController : MonoBehaviour {
 			GetGoldCoin(other.gameObject);
 		}
 	}
+    void Update()
+    {
+        money.text = gold.ToString();
+    }
 	private void GetGoldCoin(GameObject other)
 	{
 		if(this.transform != null)
