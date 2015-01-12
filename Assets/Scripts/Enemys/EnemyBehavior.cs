@@ -56,9 +56,9 @@ public class EnemyBehavior : MonoBehaviour, IComparable<EnemyBehavior> {
     {
 		if (other.gameObject.tag == "Portal")
         {
+			isOnStage = false;
             other.gameObject.GetComponent<GateScript>().hit();
 			Destroy(this.gameObject);
-			isOnStage = false;
         }
     }
 	public void SetHealth(float newHealth)
@@ -85,11 +85,14 @@ public class EnemyBehavior : MonoBehaviour, IComparable<EnemyBehavior> {
 	}
 	private void StopStun()
 	{
-		if(_navMesh != null)
+		if(!_death)
 		{
-			_navMesh.speed = _oldSpeed;
-		} else {
-			_speed = _oldSpeed;
+			if(_navMesh != null)
+			{
+				_navMesh.speed = _oldSpeed;
+			} else {
+				_speed = _oldSpeed;
+			}
 		}
 	}
 	protected virtual void Die()
@@ -107,12 +110,13 @@ public class EnemyBehavior : MonoBehaviour, IComparable<EnemyBehavior> {
 		//audio.Play();
 		childAnims.SetTrigger("dead");
 		_death = true;
+		isOnStage = false;
 		Destroy(this.rigidbody);
 		Destroy(this.collider);
 		Destroy(greenbar.gameObject);
 		Destroy(redbar.gameObject);
 		Destroy(this.gameObject, 20f);
-		isOnStage = false;
+
 	}
 	public void SetOnFire()
 	{
@@ -130,7 +134,7 @@ public class EnemyBehavior : MonoBehaviour, IComparable<EnemyBehavior> {
 	{
 		while(particleSystem.enableEmission)
 		{
-			GetDmg(0.5f);
+			GetDmg(1f);
 			yield return new WaitForSeconds(0.25f);
 		}
 	}

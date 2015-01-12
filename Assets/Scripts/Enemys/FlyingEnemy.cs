@@ -11,6 +11,11 @@ public class FlyingEnemy : EnemyBehavior {
 	}
 	// Update is called once per frame
 	void Update () {
+		if(rigidbody != null)
+		{
+			rigidbody.velocity = Vector3.zero;
+			rigidbody.angularVelocity = Vector3.zero;
+		}
 		if(target)
 		{
 			this.transform.position = Vector3.MoveTowards(this.transform.position,target.transform.position, _speed * Time.deltaTime);
@@ -37,6 +42,8 @@ public class FlyingEnemy : EnemyBehavior {
 				
 				if(target == null)
 				{
+					isOnStage = false;
+					GameObject.FindGameObjectWithTag("Portal").GetComponent<GateScript>().hit();
 					Destroy(this.gameObject);
 				}
 			}

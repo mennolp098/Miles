@@ -6,6 +6,7 @@ public class HealthController : MonoBehaviour {
 	private float _health;
 	private bool _invincible;
 
+	public GameObject spawnPoint;
 	public Text respawnText;
 	public GameObject respawnCanvas;
 	//public GameObject character;
@@ -20,7 +21,7 @@ public class HealthController : MonoBehaviour {
 	}
 	public void SubtractHealth(float health)
 	{
-		if(!_invincible)
+		if(!_invincible && !GetComponent<PlayerController>().death)
 		{
 			_health -= health;
 			if(_health <= 0)
@@ -35,9 +36,11 @@ public class HealthController : MonoBehaviour {
 	}
 	private void Die()
 	{
-		GetComponent<PlayerController>().death = true;
 		GetComponent<Animator>().SetTrigger("death");
-		Invoke("DisableModel", 0.90f);
+		GetComponent<PlayerController>().death = true;
+		GetComponent<PlayerController>().StopFire();
+		GetComponent<TrapBuilder>().ClearTrap();
+		Invoke("DisableModel", 0.80f);
 		respawnCanvas.SetActive(true);
 		StartCoroutine("RespawnCounterCouritine");
 	}
@@ -87,7 +90,7 @@ public class HealthController : MonoBehaviour {
 		respawnCanvas.SetActive(false);
 		//character.SetActive(true);
 		sphere.SetActive(true);
-		this.transform.localPosition = new Vector3(-5f,12f,50f);
+		this.transform.localPosition = spawnPoint.transform.localPosition;
 		this.transform.eulerAngles = new Vector3(0f,180f,0);
 		GetComponent<PlayerController>().death = false;
 		_health = 100;

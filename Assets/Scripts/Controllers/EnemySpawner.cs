@@ -66,13 +66,11 @@ public class EnemySpawner : MonoBehaviour
         {
             for (int a = 0; a < numBosses; a++)
             {
-                Debug.Log("boss" + a);
                 GameObject newBoss = Instantiate(_bosses[0], new Vector3(transform.position.x + Random.Range(-15, 15), transform.position.y, transform.position.z), transform.rotation) as GameObject;
                 newBoss.transform.parent = allEnemys;
             }
             for(int a =0;a < numEnemys;a++)
             {
-                Debug.Log("enemy"+ a);
                 GameObject newEnemy = Instantiate(_enemys[0], new Vector3(transform.position.x + Random.Range(-15, 15), transform.position.y, transform.position.z), transform.rotation) as GameObject;
                 newEnemy.transform.parent = allEnemys;
             }

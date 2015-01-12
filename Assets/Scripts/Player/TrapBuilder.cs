@@ -145,7 +145,7 @@ public class TrapBuilder : MonoBehaviour {
 		}
 	}
 	//clear building
-	private void ClearTrap()
+	public void ClearTrap()
 	{
 		if(_currentTrap != null)
 		{
@@ -157,7 +157,7 @@ public class TrapBuilder : MonoBehaviour {
 	//check wich trap to build
 	private void BuildTrap(int trapSort)
 	{
-		if(_buildTraps[trapSort] != null)
+		if(_buildTraps[trapSort] != null && !GetComponent<PlayerController>().death)
 		{
 			isBuilding = true;
 			_trapToBuild = trapSort;

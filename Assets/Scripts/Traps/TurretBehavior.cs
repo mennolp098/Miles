@@ -49,12 +49,24 @@ public class TurretBehavior : MonoBehaviour {
 	}
 	void OnTriggerEnter(Collider other) 
 	{
-		//add enemys in list while they enter the trigger
-		EnemyBehavior enemyScript = other.GetComponent<EnemyBehavior> ();
+		//if enemy enters trigger
 		if(other.transform.tag == "Enemy")
 		{
-			_enemyScripts.Add(enemyScript);
-			_enemyScripts.Sort();
+			//raycast to check if it hits the enemy.
+			Vector3 raycastDirection = other.transform.position - transform.position;
+			Ray ray = new Ray(transform.position, raycastDirection);
+			Debug.DrawRay(transform.position, raycastDirection);
+			RaycastHit hit;
+			if(Physics.Raycast(ray, out hit, 20f))
+			{
+				if(hit.transform.tag == "Enemy")
+				{
+					//add enemys in list while they enter the ray hit
+					EnemyBehavior enemyScript = other.GetComponent<EnemyBehavior> ();
+					_enemyScripts.Add(enemyScript);
+					_enemyScripts.Sort();
+				}
+			}
 		}
 	}
 	void OnTriggerExit(Collider other) 

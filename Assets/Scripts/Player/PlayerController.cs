@@ -101,7 +101,7 @@ public class PlayerController : MonoBehaviour
 	}
 	public void SetOnFire()
 	{
-		if(!particleSystem.enableEmission)
+		if(!particleSystem.enableEmission && !death)
 		{
 			particleSystem.enableEmission = true;
 			StartCoroutine("OnFire");
