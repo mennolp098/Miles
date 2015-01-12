@@ -177,8 +177,8 @@ public class TrapBuilder : MonoBehaviour {
 		for(int i = 0; i < 4; i++)
 		{
 			int trapId = PlayerPrefs.GetInt("hotBar"+i);
-			_allTraps.Add(arrowTrap[trapId-1]);
-			_buildTraps.Add(buildArrowTrap[trapId-1]);
+			_allTraps.Add(arrowTrap[trapId]);
+			_buildTraps.Add(buildArrowTrap[trapId]);
 		}
 	}
 }
