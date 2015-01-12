@@ -1,0 +1,261 @@
+fileFormatVersion: 2
+guid: f2103dbdaeee0244598ba3afd1a57826
+ModelImporter:
+  serializedVersion: 16
+  fileIDToRecycleName:
+    100000: ancle
+    100002: ancle_2
+    100004: bb1
+    100006: bb2
+    100008: bb2_Goal
+    100010: //RootNode
+    100012: elbow
+    100014: elbow_2
+    100016: hand
+    100018: hand_2
+    100020: head
+    100022: head_2
+    100024: heel
+    100026: heel_2
+    100028: heel_Goal
+    100030: heel_Goal_2
+    100032: knee
+    100034: knee_2
+    100036: lcollar
+    100038: leftarm
+    100040: leftleg
+    100042: lhip
+    100044: neck
+    100046: pelvis
+    100048: rcollar
+    100050: rhip
+    100052: rightarm
+    100054: rightleg
+    100056: Root
+    100058: shoulder
+    100060: shoulder_2
+    100062: shoulder_3
+    100064: Skin
+    100066: Sphere
+    100068: staf
+    100070: staff
+    100072: staff_Goal
+    100074: toe
+    100076: toe_2
+    100078: wrist
+    100080: wrist_2
+    100082: wrist_Goal
+    100084: wrist_Goal_2
+    400000: ancle
+    400002: ancle_2
+    400004: bb1
+    400006: bb2
+    400008: bb2_Goal
+    400010: //RootNode
+    400012: elbow
+    400014: elbow_2
+    400016: hand
+    400018: hand_2
+    400020: head
+    400022: head_2
+    400024: heel
+    400026: heel_2
+    400028: heel_Goal
+    400030: heel_Goal_2
+    400032: knee
+    400034: knee_2
+    400036: lcollar
+    400038: leftarm
+    400040: leftleg
+    400042: lhip
+    400044: neck
+    400046: pelvis
+    400048: rcollar
+    400050: rhip
+    400052: rightarm
+    400054: rightleg
+    400056: Root
+    400058: shoulder
+    400060: shoulder_2
+    400062: shoulder_3
+    400064: Skin
+    400066: Sphere
+    400068: staf
+    400070: staff
+    400072: staff_Goal
+    400074: toe
+    400076: toe_2
+    400078: wrist
+    400080: wrist_2
+    400082: wrist_Goal
+    400084: wrist_Goal_2
+    4300000: Sphere
+    7400000: CharacterIdle
+    9500000: //RootNode
+    13700000: Sphere
+  materials:
+    importMaterials: 1
+    materialName: 0
+    materialSearch: 1
+  animations:
+    legacyGenerateAnimations: 4
+    bakeSimulation: 0
+    optimizeGameObjects: 0
+    motionNodeName: 
+    animationCompression: 1
+    animationRotationError: .5
+    animationPositionError: .5
+    animationScaleError: .5
+    animationWrapMode: 0
+    extraExposedTransformPaths: []
+    clipAnimations:
+    - serializedVersion: 16
+      name: CharacterIdle
+      takeName: C4D Animation Take
+      firstFrame: 0
+      lastFrame: 16
+      wrapMode: 0
+      orientationOffsetY: 0
+      level: 0
+      cycleOffset: 0
+      loop: 0
+      loopTime: 1
+      loopBlend: 0
+      loopBlendOrientation: 0
+      loopBlendPositionY: 0
+      loopBlendPositionXZ: 0
+      keepOriginalOrientation: 0
+      keepOriginalPositionY: 1
+      keepOriginalPositionXZ: 0
+      heightFromFeet: 0
+      mirror: 0
+      bodyMask: 01000000010000000100000001000000010000000100000001000000010000000100000001000000010000000100000001000000
+      curves: []
+      events: []
+      transformMask:
+      - path: 
+        weight: 1
+      - path: bb2_Goal
+        weight: 1
+      - path: head
+        weight: 1
+      - path: leftarm
+        weight: 1
+      - path: leftarm/wrist_Goal
+        weight: 1
+      - path: leftleg
+        weight: 1
+      - path: leftleg/heel_Goal_2
+        weight: 1
+      - path: rightarm
+        weight: 1
+      - path: rightarm/wrist_Goal_2
+        weight: 1
+      - path: rightarm/wrist_Goal_2/staff_Goal
+        weight: 1
+      - path: rightleg
+        weight: 1
+      - path: rightleg/heel_Goal
+        weight: 1
+      - path: Root
+        weight: 1
+      - path: Root/pelvis
+        weight: 1
+      - path: Root/pelvis/bb1
+        weight: 1
+      - path: Root/pelvis/bb1/bb2
+        weight: 1
+      - path: Root/pelvis/bb1/bb2/shoulder
+        weight: 1
+      - path: Root/pelvis/bb1/bb2/shoulder/lcollar
+        weight: 1
+      - path: Root/pelvis/bb1/bb2/shoulder/lcollar/shoulder_3
+        weight: 1
+      - path: Root/pelvis/bb1/bb2/shoulder/lcollar/shoulder_3/elbow_2
+        weight: 1
+      - path: Root/pelvis/bb1/bb2/shoulder/lcollar/shoulder_3/elbow_2/wrist_2
+        weight: 1
+      - path: Root/pelvis/bb1/bb2/shoulder/lcollar/shoulder_3/elbow_2/wrist_2/hand_2
+        weight: 1
+      - path: Root/pelvis/bb1/bb2/shoulder/neck
+        weight: 1
+      - path: Root/pelvis/bb1/bb2/shoulder/neck/head_2
+        weight: 1
+      - path: Root/pelvis/bb1/bb2/shoulder/rcollar
+        weight: 1
+      - path: Root/pelvis/bb1/bb2/shoulder/rcollar/shoulder_2
+        weight: 1
+      - path: Root/pelvis/bb1/bb2/shoulder/rcollar/shoulder_2/elbow
+        weight: 1
+      - path: Root/pelvis/bb1/bb2/shoulder/rcollar/shoulder_2/elbow/wrist
+        weight: 1
+      - path: Root/pelvis/bb1/bb2/shoulder/rcollar/shoulder_2/elbow/wrist/hand
+        weight: 1
+      - path: Root/pelvis/bb1/bb2/shoulder/rcollar/shoulder_2/elbow/wrist/hand/staf
+        weight: 1
+      - path: Root/pelvis/bb1/bb2/shoulder/rcollar/shoulder_2/elbow/wrist/hand/staf/staff
+        weight: 1
+      - path: Root/pelvis/lhip
+        weight: 1
+      - path: Root/pelvis/lhip/knee_2
+        weight: 1
+      - path: Root/pelvis/lhip/knee_2/ancle_2
+        weight: 1
+      - path: Root/pelvis/lhip/knee_2/ancle_2/heel_2
+        weight: 1
+      - path: Root/pelvis/lhip/knee_2/ancle_2/heel_2/toe_2
+        weight: 1
+      - path: Root/pelvis/rhip
+        weight: 1
+      - path: Root/pelvis/rhip/knee
+        weight: 1
+      - path: Root/pelvis/rhip/knee/ancle
+        weight: 1
+      - path: Root/pelvis/rhip/knee/ancle/heel
+        weight: 1
+      - path: Root/pelvis/rhip/knee/ancle/heel/toe
+        weight: 1
+      - path: Sphere
+        weight: 1
+      - path: Sphere/Skin
+        weight: 1
+      maskType: 0
+      maskSource: {instanceID: 0}
+    isReadable: 1
+  meshes:
+    lODScreenPercentages: []
+    globalScale: .00999999978
+    meshCompression: 0
+    addColliders: 0
+    importBlendShapes: 1
+    swapUVChannels: 0
+    generateSecondaryUV: 0
+    useFileUnits: 1
+    optimizeMeshForGPU: 1
+    weldVertices: 1
+    secondaryUVAngleDistortion: 8
+    secondaryUVAreaDistortion: 15.000001
+    secondaryUVHardAngle: 88
+    secondaryUVPackMargin: 4
+  tangentSpace:
+    normalSmoothAngle: 60
+    splitTangentsAcrossUV: 1
+    normalImportMode: 0
+    tangentImportMode: 1
+  importAnimation: 1
+  copyAvatar: 0
+  humanDescription:
+    human: []
+    skeleton: []
+    armTwist: .5
+    foreArmTwist: .5
+    upperLegTwist: .5
+    legTwist: .5
+    armStretch: .0500000007
+    legStretch: .0500000007
+    feetSpacing: 0
+    rootMotionBoneName: 
+  lastHumanDescriptionAvatarSource: {instanceID: 0}
+  animationType: 2
+  additionalBone: 0
+  userData: 

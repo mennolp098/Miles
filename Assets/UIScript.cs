@@ -21,6 +21,6 @@ public class UIScript : MonoBehaviour {
 	}
     void Update ()
     {
-        healthBar.value = player.GetComponent<HealthController>()._health;
+        healthBar.value = player.GetComponent<HealthController>().GetHealth();
     }
 }

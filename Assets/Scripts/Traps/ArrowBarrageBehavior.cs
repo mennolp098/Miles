@@ -4,9 +4,11 @@ using System.Collections;
 public class ArrowBarrageBehavior : MonoBehaviour {
 	private float _shootCooldown = 5;
 	private float _timeStamp = 0;
+	private float _attackDamage;
 	void Start()
 	{
 		particleSystem.enableEmission = false;
+		_attackDamage = 2.5f;
 	}
 
 	void OnTriggerStay(Collider other)
@@ -30,7 +32,7 @@ public class ArrowBarrageBehavior : MonoBehaviour {
 	{
 		if(other.transform.tag == "Enemy")
 		{
-			other.GetComponent<EnemyBehavior>().GetDmg(1);
+			other.GetComponent<EnemyBehavior>().GetDmg(_attackDamage);
 		}
 	}
 }

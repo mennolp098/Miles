@@ -14,7 +14,7 @@ public class EnemyBehavior : MonoBehaviour, IComparable<EnemyBehavior> {
 	public Animator childAnims;
 
 	protected NavMeshAgent _navMesh;
-	protected bool _dead;
+	protected bool _death;
 	protected float _speed = 0.03f;
 	protected float _oldSpeed;
 	protected float _myGold = 0;
@@ -106,7 +106,7 @@ public class EnemyBehavior : MonoBehaviour, IComparable<EnemyBehavior> {
 		}
 		//audio.Play();
 		childAnims.SetTrigger("dead");
-		_dead = true;
+		_death = true;
 		Destroy(this.rigidbody);
 		Destroy(this.collider);
 		Destroy(greenbar.gameObject);

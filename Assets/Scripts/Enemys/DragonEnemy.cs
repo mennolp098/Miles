@@ -15,7 +15,7 @@ public class DragonEnemy : FlyingEnemy {
 	}
 	private void FireFlames()
 	{
-		if(!_dead)
+		if(!_death)
 		{
 			childAnims.SetBool("attacking", true);
 			flames.particleSystem.enableEmission = true;

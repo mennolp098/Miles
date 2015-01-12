@@ -1,6 +1,7 @@
 ﻿using UnityEngine;
 using System.Collections;
 using System.Collections.Generic;
+using UnityEngine.UI;
 
 public class TrapBuilder : MonoBehaviour {
 
@@ -9,6 +10,7 @@ public class TrapBuilder : MonoBehaviour {
 	public float[] trapPrices = new float[0];
 	public bool isBuilding = false;
 	public GUIStyle textStyle;
+	public Text costText;
 
 	private float _spawnY;
 	private int _trapToBuild = -1;
@@ -60,16 +62,16 @@ public class TrapBuilder : MonoBehaviour {
 	{
 		if(Input.GetKeyDown(KeyCode.Alpha1))
 		{
-            BuildTrap(PlayerPrefs.GetInt("hotBar0"));
+            BuildTrap(0);
 		} else if(Input.GetKeyDown(KeyCode.Alpha2)) 
 		{
-            BuildTrap(PlayerPrefs.GetInt("hotBar1"));
+            BuildTrap(1);
 		} else if(Input.GetKeyDown(KeyCode.Alpha3)) 
 		{
-            BuildTrap(PlayerPrefs.GetInt("hotBar2"));
+            BuildTrap(2);
 		} else if(Input.GetKeyDown(KeyCode.Alpha4)) 
 		{
-            BuildTrap(PlayerPrefs.GetInt("hotBar3"));
+            BuildTrap(3);
 		}
 	}
 	private void CheckWhereToBuild()
@@ -159,7 +161,7 @@ public class TrapBuilder : MonoBehaviour {
 		{
 			isBuilding = true;
 			_trapToBuild = trapSort;
-			Debug.Log(_buildTraps[_trapToBuild]);
+			costText.text = "Cost: " + trapPrices[_trapToBuild];
 			if(_currentTrap != null)
 			{
 				Destroy(_currentTrap.gameObject);

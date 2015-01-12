@@ -20,24 +20,28 @@ public class ArcherEnemy : GroundEnemy {
 	protected override void Update ()
 	{
 		base.Update ();
-		if(_attackTarget != null && !_dead)
+		if(_attackTarget != null && !_death)
 		{
-			Vector3 fixedEulerRot = new Vector3(0,180,0);
-			Vector3 lerpRotation = Vector3.Lerp(archerModel.transform.localEulerAngles,fixedEulerRot, 0.5f * Time.deltaTime);
-			archerModel.transform.localEulerAngles = lerpRotation;
-			//draw bow if it isn't drawn
-			if(!_bowIsDrawn)
+			bool playerIsDeath = _attackTarget.gameObject.GetComponent<PlayerController>().death;
+			if(!playerIsDeath)
 			{
-				childAnims.SetTrigger("drawBow");
-				Invoke("setDrawBow", 1f);
+				Vector3 fixedEulerRot = new Vector3(0,180,0);
+				Vector3 lerpRotation = Vector3.Lerp(archerModel.transform.localEulerAngles,fixedEulerRot, 0.5f * Time.deltaTime);
+				archerModel.transform.localEulerAngles = lerpRotation;
+				//draw bow if it isn't drawn
+				if(!_bowIsDrawn)
+				{
+					childAnims.SetTrigger("drawBow");
+					Invoke("setDrawBow", 1f);
+				}
+				_navMesh.speed = 0;
+				Vector3 relativePos = _attackTarget.position - this.transform.position;
+				Quaternion enemyLookAt = Quaternion.LookRotation(relativePos);
+				//check rotation relative to the pos to slerp towards enemypos
+				this.transform.rotation = Quaternion.Slerp(this.transform.rotation, enemyLookAt, Time.deltaTime * 25f);
 			}
-			_navMesh.speed = 0;
-			Vector3 relativePos = _attackTarget.position - this.transform.position;
-			Quaternion enemyLookAt = Quaternion.LookRotation(relativePos);
-			//check rotation relative to the pos to slerp towards enemypos
-			this.transform.rotation = Quaternion.Slerp(this.transform.rotation, enemyLookAt, Time.deltaTime * 25f);
 		} 
-		else if(!_dead)
+		else if(!_death)
 		{
 			if(_bowIsDrawn)
 			{

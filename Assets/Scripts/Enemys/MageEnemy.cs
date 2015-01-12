@@ -20,15 +20,19 @@ public class MageEnemy : GroundEnemy {
 	protected override void Update ()
 	{
 		base.Update ();
-		if(_attackTarget != null && !_dead)
+		if(_attackTarget != null && !_death)
 		{
-			Vector3 relativePos = _attackTarget.position - this.transform.position;
-			Quaternion enemyLookAt = Quaternion.LookRotation(relativePos);
-			//check rotation relative to the pos to slerp towards enemypos
-			this.transform.rotation = Quaternion.Slerp(this.transform.rotation, enemyLookAt, Time.deltaTime * 25f);
-			if (Time.time > _shootCoolDown) 
+			bool playerIsDeath = _attackTarget.gameObject.GetComponent<PlayerController>().death;
+			if(!playerIsDeath)
 			{
-				Shoot ();
+				Vector3 relativePos = _attackTarget.position - this.transform.position;
+				Quaternion enemyLookAt = Quaternion.LookRotation(relativePos);
+				//check rotation relative to the pos to slerp towards enemypos
+				this.transform.rotation = Quaternion.Slerp(this.transform.rotation, enemyLookAt, Time.deltaTime * 25f);
+				if (Time.time > _shootCoolDown) 
+				{
+					Shoot ();
+				}
 			}
 		}
 	}

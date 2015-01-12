@@ -37,7 +37,6 @@ public class FlyingEnemy : EnemyBehavior {
 				
 				if(target == null)
 				{
-					Debug.LogWarning("no waypoints found!");
 					Destroy(this.gameObject);
 				}
 			}
@@ -48,7 +47,7 @@ public class FlyingEnemy : EnemyBehavior {
 				this.transform.position += movement * Time.deltaTime;
 			}
 		}
-		if(_dead && this.transform.position.y >= 3)
+		if(_death && this.transform.position.y >= 3)
 		{
 			Vector3 fallmovement = Vector3.zero;
 			fallmovement.y = -10;

@@ -724,7 +724,7 @@ ModelImporter:
     400716: Spine_null
     400718: Torso_con_
     4300000: Sphere
-    7400000: playerwalk
+    7400000: fakewalk
     9500000: //RootNode
     13700000: Sphere
   materials:
@@ -744,7 +744,7 @@ ModelImporter:
     extraExposedTransformPaths: []
     clipAnimations:
     - serializedVersion: 16
-      name: playerwalk
+      name: fakewalk
       takeName: C4D Animation Take
       firstFrame: 0
       lastFrame: 30

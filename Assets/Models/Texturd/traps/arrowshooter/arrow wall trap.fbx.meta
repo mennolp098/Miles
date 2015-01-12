@@ -1,26 +1,13 @@
 fileFormatVersion: 2
-guid: e2f5e38713b40e84c985dd8f948a2922
+guid: 414f97d5fe4db2a46b4da2a844908e90
 ModelImporter:
   serializedVersion: 16
   fileIDToRecycleName:
-    100000: Boole
-    100002: Cube
-    100004: Cube_Cylinder
-    100006: Cylinder
-    100008: Tube
-    100010: //RootNode
-    400000: Boole
-    400002: Cube
-    400004: Cube_Cylinder
-    400006: Cylinder
-    400008: Tube
-    400010: //RootNode
-    2300000: Cube_Cylinder
-    2300002: Tube
-    3300000: Cube_Cylinder
-    3300002: Tube
-    4300000: Tube
-    4300002: Cube_Cylinder
+    100000: //RootNode
+    400000: //RootNode
+    2300000: //RootNode
+    3300000: //RootNode
+    4300000: Cube_1_Cylinder_0_1
     9500000: //RootNode
   materials:
     importMaterials: 1

@@ -20,23 +20,30 @@ public class TrollEnemy : GroundEnemy {
 	protected override void Update ()
 	{
 		base.Update ();
-		if(_attackTarget != null && !_dead && Vector3.Distance(this.transform.position,_attackTarget.transform.position) <= 4f)
+		if(_attackTarget != null && !_death)
 		{
-			_speed = 0;
-			LookAtTarget();
-			if (Time.time > _attackCooldown) 
+			bool playerIsDeath = _attackTarget.gameObject.GetComponent<PlayerController>().death;
+			if(!playerIsDeath)
 			{
-				Attack ();
+				if(Vector3.Distance(this.transform.position,_attackTarget.transform.position) <= 4f)
+				{
+					_speed = 0;
+					LookAtTarget();
+					if (Time.time > _attackCooldown) 
+					{
+						Attack ();
+					}
+				} 
+				else 
+				{
+					_speed = 0;
+					LookAtTarget();
+					if(Vector3.Dot(this.transform.forward, (_attackTarget.position - this.transform.position).normalized) >= 0.85f)
+						this.transform.position = Vector3.MoveTowards(this.transform.position, _attackTarget.position, 3 * Time.deltaTime);
+				}
 			}
 		} 
-		else if(_attackTarget != null && !_dead)
-		{
-			_speed = 0;
-			LookAtTarget();
-			if(Vector3.Dot(this.transform.forward, (_attackTarget.position - this.transform.position).normalized) >= 0.85f)
-				this.transform.position = Vector3.MoveTowards(this.transform.position, _attackTarget.position, 3 * Time.deltaTime);
-		} 
-		else if(!_dead)
+		else if(!_death)
 		{
 			_speed = _oldSpeed;
 		}
