@@ -4,17 +4,19 @@ using System.Collections;
 public class ArcherEnemy : GroundEnemy {
 	private Transform _attackTarget;
 	private bool _bowIsDrawn;
+	private float _attackDamage;
 
 	public GameObject archerModel;
 	public GameObject arrowPrefab;
 	public Transform spawnpoint;
-	public float attackDamage;
+
 	// Use this for initialization
 	protected override void Start () {
-		health = 35f;
-		_speed = 0.5f;
+		_health = 35f;
+		_speed = 0.75f;
 		_myGold = 20f;
-		sort = 3;
+		_attackDamage = 20f;
+		sort = 1;
 		base.Start();
 	}
 	protected override void Update ()
@@ -71,7 +73,7 @@ public class ArcherEnemy : GroundEnemy {
 		GameObject newArcherArrow = Instantiate (arrowPrefab, spawnpoint.position, spawnpoint.rotation) as GameObject;
 		newArcherArrow.transform.parent = GameObject.FindGameObjectWithTag("ArcherArrows").transform;
 		ArcherArrowBehavior newArcherArrowScript = newArcherArrow.GetComponent<ArcherArrowBehavior>();
-		newArcherArrowScript.SetDamage(attackDamage);
+		newArcherArrowScript.SetDamage(_attackDamage);
 		childAnims.SetTrigger("shoot");
 	}
 	protected override void OnTriggerEnter(Collider other)

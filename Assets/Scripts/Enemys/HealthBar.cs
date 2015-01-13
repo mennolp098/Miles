@@ -9,13 +9,13 @@ public class HealthBar : MonoBehaviour {
 	private float maxHealth = 100;
 	
 	void Start(){
-		health = GetComponentInParent<EnemyBehavior>().health;
+		health = GetComponentInParent<EnemyBehavior>().GetHealth();
 		maxHealth = health;
 		initialGreenLength = greenBar.transform.localScale.x;
 	}
 	
 	void Update(){
-		health = GetComponentInParent<EnemyBehavior>().health;
+		health = GetComponentInParent<EnemyBehavior>().GetHealth();
 		if(health >= 1)
 		{
 			Vector3 newScale = greenBar.transform.localScale;

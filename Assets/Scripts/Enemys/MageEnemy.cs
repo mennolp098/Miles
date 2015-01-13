@@ -3,18 +3,21 @@ using System.Collections;
 
 public class MageEnemy : GroundEnemy {
 	private Transform _attackTarget;
-	private float _shootCoolDown;
+	private float _cooldownTracker;
+	private float _attackDamage;
+	private float _shootCooldown;
 
 	public GameObject mageSpellPrefab;
 	public Transform spawnpoint;
-	public float attackDamage;
-	public float shootCooldown;
+
 	// Use this for initialization
 	protected override void Start () {
-		health = 30f;
+		_health = 30f;
 		_speed = 0.5f;
 		_myGold = 20f;
-		sort = 3;
+		_attackDamage = 10f;
+		_shootCooldown = 2f;
+		sort = 2;
 		base.Start();
 	}
 	protected override void Update ()
@@ -29,7 +32,7 @@ public class MageEnemy : GroundEnemy {
 				Quaternion enemyLookAt = Quaternion.LookRotation(relativePos);
 				//check rotation relative to the pos to slerp towards enemypos
 				this.transform.rotation = Quaternion.Slerp(this.transform.rotation, enemyLookAt, Time.deltaTime * 25f);
-				if (Time.time > _shootCoolDown) 
+				if (Time.time > _cooldownTracker) 
 				{
 					Shoot ();
 				}
@@ -38,12 +41,12 @@ public class MageEnemy : GroundEnemy {
 	}
 	void Shoot() 
 	{
-		_shootCoolDown = Time.time + shootCooldown;
+		_cooldownTracker = Time.time + _shootCooldown;
 		audio.Play();
 		GameObject newMageSpell = Instantiate (mageSpellPrefab, spawnpoint.position, spawnpoint.rotation) as GameObject;
 		newMageSpell.transform.parent = GameObject.FindGameObjectWithTag("MageSpells").transform;
 		MageSpellBehavior newMageSpellScript = newMageSpell.GetComponent<MageSpellBehavior>();
-		newMageSpellScript.SetDamage(attackDamage);
+		newMageSpellScript.SetDamage(_attackDamage);
 		newMageSpellScript.SetTarget(_attackTarget);
 		childAnims.SetTrigger("shoot");
 	}

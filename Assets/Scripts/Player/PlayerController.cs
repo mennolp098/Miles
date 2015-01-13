@@ -7,6 +7,7 @@ public class PlayerController : MonoBehaviour
 	public Transform playerCamera;
 	public Animator animator;
 	public bool death;
+	public AudioClip[] allSounds = new AudioClip[0];
 
 	private  enum RotationAxes { MouseXAndY = 0, MouseX = 1, MouseY = 2 }
     private RotationAxes axes = RotationAxes.MouseXAndY;
@@ -92,6 +93,7 @@ public class PlayerController : MonoBehaviour
 			animator.SetBool("isShooting", true);
 			Invoke("StopShooting", 1f);
 			Instantiate(spell, spawn.position, spawn.rotation);
+			audio.clip = allSounds[0];
 			audio.Play();
 		}
 	}
@@ -119,5 +121,11 @@ public class PlayerController : MonoBehaviour
 	public void StopFire()
 	{
 		particleSystem.enableEmission = false;
+	}
+	AnimationEvent Walk()
+	{
+		audio.clip = allSounds[1];
+		audio.Play();
+		return null;
 	}
 }

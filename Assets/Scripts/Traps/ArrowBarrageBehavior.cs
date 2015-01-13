@@ -2,11 +2,10 @@
 using System.Collections;
 
 public class ArrowBarrageBehavior : MonoBehaviour {
-	public GameObject bloodSplatterPrefab;
-
 	private float _shootCooldown = 5;
 	private float _timeStamp = 0;
 	private float _attackDamage;
+	private float _fireTime = 1f;
 	void Start()
 	{
 		particleSystem.enableEmission = false;
@@ -24,7 +23,7 @@ public class ArrowBarrageBehavior : MonoBehaviour {
 	{
 		_timeStamp = Time.time + _shootCooldown;
 		particleSystem.enableEmission = true;
-		Invoke("StopBarrage", 1f);
+		Invoke("StopBarrage", _fireTime);
 	}
 	private void StopBarrage()
 	{
@@ -35,10 +34,6 @@ public class ArrowBarrageBehavior : MonoBehaviour {
 		if(other.transform.tag == "Enemy")
 		{
 			other.GetComponent<EnemyBehavior>().GetDmg(_attackDamage);
-			GameObject bloodSplatter = Instantiate(bloodSplatterPrefab,this.transform.position,Quaternion.identity) as GameObject;
-			Vector3 newRot = this.transform.eulerAngles;
-			newRot.y -= 180;
-			bloodSplatter.transform.eulerAngles = newRot;
 		}
 	}
 }

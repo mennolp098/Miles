@@ -4,7 +4,6 @@ using System.Collections;
 public class ArrowBehavior : MonoBehaviour {
 	public float destroyTime;
 	public float speed;
-	public GameObject bloodSplatterPrefab;
 
 	private float _damage;
 	private Transform _target;
@@ -27,11 +26,13 @@ public class ArrowBehavior : MonoBehaviour {
 		{
 			if(other.transform.tag == "Enemy")
 			{
-				other.gameObject.GetComponent<EnemyBehavior>().GetDmg(_damage);
-				GameObject bloodSplatter = Instantiate(bloodSplatterPrefab,this.transform.position,Quaternion.identity) as GameObject;
-				Vector3 newRot = this.transform.eulerAngles;
-				newRot.y -= 180;
-				bloodSplatter.transform.eulerAngles = newRot;
+				if(other.transform.name == "FlyingEnemy")
+				{
+					float amplifiedDamage = _damage * 1.5f;
+					other.gameObject.GetComponent<EnemyBehavior>().GetDmg(amplifiedDamage);
+				} else {
+					other.gameObject.GetComponent<EnemyBehavior>().GetDmg(_damage);
+				}
 				Destroy(this.gameObject);
 			} else {
 				Destroy(this.gameObject);

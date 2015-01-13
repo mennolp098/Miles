@@ -7,12 +7,11 @@ public class TrollEnemy : GroundEnemy {
 
 	public GameObject cloudPrefab;
 	public TrollAttack trollAttack;
-	public float attackDamage;
 	public float attackCooldown;
 	// Use this for initialization
 	protected override void Start () {
-		health = 100f;
-		_speed = 0.5f;
+		_health = 100f;
+		_speed = 0.25f;
 		_myGold = 50f;
 		sort = 3;
 		base.Start();

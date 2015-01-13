@@ -10,7 +10,7 @@ public class SpikeTrapBehavior : GroundTrapBehavior {
 		for(int i = 0; i < _enemyScripts.Count; i++)
 		{
 			_enemyScripts[i].GetDmg(damage);
-			_enemyScripts[i].GetStunned(0.5f);
+			_enemyScripts[i].GetStunned(2f);
 		}
 
 	}

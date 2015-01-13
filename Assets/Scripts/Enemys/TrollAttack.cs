@@ -15,7 +15,6 @@ public class TrollAttack : MonoBehaviour {
 		if(other.transform.tag == "Player" && attacking)
 		{
 			attacking = false;
-			Debug.Log("Troll hits you!");
 			other.GetComponent<HealthController>().SubtractHealth(_attackDamage);
 		}
 	}

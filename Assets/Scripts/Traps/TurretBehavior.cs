@@ -9,8 +9,8 @@ public class TurretBehavior : MonoBehaviour {
 	private float attackDamage = 4f;
 
 	public Transform spawnpoint;
-	public Transform cannon;
-	public GameObject bulletPrefab;
+	public Transform crossbow;
+	public GameObject arrowPrefab;
 	// Update is called once per frame
 	void Update () {
 		CheckTargets();
@@ -25,10 +25,10 @@ public class TurretBehavior : MonoBehaviour {
 				//check first enemy in list
 				if(_enemyScripts[0].thisTransform)
 				{
-					Vector3 relativePos = _enemyScripts[0].thisTransform.position - cannon.position;
+					Vector3 relativePos = _enemyScripts[0].thisTransform.position - crossbow.position;
 					Quaternion enemyLookAt = Quaternion.LookRotation(relativePos);
 					//check rotation relative to the pos to slerp towards enemypos
-					cannon.rotation = Quaternion.Slerp(cannon.rotation, enemyLookAt, Time.deltaTime * rotationSpeed);
+					crossbow.rotation = Quaternion.Slerp(crossbow.rotation, enemyLookAt, Time.deltaTime * rotationSpeed);
 					if (Time.time > _shootCoolDown) 
 					{
 						Shoot ();
@@ -83,7 +83,7 @@ public class TurretBehavior : MonoBehaviour {
 	{
 		audio.Play();
 		_shootCoolDown = Time.time + shootCooldown;
-		GameObject newBullet = Instantiate (bulletPrefab, spawnpoint.position, spawnpoint.rotation) as GameObject;
+		GameObject newBullet = Instantiate (arrowPrefab, spawnpoint.position, spawnpoint.rotation) as GameObject;
 		newBullet.transform.parent = GameObject.FindGameObjectWithTag("Bullets").transform;
 		ArrowBehavior newBulletScript = newBullet.GetComponent<ArrowBehavior>();
 		newBulletScript.SetDamage(attackDamage);

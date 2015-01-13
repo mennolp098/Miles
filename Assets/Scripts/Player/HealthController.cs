@@ -6,6 +6,7 @@ public class HealthController : MonoBehaviour {
 	private float _health;
 	private bool _invincible;
 
+	public AudioClip deathSound;
 	public GameObject spawnPoint;
 	public Text respawnText;
 	public GameObject respawnCanvas;
@@ -36,6 +37,8 @@ public class HealthController : MonoBehaviour {
 	}
 	private void Die()
 	{
+		audio.clip = deathSound;
+		audio.Play();
 		GetComponent<Animator>().SetTrigger("death");
 		GetComponent<PlayerController>().death = true;
 		GetComponent<PlayerController>().StopFire();

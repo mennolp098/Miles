@@ -5,7 +5,7 @@ public class DragonEnemy : FlyingEnemy {
 	public GameObject flames;
 	// Use this for initialization
 	protected override void Start () {
-		health = 30f;
+		_health = 30f;
 		_speed = 3f;
 		_myGold = 10f;
 		sort = 1;

@@ -5,30 +5,32 @@ using System;
 
 public class EnemyBehavior : MonoBehaviour, IComparable<EnemyBehavior> {
 	public bool isOnStage;
-	public float health;
+
 	public Transform thisTransform;
 	public int sort;
 	public GameObject greenbar;
 	public GameObject redbar;
 	public GameObject goldPrefab;
 	public Animator childAnims;
+	public AudioClip[] allSounds = new AudioClip[0];
 
 	protected NavMeshAgent _navMesh;
 	protected bool _death;
+	protected float _health;
 	protected float _speed = 0.03f;
 	protected float _oldSpeed;
 	protected float _myGold = 0;
 	protected List<Material> allChildrenMaterials = new List<Material>();
-	protected Transform allCoins;
 	protected GameObject target;
 	protected DateTime TimeAdded;
 	protected float counter = 1;
    
+	private Transform _allCoins;
 	public int CompareTo(EnemyBehavior other)
 	{
-		if(this.health < other.health)
+		if(this._health < other._health)
 		{
-			return this.health.CompareTo(other.health);
+			return this._health.CompareTo(other._health);
 		} 
 		else
 		{
@@ -41,11 +43,14 @@ public class EnemyBehavior : MonoBehaviour, IComparable<EnemyBehavior> {
 	}
 	protected virtual void Start () 
 	{
-		allCoins = GameObject.FindGameObjectWithTag("allCoins").transform;
 		thisTransform = this.transform;
 		TimeAdded = DateTime.Now;
 		isOnStage = true;
+		audio.clip = allSounds[0];
+
+		_allCoins = GameObject.FindGameObjectWithTag("allCoins").transform;
 		_oldSpeed = _speed;
+
 		Renderer[] allChildrenRenderers = GetComponentsInChildren<Renderer>();
 		foreach(Renderer renderer in allChildrenRenderers)
 		{
@@ -63,12 +68,16 @@ public class EnemyBehavior : MonoBehaviour, IComparable<EnemyBehavior> {
     }
 	public void SetHealth(float newHealth)
 	{
-		health = newHealth;
+		_health = newHealth;
+	}
+	public float GetHealth()
+	{
+		return _health;
 	}
 	public void GetDmg(float dmg)
 	{
-		health -= dmg;
-		if(health <= 0)
+		_health -= dmg;
+		if(_health <= 0)
 		{
 			Die();
 		}
@@ -95,7 +104,54 @@ public class EnemyBehavior : MonoBehaviour, IComparable<EnemyBehavior> {
 			}
 		}
 	}
+	public void SetOnFire(float fireDamage, float damageSpeed)
+	{
+		if(this.GetComponent<GroundEnemy>())
+		{
+			if(!particleSystem.enableEmission)
+			{
+				particleSystem.enableEmission = true;
+				StartCoroutine(OnFire(fireDamage, damageSpeed));
+				Invoke("StopFire", 3f);
+			}
+		}
+	}
+	public IEnumerator OnFire(float fireDamage, float damageSpeed)
+	{
+		while(particleSystem.enableEmission)
+		{
+			GetDmg(fireDamage);
+			yield return new WaitForSeconds(damageSpeed);
+		}
+	}
+	public void StopFire()
+	{
+		particleSystem.enableEmission = false;
+	}
 	protected virtual void Die()
+	{
+		SpawnGold();
+		DestroyBody();
+		audio.clip = allSounds[1];
+		audio.Play();
+	}
+	public void PlayWalkSound()
+	{
+		audio.clip = allSounds[2];
+		audio.Play();
+	}
+	private void DestroyBody()
+	{
+		childAnims.SetTrigger("dead");
+		_death = true;
+		isOnStage = false;
+		Destroy(this.rigidbody);
+		Destroy(this.collider);
+		Destroy(greenbar.gameObject);
+		Destroy(redbar.gameObject);
+		Destroy(this.gameObject, 20f);
+	}
+	private void SpawnGold()
 	{
 		for(int i = 0; i < _myGold/5; i++)
 		{
@@ -105,41 +161,7 @@ public class EnemyBehavior : MonoBehaviour, IComparable<EnemyBehavior> {
 			randomSpawnPos.y += UnityEngine.Random.Range(1,5);
 			GameObject newGoldCoin = Instantiate(goldPrefab, randomSpawnPos,Quaternion.identity) as GameObject;
 			newGoldCoin.rigidbody.AddExplosionForce(200f,this.transform.position,20f);
-			newGoldCoin.transform.parent = allCoins;
+			newGoldCoin.transform.parent = _allCoins;
 		}
-		//audio.Play();
-		childAnims.SetTrigger("dead");
-		_death = true;
-		isOnStage = false;
-		Destroy(this.rigidbody);
-		Destroy(this.collider);
-		Destroy(greenbar.gameObject);
-		Destroy(redbar.gameObject);
-		Destroy(this.gameObject, 20f);
-
-	}
-	public void SetOnFire()
-	{
-		if(this.GetComponent<GroundEnemy>())
-		{
-			if(!particleSystem.enableEmission)
-			{
-				particleSystem.enableEmission = true;
-				StartCoroutine("OnFire");
-				Invoke("StopFire", 3f);
-			}
-		}
-	}
-	public IEnumerator OnFire()
-	{
-		while(particleSystem.enableEmission)
-		{
-			GetDmg(1f);
-			yield return new WaitForSeconds(0.25f);
-		}
-	}
-	public void StopFire()
-	{
-		particleSystem.enableEmission = false;
 	}
 }
