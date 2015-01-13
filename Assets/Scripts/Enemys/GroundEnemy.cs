@@ -19,7 +19,7 @@ public class GroundEnemy : EnemyBehavior {
 		}
 		if(target)
 		{
-			if(Vector2.Distance (new Vector2(transform.position.x,transform.position.z), new Vector2(target.transform.position.x,target.transform.position.z)) < 1.5f)
+			if(Vector2.Distance (new Vector2(transform.position.x,transform.position.z), new Vector2(target.transform.position.x,target.transform.position.z)) < 3f)
 			{
 				counter++;
 				if(counter == 2)
