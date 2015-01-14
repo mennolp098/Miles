@@ -26,6 +26,8 @@ public class PlayerController : MonoBehaviour
     private GameObject spell;
     [SerializeField]
     private Transform spawn;
+    [SerializeField]
+    private Canvas loseScreen;
 
 	void OnGUI()
 	{
@@ -43,7 +45,7 @@ public class PlayerController : MonoBehaviour
     }
 	void Update ()
 	{
-		if(!death)
+		if(!death && loseScreen.active == false)
 		{
 	        if(Input.GetKey(KeyCode.Mouse0))
 	        {

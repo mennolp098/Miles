@@ -6,7 +6,7 @@ public class loseScript : MonoBehaviour {
 
     public void replay()
     {
-        Application.LoadLevel("levelOne");
+        Application.LoadLevel("level01");
     }
     public void menu()
     {
