@@ -11,14 +11,23 @@ public class EnemySpawner : MonoBehaviour
     [SerializeField]
     private GameObject[] _bosses;
     private float timeLastSubtracted;
-    private float waveTime = 7;
+
+    private float waveTime = 10;
     private int wave;
     private bool spawningWave = false;
     private int waveTillBoss = 5;
     private bool spawnWave;
     private int bossesKilled = 0;
     private int gropes = 3;
-    private bool spawning = true;
+    private bool spawning = false;
+	void Start()
+	{
+		Invoke ("BeginSpawning", 15f);
+	}
+	void BeginSpawning()
+	{
+		spawning = true;
+	}
     void Update()
     {
         if (spawning == true)

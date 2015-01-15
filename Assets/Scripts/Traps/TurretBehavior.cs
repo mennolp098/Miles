@@ -11,6 +11,19 @@ public class TurretBehavior : MonoBehaviour {
 	public Transform spawnpoint;
 	public Transform crossbow;
 	public GameObject arrowPrefab;
+	void Start () {
+		Collider[] hitColliders = Physics.OverlapSphere(this.transform.position, 40f);
+		for (int i = 0; i < hitColliders.Length; i++) 
+		{
+			string colliderTag = hitColliders[i].transform.tag;
+			if(colliderTag == "Enemy")
+			{
+				EnemyBehavior enemyScript = hitColliders[i].gameObject.GetComponent<EnemyBehavior>();
+				_enemyScripts.Add(enemyScript);
+				_enemyScripts.Sort();
+			}
+		}
+	}
 	// Update is called once per frame
 	void Update () {
 		CheckTargets();
