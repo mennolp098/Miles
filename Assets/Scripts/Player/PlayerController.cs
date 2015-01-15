@@ -45,7 +45,7 @@ public class PlayerController : MonoBehaviour
     }
 	void Update ()
 	{
-		if(!death && loseScreen.active == false)
+		if(!death && loseScreen.gameObject.activeInHierarchy == false)
 		{
 	        if(Input.GetKey(KeyCode.Mouse0))
 	        {

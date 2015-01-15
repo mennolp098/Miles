@@ -18,16 +18,7 @@ public class EnemySpawner : MonoBehaviour
     private bool spawnWave;
     private int bossesKilled = 0;
     private int gropes = 3;
-    private bool spawning = false;
-    private bool doneSpawning = false;
-	void Start()
-	{
-		Invoke ("BeginSpawning", 15f);
-	}
-	void BeginSpawning()
-	{
-		spawning = true;
-	}
+    private bool spawning = true;
     void Update()
     {
         if (spawning == true)
@@ -46,7 +37,7 @@ public class EnemySpawner : MonoBehaviour
                     bossesKilled++;
                     if(bossesKilled == 2)
                     {
-                        doneSpawning = true;
+                        spawning = false;
                     }
                 }
                 timeLastSubtracted = Time.time;
@@ -69,7 +60,7 @@ public class EnemySpawner : MonoBehaviour
         }
         GameObject[] enemys;
         enemys = GameObject.FindGameObjectsWithTag("Enemy");
-        if(doneSpawning == true && enemys.Length == 0)
+        if(spawning == false && enemys.Length == 0)
         {
             PlayerPrefs.SetString("Level", "Level02");
             Application.LoadLevel("Traps");
