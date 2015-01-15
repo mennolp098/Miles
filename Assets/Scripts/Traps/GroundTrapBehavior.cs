@@ -6,7 +6,6 @@ public class GroundTrapBehavior : MonoBehaviour {
 	protected List<EnemyBehavior> _enemyScripts = new List<EnemyBehavior>();
 	protected float _coolDown = 0;
 	public float coolDown;
-	public float damage;
 	void OnTriggerEnter(Collider other)
 	{
 		EnemyBehavior enemyScript = other.GetComponent<EnemyBehavior> ();

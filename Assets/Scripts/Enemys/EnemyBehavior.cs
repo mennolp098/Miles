@@ -120,7 +120,13 @@ public class EnemyBehavior : MonoBehaviour, IComparable<EnemyBehavior> {
 	{
 		while(particleSystem.enableEmission)
 		{
-			GetDmg(fireDamage);
+			if(!_death)
+			{
+				GetDmg(fireDamage);
+			} else {
+				StopFire();
+				break;
+			}
 			yield return new WaitForSeconds(damageSpeed);
 		}
 	}

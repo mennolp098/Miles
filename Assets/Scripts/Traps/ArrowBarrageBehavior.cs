@@ -9,7 +9,7 @@ public class ArrowBarrageBehavior : MonoBehaviour {
 	void Start()
 	{
 		particleSystem.enableEmission = false;
-		_attackDamage = 2.5f;
+		_attackDamage = 5f;
 	}
 
 	void OnTriggerStay(Collider other)

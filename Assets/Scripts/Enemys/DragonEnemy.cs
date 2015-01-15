@@ -8,7 +8,7 @@ public class DragonEnemy : FlyingEnemy {
 		_health = 30f;
 		_speed = 3f;
 		_myGold = 10f;
-		sort = 1;
+		sort = 5;
 		base.Start();
 		flames.particleSystem.enableEmission = false;
 		Invoke("FireFlames", Random.Range(3,20));
