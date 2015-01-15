@@ -11,7 +11,7 @@ public class EnemySpawner : MonoBehaviour
     [SerializeField]
     private GameObject[] _bosses;
     private float timeLastSubtracted;
-    private float waveTime = 4;
+    private float waveTime = 7;
     private int wave;
     private bool spawningWave = false;
     private int waveTillBoss = 5;
