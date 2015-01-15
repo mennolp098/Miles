@@ -11,7 +11,6 @@ public class EnemySpawner : MonoBehaviour
     [SerializeField]
     private GameObject[] _bosses;
     private float timeLastSubtracted;
-
     private float waveTime = 10;
     private int wave;
     private bool spawningWave = false;
@@ -20,6 +19,7 @@ public class EnemySpawner : MonoBehaviour
     private int bossesKilled = 0;
     private int gropes = 3;
     private bool spawning = false;
+    private bool doneSpawning = false;
 	void Start()
 	{
 		Invoke ("BeginSpawning", 15f);
@@ -46,7 +46,7 @@ public class EnemySpawner : MonoBehaviour
                     bossesKilled++;
                     if(bossesKilled == 2)
                     {
-                        spawning = false;
+                        doneSpawning = true;
                     }
                 }
                 timeLastSubtracted = Time.time;
@@ -69,7 +69,7 @@ public class EnemySpawner : MonoBehaviour
         }
         GameObject[] enemys;
         enemys = GameObject.FindGameObjectsWithTag("Enemy");
-        if(spawning == false && enemys.Length == 0)
+        if(doneSpawning == true && enemys.Length == 0)
         {
             PlayerPrefs.SetString("Level", "Level02");
             Application.LoadLevel("Traps");
