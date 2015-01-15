@@ -12,7 +12,7 @@ public class GateScript : MonoBehaviour
         _health--;
         if(_health == 0)
         {
-            loseScreen.active = true;
+            loseScreen.gameObject.SetActive(true);
         }
     }
 }

@@ -18,15 +18,7 @@ public class EnemySpawner : MonoBehaviour
     private bool spawnWave;
     private int bossesKilled = 0;
     private int gropes = 3;
-    private bool spawning = false;
-	void Start()
-	{
-		Invoke ("BeginSpawning", 15f);
-	}
-	void BeginSpawning()
-	{
-		spawning = true;
-	}
+    private bool spawning = true;
     void Update()
     {
         if (spawning == true)
