@@ -74,9 +74,8 @@ public class TrollEnemy : GroundEnemy {
 		trollAttack.attacking = false;
 		childAnims.SetBool("Attacking", false);
 	}
-	protected override void OnTriggerEnter(Collider other)
+	void OnTriggerEnter(Collider other)
 	{
-		base.OnTriggerEnter(other);
 		if(other.transform.tag == "Player")
 		{
 			_attackTarget = other.transform;

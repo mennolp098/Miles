@@ -8,19 +8,25 @@ public class UIScript : MonoBehaviour {
     [SerializeField]
     private Sprite[] traps;
     private Image[] images;
+	[SerializeField]
     private Slider healthBar;
+	[SerializeField]
+	private Slider gateBar;
 	// Use this for initialization
 	void Start () 
     {
         images = gameObject.GetComponentsInChildren<Image>();
-        healthBar = gameObject.GetComponentInChildren<Slider>();
         for (int i = 0; i < 4;i++ )
         {
             images[i + 1].sprite = traps[PlayerPrefs.GetInt("hotBar"+i)];
         }
 	}
-    void Update ()
+	public void UpdateHealthBar (float newHealth)
     {
-        healthBar.value = player.GetComponent<HealthController>().GetHealth();
+        healthBar.value = newHealth;
     }
+	public void UpdateGateBar(float newHealth)
+	{
+		gateBar.value = newHealth;
+	}
 }

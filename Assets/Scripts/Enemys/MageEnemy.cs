@@ -50,9 +50,8 @@ public class MageEnemy : GroundEnemy {
 		newMageSpellScript.SetTarget(_attackTarget);
 		childAnims.SetTrigger("shoot");
 	}
-	protected override void OnTriggerEnter(Collider other)
+	void OnTriggerEnter(Collider other)
 	{
-		base.OnTriggerEnter(other);
 		if(other.transform.tag == "Player")
 		{
 			_attackTarget = other.transform;

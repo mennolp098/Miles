@@ -8,6 +8,8 @@ public class PlayerController : MonoBehaviour
 	public Animator animator;
 	public bool death;
 	public AudioClip[] allSounds = new AudioClip[0];
+	public GameObject playerModel;
+
 
 	private  enum RotationAxes { MouseXAndY = 0, MouseX = 1, MouseY = 2 }
     private RotationAxes axes = RotationAxes.MouseXAndY;
@@ -26,8 +28,6 @@ public class PlayerController : MonoBehaviour
     private GameObject spell;
     [SerializeField]
     private Transform spawn;
-    [SerializeField]
-    private Canvas loseScreen;
 
 	void OnGUI()
 	{
@@ -42,10 +42,11 @@ public class PlayerController : MonoBehaviour
         if (GetComponent<Rigidbody>())
             GetComponent<Rigidbody>().freezeRotation = true;
 		particleSystem.enableEmission = false;
+		audio.loop = false;
     }
 	void Update ()
 	{
-		if(!death && loseScreen.gameObject.activeInHierarchy == false)
+		if(!death && playerModel.activeInHierarchy)
 		{
 	        if(Input.GetKey(KeyCode.Mouse0))
 	        {
@@ -98,6 +99,16 @@ public class PlayerController : MonoBehaviour
 			audio.clip = allSounds[0];
 			audio.Play();
 		}
+	}
+	public void YouLost()
+	{
+		playerModel.SetActive(false);
+		Collider[] colliders = GetComponents<SphereCollider>();
+		foreach(Collider collider in colliders)
+		{
+			Destroy(collider);
+		}
+		Screen.lockCursor = false;
 	}
 	private void StopShooting()
 	{

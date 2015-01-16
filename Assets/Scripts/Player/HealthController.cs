@@ -5,7 +5,7 @@ using UnityEngine.UI;
 public class HealthController : MonoBehaviour {
 	private float _health;
 	private bool _invincible;
-
+	
 	public AudioClip deathSound;
 	public GameObject spawnPoint;
 	public Text respawnText;
@@ -25,6 +25,7 @@ public class HealthController : MonoBehaviour {
 		if(!_invincible && !GetComponent<PlayerController>().death)
 		{
 			_health -= health;
+			GameObject.FindGameObjectWithTag("UI").GetComponent<UIScript>().UpdateHealthBar(_health);
 			if(_health <= 0)
 			{
 				Die();
@@ -97,6 +98,7 @@ public class HealthController : MonoBehaviour {
 		this.transform.eulerAngles = new Vector3(0f,180f,0);
 		GetComponent<PlayerController>().death = false;
 		_health = 100;
+		GameObject.FindGameObjectWithTag("UI").GetComponent<UIScript>().UpdateHealthBar(_health);
 		_invincible = true;
 		StartCoroutine("InvincibleCounterCouritine");
 	}
