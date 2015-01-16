@@ -7,14 +7,15 @@ public class TrapBuilder : MonoBehaviour {
 
 	public GameObject[] arrowTrap = new GameObject[0];
 	public GameObject[] buildArrowTrap = new GameObject[0];
-	public float[] trapPrices = new float[0];
+	public float[] allTrapPrices = new float[0];
 	public bool isBuilding = false;
 	public GUIStyle textStyle;
 	public Text costText;
-
+	
 	private float _spawnY;
 	private int _trapToBuild = -1;
 	private GameObject _currentTrap;
+	private List<float> _trapPrices = new List<float>();
 	private List<GameObject> _buildTraps = new List<GameObject>();
 	private List<GameObject> _allTraps = new List<GameObject>();
 
@@ -129,9 +130,9 @@ public class TrapBuilder : MonoBehaviour {
 	//spawn new trap
 	private void SpawnTrap()
 	{
-		if(trapPrices[_trapToBuild] <= this.GetComponent<GoldController>().GetGold())
+		if(_trapPrices[_trapToBuild] <= this.GetComponent<GoldController>().GetGold())
 		{
-			GetComponent<GoldController>().SubtractGold(trapPrices[_trapToBuild]);
+			GetComponent<GoldController>().SubtractGold(_trapPrices[_trapToBuild]);
 			GameObject newTrap = Instantiate(_allTraps[_trapToBuild], _currentTrap.transform.position,_currentTrap.transform.rotation) as GameObject;
 			GameObject hierachyTraps = GameObject.FindGameObjectWithTag("AllTraps");
 			newTrap.transform.parent = hierachyTraps.transform;
@@ -161,7 +162,7 @@ public class TrapBuilder : MonoBehaviour {
 		{
 			isBuilding = true;
 			_trapToBuild = trapSort;
-			costText.text = "Cost: " + trapPrices[_trapToBuild];
+			costText.text = "Cost: " + _trapPrices[_trapToBuild];
 			if(_currentTrap != null)
 			{
 				Destroy(_currentTrap.gameObject);
@@ -179,6 +180,7 @@ public class TrapBuilder : MonoBehaviour {
 			int trapId = PlayerPrefs.GetInt("hotBar"+i);
 			_allTraps.Add(arrowTrap[trapId]);
 			_buildTraps.Add(buildArrowTrap[trapId]);
+			_trapPrices.Add(allTrapPrices[trapId]);
 		}
 	}
 }

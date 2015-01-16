@@ -47,6 +47,7 @@ public class EnemyBehavior : MonoBehaviour, IComparable<EnemyBehavior> {
 		thisTransform = this.transform;
 		TimeAdded = DateTime.Now;
 		isOnStage = true;
+		audio.loop = false;
 		audio.clip = allSounds[0];
 
 		_allCoins = GameObject.FindGameObjectWithTag("allCoins").transform;
@@ -55,15 +56,6 @@ public class EnemyBehavior : MonoBehaviour, IComparable<EnemyBehavior> {
         allChildrenRenderers = GetComponentsInChildren<Renderer>();
 
 	}
-    protected virtual void OnTriggerEnter(Collider other)
-    {
-		if (other.gameObject.tag == "Portal")
-        {
-			isOnStage = false;
-            other.gameObject.GetComponent<GateScript>().hit();
-			Destroy(this.gameObject);
-        }
-    }
 	public void SetHealth(float newHealth)
 	{
 		_health = newHealth;

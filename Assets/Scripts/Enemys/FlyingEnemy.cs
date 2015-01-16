@@ -19,7 +19,7 @@ public class FlyingEnemy : EnemyBehavior {
 		if(target)
 		{
 			this.transform.position = Vector3.MoveTowards(this.transform.position,target.transform.position, _speed * Time.deltaTime);
-			if(Vector2.Distance (new Vector2(transform.position.x,transform.position.z), new Vector2(target.transform.position.x,target.transform.position.z)) < 1.5f)
+			if(Vector2.Distance (new Vector2(transform.position.x,transform.position.z), new Vector2(target.transform.position.x,target.transform.position.z)) < 3f)
 			{
 				if(counter == 1)
 				{
