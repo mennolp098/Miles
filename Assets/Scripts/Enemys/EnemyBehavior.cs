@@ -24,7 +24,8 @@ public class EnemyBehavior : MonoBehaviour, IComparable<EnemyBehavior> {
 	protected GameObject target;
 	protected DateTime TimeAdded;
 	protected float counter = 1;
-   
+    protected bool poison =false;
+    protected Renderer[] allChildrenRenderers;
 	private Transform _allCoins;
 	public int CompareTo(EnemyBehavior other)
 	{
@@ -51,11 +52,8 @@ public class EnemyBehavior : MonoBehaviour, IComparable<EnemyBehavior> {
 		_allCoins = GameObject.FindGameObjectWithTag("allCoins").transform;
 		_oldSpeed = _speed;
 
-		Renderer[] allChildrenRenderers = GetComponentsInChildren<Renderer>();
-		foreach(Renderer renderer in allChildrenRenderers)
-		{
-			allChildrenMaterials.Add(renderer.material);
-		}
+        allChildrenRenderers = GetComponentsInChildren<Renderer>();
+
 	}
     protected virtual void OnTriggerEnter(Collider other)
     {
@@ -130,6 +128,36 @@ public class EnemyBehavior : MonoBehaviour, IComparable<EnemyBehavior> {
 			yield return new WaitForSeconds(damageSpeed);
 		}
 	}
+    public void SetPoison(float attackDamage, float attackSpeed)
+    {
+        foreach (Renderer renderer in allChildrenRenderers)
+        {
+            allChildrenMaterials.Add(renderer.material);
+            renderer.material.color = Color.green;
+        }
+        poison = true;
+        StartCoroutine(Poisoned(attackDamage, attackSpeed));
+        Invoke("stopPoison", 6f);
+    }
+    protected void stopPoison()
+    {
+        poison = false;
+    }
+    protected IEnumerator Poisoned(float damage,float speed)
+    {
+        while (poison == true)
+        {
+            if (!_death)
+            {
+                GetDmg(damage);
+            }
+            else
+            {
+                stopPoison();
+            }
+            yield return new WaitForSeconds(speed);
+        }
+    }
 	public void StopFire()
 	{
 		particleSystem.enableEmission = false;
