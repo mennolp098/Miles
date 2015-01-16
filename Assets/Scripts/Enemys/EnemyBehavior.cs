@@ -126,7 +126,6 @@ public class EnemyBehavior : MonoBehaviour, IComparable<EnemyBehavior> {
         {
             foreach (Renderer renderer in allChildrenRenderers)
             {
-                allChildrenMaterials.Add(renderer.material);
                 renderer.material.color = Color.green;
             }
             poison = true;
@@ -138,8 +137,10 @@ public class EnemyBehavior : MonoBehaviour, IComparable<EnemyBehavior> {
     {
         foreach (Renderer renderer in allChildrenRenderers)
         {
-            allChildrenMaterials.Add(renderer.material);
-            renderer.material.color = new Color(1,1,1,1);
+            if (renderer != null)
+            {
+                renderer.material.color = new Color(1, 1, 1, 1);
+            }
         }
         poison = false;
     }
