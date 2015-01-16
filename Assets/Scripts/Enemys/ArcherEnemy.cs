@@ -14,7 +14,7 @@ public class ArcherEnemy : GroundEnemy {
 	protected override void Start () {
 		_health = 35f;
 		_speed = 0.75f;
-		_myGold = 20f;
+		_myGold = 10f;
 		_attackDamage = 20f;
 		sort = 1;
 		base.Start();

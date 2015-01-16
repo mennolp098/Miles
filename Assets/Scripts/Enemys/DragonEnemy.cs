@@ -7,7 +7,7 @@ public class DragonEnemy : FlyingEnemy {
 	protected override void Start () {
 		_health = 30f;
 		_speed = 3f;
-		_myGold = 10f;
+		_myGold = 5f;
 		sort = 5;
 		base.Start();
 		flames.particleSystem.enableEmission = false;

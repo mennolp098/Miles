@@ -12,7 +12,7 @@ public class TrollEnemy : GroundEnemy {
 	protected override void Start () {
 		_health = 250f;
 		_speed = 0.25f;
-		_myGold = 50f;
+		_myGold = 20f;
 		sort = 3;
 		base.Start();
 	}

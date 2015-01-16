@@ -136,12 +136,15 @@ public class EnemyBehavior : MonoBehaviour, IComparable<EnemyBehavior> {
     }
     protected void stopPoison()
     {
-        foreach (Renderer renderer in allChildrenRenderers)
-        {
-            allChildrenMaterials.Add(renderer.material);
-            renderer.material.color = new Color(1,1,1,1);
-        }
-        poison = false;
+		if(!_death)
+		{
+	        foreach (Renderer renderer in allChildrenRenderers)
+	        {
+	            allChildrenMaterials.Add(renderer.material);
+	            renderer.material.color = new Color(1,1,1,1);
+	        }
+		}
+		poison = false;
     }
     protected IEnumerator Poisoned(float damage,float speed)
     {
@@ -187,7 +190,7 @@ public class EnemyBehavior : MonoBehaviour, IComparable<EnemyBehavior> {
 	}
 	private void SpawnGold()
 	{
-		for(int i = 0; i < _myGold/5; i++)
+		for(int i = 0; i < _myGold/2; i++)
 		{
 			Vector3 randomSpawnPos = this.transform.position;
 			randomSpawnPos.x += UnityEngine.Random.Range(-3,3);

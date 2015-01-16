@@ -14,7 +14,7 @@ public class MageEnemy : GroundEnemy {
 	protected override void Start () {
 		_health = 30f;
 		_speed = 0.5f;
-		_myGold = 20f;
+		_myGold = 10f;
 		_attackDamage = 10f;
 		_shootCooldown = 2f;
 		sort = 2;

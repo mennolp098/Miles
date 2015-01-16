@@ -10,60 +10,82 @@ public class EnemySpawner : MonoBehaviour
     private GameObject[] _enemys;
     [SerializeField]
     private GameObject[] _bosses;
-    private float timeLastSubtracted;
-    private float waveTime = 10;
-    private int wave;
-    private bool spawningWave = false;
-    private int waveTillBoss = 5;
-    private bool spawnWave;
-    private int bossesKilled = 0;
-    private int gropes = 3;
-    private bool spawning = true;
+    private float _timeLastSubtracted;
+    private float _waveTime = 10;
+    private bool _spawningWave = false;
+    private int _waveTillBoss = 5;
+    private bool _spawnWave;
+    private int _bossesKilled = 0;
+    private int _gropes = 3;
+    private bool _spawning = true;
+	private bool _winning = false;
+
+	void Start()
+	{
+		Invoke("StartSpawning",15f);
+	}
+	void StartSpawning()
+	{
+		_spawning = true;
+	}
     void Update()
     {
-        if (spawning == true)
+        if (_spawning == true)
         {
-            if (spawningWave == false && Time.time >= timeLastSubtracted + waveTime)
+            if (_spawningWave == false && Time.time >= _timeLastSubtracted + _waveTime)
             {
-                if (waveTillBoss > 0)
+                if (_waveTillBoss > 0)
                 {
-                    spawningWave = true;
-                    waveTillBoss--;
+                    _spawningWave = true;
+                    _waveTillBoss--;
                 }
                 else
                 {
                     Wave(true, 5, 2);
-                    waveTillBoss = 5;
-                    bossesKilled++;
-                    if(bossesKilled == 2)
+                    _waveTillBoss = 5;
+                    _bossesKilled++;
+                    if(_bossesKilled == 2)
                     {
-                        spawning = false;
+                        _winning = true;
                     }
                 }
-                timeLastSubtracted = Time.time;
+                _timeLastSubtracted = Time.time;
             }
-            if (spawningWave == true && Time.time >= timeLastSubtracted + 2)
+            if (_spawningWave == true && Time.time >= _timeLastSubtracted + 2)
             {
 
-                if (gropes > 0)
+                if (_gropes > 0)
                 {
                     Wave(false, 3, 0);
-                    gropes--;
+                    _gropes--;
                 }
                 else
                 {
-                    gropes = 3;
-                    spawningWave = false;
+                    _gropes = 3;
+                    _spawningWave = false;
                 }
-                timeLastSubtracted = Time.time;
+                _timeLastSubtracted = Time.time;
             }
         }
         GameObject[] enemys;
         enemys = GameObject.FindGameObjectsWithTag("Enemy");
-        if(spawning == false && enemys.Length == 0)
+        if(_winning)
         {
-            PlayerPrefs.SetString("Level", "Level02");
-            Application.LoadLevel("Traps");
+			bool allEnemysDeath = true;
+			foreach(GameObject enemy in enemys)
+			{
+				EnemyBehavior enemyScript = enemy.GetComponent<EnemyBehavior>();
+				if(enemyScript.isOnStage)
+				{
+					allEnemysDeath = false;
+					break;
+				}
+			}
+			if(allEnemysDeath)
+			{
+	            PlayerPrefs.SetString("Level", "Level02");
+	            Application.LoadLevel("Traps");
+			}
         }
     }
     private void Wave(bool bossWave,int numEnemys,int numBosses)
@@ -86,7 +108,7 @@ public class EnemySpawner : MonoBehaviour
         {
             for(int a =0;a < numEnemys;a++)
             {
-                GameObject newEnemy = Instantiate(_enemys[Random.Range(0, _enemys.Length-1)], new Vector3(transform.position.x + Random.Range(-15, 15), transform.position.y, transform.position.z), transform.rotation) as GameObject;
+                GameObject newEnemy = Instantiate(_enemys[Random.Range(0, _enemys.Length)], new Vector3(transform.position.x + Random.Range(-15, 15), transform.position.y, transform.position.z), transform.rotation) as GameObject;
                 newEnemy.transform.parent = allEnemys;
             }
         }

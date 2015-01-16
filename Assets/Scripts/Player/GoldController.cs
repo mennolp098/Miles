@@ -7,7 +7,7 @@ public class GoldController : MonoBehaviour {
     [SerializeField]
     private Text money;
 	void Start () {
-		gold = 50;
+		gold = 100;
 	}
 	public void AddGold(float gold)
 	{
@@ -42,7 +42,7 @@ public class GoldController : MonoBehaviour {
 			other.transform.position = Vector3.MoveTowards(other.transform.position,this.transform.position, 12 * Time.deltaTime);
 			if(Vector3.Distance(other.transform.position,this.transform.position) <= 3)
 			{
-				AddGold(5);
+				AddGold(2);
 				Destroy(other.gameObject);
 			}
 		}
