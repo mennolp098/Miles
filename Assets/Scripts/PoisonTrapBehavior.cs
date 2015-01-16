@@ -3,8 +3,8 @@ using System.Collections;
 
 public class PoisonTrapBehavior : MonoBehaviour {
     private ParticleSystem poison;
-    private float _attackDamage = 2;
-    private float _attackSpeed = 2;
+    private float _attackDamage = 3;
+    private float _attackSpeed = 4;
     void Start()
     {
         poison = GetComponent<ParticleSystem>();

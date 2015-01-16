@@ -122,17 +122,25 @@ public class EnemyBehavior : MonoBehaviour, IComparable<EnemyBehavior> {
 	}
     public void SetPoison(float attackDamage, float attackSpeed)
     {
-        foreach (Renderer renderer in allChildrenRenderers)
+        if (!poison)
         {
-            allChildrenMaterials.Add(renderer.material);
-            renderer.material.color = Color.green;
+            foreach (Renderer renderer in allChildrenRenderers)
+            {
+                allChildrenMaterials.Add(renderer.material);
+                renderer.material.color = Color.green;
+            }
+            poison = true;
+            StartCoroutine(Poisoned(attackDamage, attackSpeed));
+            Invoke("stopPoison", 12f);
         }
-        poison = true;
-        StartCoroutine(Poisoned(attackDamage, attackSpeed));
-        Invoke("stopPoison", 6f);
     }
     protected void stopPoison()
     {
+        foreach (Renderer renderer in allChildrenRenderers)
+        {
+            allChildrenMaterials.Add(renderer.material);
+            renderer.material.color = new Color(1,1,1,1);
+        }
         poison = false;
     }
     protected IEnumerator Poisoned(float damage,float speed)
