@@ -23,7 +23,7 @@ public class menuScript : MonoBehaviour {
             if (GUI.Button(new Rect(_middelPoint.x - (_buttonSize.x * 4.2f), _middelPoint.y, _buttonSize.x * 2, _buttonSize.y * 2), "", GUIStyle.none))
             {
                 _menus[1].SetActive(false);
-                _menus[2].SetActive(true);
+                _menus[6].SetActive(true);
             }
             if (GUI.Button(new Rect(_middelPoint.x - (_buttonSize.x * 4.2f), _middelPoint.y + (_buttonSize.y * 2), _buttonSize.x * 2, _buttonSize.y), "", GUIStyle.none))
             {
