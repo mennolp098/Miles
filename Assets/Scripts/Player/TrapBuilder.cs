@@ -11,16 +11,18 @@ public class TrapBuilder : MonoBehaviour {
 	public bool isBuilding = false;
 	public GUIStyle textStyle;
 	public Text costText;
-	
-	private float _spawnY;
-	private int _trapToBuild = -1;
-	private GameObject _currentTrap;
-	private List<float> _trapPrices = new List<float>();
-	private List<GameObject> _buildTraps = new List<GameObject>();
-	private List<GameObject> _allTraps = new List<GameObject>();
+	public Camera currentCam;
 
+	protected float _spawnY;
+	protected int _trapToBuild = -1;
+	protected GameObject _currentTrap;
+	protected List<float> _trapPrices = new List<float>();
+	protected List<GameObject> _buildTraps = new List<GameObject>();
+	protected List<GameObject> _allTraps = new List<GameObject>();
+	protected GeneralController _generalController;
 	void Start()
 	{
+		_generalController = GameObject.FindGameObjectWithTag("GeneralController").GetComponent<GeneralController>();
 		GetTraps();
 		int trapcounter = 0;
 		foreach(GameObject trap in _buildTraps)
@@ -36,7 +38,7 @@ public class TrapBuilder : MonoBehaviour {
 		}
 	}
 
-	void Update () {
+	protected virtual void Update () {
         KeyInput();
 		if(Input.GetMouseButtonDown(0) && isBuilding)
 		{
@@ -59,7 +61,7 @@ public class TrapBuilder : MonoBehaviour {
 			CheckWhereToBuild();
 		}
 	}
-	private void KeyInput()
+	protected virtual void KeyInput()
 	{
 		if(Input.GetKeyDown(KeyCode.Alpha1))
 		{
@@ -75,12 +77,12 @@ public class TrapBuilder : MonoBehaviour {
             BuildTrap(3);
 		}
 	}
-	private void CheckWhereToBuild()
+	protected void CheckWhereToBuild()
 	{
 		RaycastHit hit;
 		Ray ray;
 
-		ray = Camera.main.ScreenPointToRay(new Vector2(Screen.width/2,Screen.height/2));
+		ray = Camera.main.ScreenPointToRay(new Vector2(currentCam.pixelWidth/2,currentCam.pixelHeight/2));
 		ray.origin = Camera.main.transform.position;
 		if(Physics.Raycast(ray, out hit))
 		{
@@ -117,7 +119,7 @@ public class TrapBuilder : MonoBehaviour {
 			}
 		}
 	}
-	private void ChangeTrapPos(RaycastHit hit)
+	protected void ChangeTrapPos(RaycastHit hit)
 	{
 		//check hit position for the wall
 		Vector3 newPos = hit.point;
@@ -128,11 +130,11 @@ public class TrapBuilder : MonoBehaviour {
 		_currentTrap.transform.eulerAngles = newRot;
 	}
 	//spawn new trap
-	private void SpawnTrap()
+	protected void SpawnTrap()
 	{
-		if(_trapPrices[_trapToBuild] <= this.GetComponent<GoldController>().GetGold())
+		if(_trapPrices[_trapToBuild] <= _generalController.GetGold())
 		{
-			GetComponent<GoldController>().SubtractGold(_trapPrices[_trapToBuild]);
+			_generalController.SubtractGold(_trapPrices[_trapToBuild]);
 			GameObject newTrap = Instantiate(_allTraps[_trapToBuild], _currentTrap.transform.position,_currentTrap.transform.rotation) as GameObject;
 			GameObject hierachyTraps = GameObject.FindGameObjectWithTag("AllTraps");
 			newTrap.transform.parent = hierachyTraps.transform;
@@ -156,7 +158,7 @@ public class TrapBuilder : MonoBehaviour {
 		_trapToBuild = -1;
 	}
 	//check wich trap to build
-	private void BuildTrap(int trapSort)
+	protected void BuildTrap(int trapSort)
 	{
 		if(_buildTraps[trapSort] != null && !GetComponent<PlayerController>().death)
 		{

@@ -8,8 +8,13 @@ public class projectileScript : MonoBehaviour {
 	void Start () 
     {
 		Destroy(this.gameObject, 10f);
+		if(GeneralController.isMultiplayer)
+		{
+			attackDamage = 5f;
+		} else {
+			attackDamage = 10f;
+		}
 	}
-	
 	void Update () 
     {
         transform.Translate(Vector3.forward);

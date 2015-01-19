@@ -11,6 +11,8 @@ public class trapMenuScript : MonoBehaviour {
     private int             _selectedtrap;
     void Start()
     {
+		Screen.lockCursor = false;
+		Screen.showCursor = true;
         _middelPoint = Camera.main.WorldToScreenPoint(GameObject.Find("middelPoint").transform.position);
         _buttonSize = new Vector2(0.1f * Screen.width, .1f * Screen.height);
         _trapButtonsize = 0.1f * Screen.height;

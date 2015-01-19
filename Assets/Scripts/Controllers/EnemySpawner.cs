@@ -30,7 +30,7 @@ public class EnemySpawner : MonoBehaviour
 	}
     void Update()
     {
-        if (_spawning == true)
+		if (_spawning == true && _winning == false)
         {
             if (_spawningWave == false && Time.time >= _timeLastSubtracted + _waveTime)
             {
@@ -44,7 +44,7 @@ public class EnemySpawner : MonoBehaviour
                     Wave(true, 5, 2);
                     _waveTillBoss = 5;
                     _bossesKilled++;
-                    if(_bossesKilled == 2)
+                    if(_bossesKilled >= 2)
                     {
                         _winning = true;
                     }

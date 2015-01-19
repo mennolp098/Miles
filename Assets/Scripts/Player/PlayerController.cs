@@ -9,35 +9,35 @@ public class PlayerController : MonoBehaviour
 	public bool death;
 	public AudioClip[] allSounds = new AudioClip[0];
 	public GameObject playerModel;
+	public Camera currentCam;
 
+	protected  enum RotationAxes { MouseXAndY = 0, MouseX = 1, MouseY = 2 }
+    protected RotationAxes axes = RotationAxes.MouseXAndY;
+    protected float sensitivityX = 15F;
+    protected float sensitivityY = 15F;
 
-	private  enum RotationAxes { MouseXAndY = 0, MouseX = 1, MouseY = 2 }
-    private RotationAxes axes = RotationAxes.MouseXAndY;
-    private float sensitivityX = 15F;
-    private float sensitivityY = 15F;
-
-    private float minimumY = -20F;
-    private float maximumY = 20F;
-    private float rotationY = 0F;
-    private float speed = 10;
-	private float gravity = 25f;
-	private float cooldown;
-	private float shootCooldown = 0.5f;
+    protected float minimumY = -20F;
+    protected float maximumY = 20F;
+    protected float rotationY = 0F;
+    protected float speed = 10;
+	protected float gravity = 25f;
+	protected float cooldown;
+	protected float shootCooldown = 0.5f;
 
     [SerializeField]
-    private GameObject spell;
+    protected GameObject spell;
     [SerializeField]
-    private Transform spawn;
+    protected Transform spawn;
 
 	void OnGUI()
 	{
-		GUI.DrawTexture(new Rect(Screen.width/2 -16, Screen.height/2 , 32, 32), cursorTexture);
+		GUI.DrawTexture(new Rect(currentCam.pixelWidth/2 -16, currentCam.pixelHeight/2 , 32, 32), cursorTexture);
 	}
 	void Awake()
 	{
 		Screen.lockCursor = true;
 	}
-    void Start()
+    protected virtual void Start()
     {
         if (GetComponent<Rigidbody>())
             GetComponent<Rigidbody>().freezeRotation = true;
@@ -46,12 +46,16 @@ public class PlayerController : MonoBehaviour
     }
 	void Update ()
 	{
+		MovementInput();
+	}
+	protected virtual void MovementInput()
+	{
 		if(!death && playerModel.activeInHierarchy)
 		{
-	        if(Input.GetKey(KeyCode.Mouse0))
-	        {
+			if(Input.GetKey(KeyCode.Mouse0))
+			{
 				ShootSpell();
-	        }
+			}
 			Vector3 movement = new Vector3(Input.GetAxis("Horizontal"), 0, Input.GetAxis("Vertical"));
 			movement = transform.TransformDirection(movement);
 			movement *= speed;
@@ -87,7 +91,7 @@ public class PlayerController : MonoBehaviour
 			}
 		}
 	}
-	private void ShootSpell()
+	protected void ShootSpell()
 	{
 		if(cooldown <= Time.time)
 		{
@@ -110,7 +114,7 @@ public class PlayerController : MonoBehaviour
 		}
 		Screen.lockCursor = false;
 	}
-	private void StopShooting()
+	protected void StopShooting()
 	{
 		animator.SetBool("isShooting", false);
 	}
