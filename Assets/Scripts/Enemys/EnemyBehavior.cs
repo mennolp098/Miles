@@ -135,16 +135,6 @@ public class EnemyBehavior : MonoBehaviour, IComparable<EnemyBehavior> {
     }
     protected void stopPoison()
     {
-<<<<<<< HEAD
-        foreach (Renderer renderer in allChildrenRenderers)
-        {
-            if (renderer != null)
-            {
-                renderer.material.color = new Color(1, 1, 1, 1);
-            }
-        }
-        poison = false;
-=======
 		if(!_death)
 		{
 	        foreach (Renderer renderer in allChildrenRenderers)
@@ -154,7 +144,6 @@ public class EnemyBehavior : MonoBehaviour, IComparable<EnemyBehavior> {
 	        }
 		}
 		poison = false;
->>>>>>> origin/master
     }
     protected IEnumerator Poisoned(float damage,float speed)
     {
