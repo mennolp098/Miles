@@ -30,7 +30,7 @@ public class EnemySpawner : MonoBehaviour
 	}
     void Update()
     {
-        if (_spawning == true)
+        if (_spawning == true && _winning == false) ;
         {
             if (_spawningWave == false && Time.time >= _timeLastSubtracted + _waveTime)
             {
