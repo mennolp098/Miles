@@ -63,6 +63,21 @@ public class menuScript : MonoBehaviour {
                 }
             }
         }
+        if (_menus[6].activeSelf == true)
+        {
+            if (GUI.Button(new Rect(_middelPoint.x  -(_buttonSize.x /3.5f), _middelPoint.y - (_buttonSize.x/2) , _buttonSize.x , _buttonSize.x), ""))
+            {
+                PlayerPrefs.SetInt("multiplayer", 0);
+                _menus[2].SetActive(true);
+                _menus[6].SetActive(false);
+            }
+            if (GUI.Button(new Rect(_middelPoint.x -(_buttonSize.x/1.5f), _middelPoint.y + (_buttonSize.y * 2.5f), _buttonSize.x + (_buttonSize.x / 2), _buttonSize.y + (_buttonSize.y / 2)), ""))
+            {
+                PlayerPrefs.SetInt("multiplayer", 1);
+                _menus[2].SetActive(true);
+                _menus[6].SetActive(false);
+            }
+        }
     }
     public void selectLevel(int level)
     {

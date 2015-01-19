@@ -15,7 +15,7 @@ public class HealthController : MonoBehaviour {
 	// Use this for initialization
 	void Start () {
 		_health = 100;
-		if(GeneralController.isMultiplayer)
+        if (PlayerPrefs.GetInt("multiplayer") == 1)
 		{
 			if(GetComponent<Player02Controller>() == null)
 			{
