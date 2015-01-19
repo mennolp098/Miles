@@ -82,8 +82,8 @@ public class TrapBuilder : MonoBehaviour {
 		RaycastHit hit;
 		Ray ray;
 
-		ray = Camera.main.ScreenPointToRay(new Vector2(currentCam.pixelWidth/2,currentCam.pixelHeight/2));
-		ray.origin = Camera.main.transform.position;
+		ray = currentCam.ScreenPointToRay(new Vector2(currentCam.pixelWidth/2 + currentCam.rect.x * Screen.width,currentCam.pixelHeight/2));
+		ray.origin = currentCam.transform.position;
 		if(Physics.Raycast(ray, out hit))
 		{
 			if(hit.transform.tag == "Wall" && _buildTraps[_trapToBuild].transform.tag == "WallTrap")

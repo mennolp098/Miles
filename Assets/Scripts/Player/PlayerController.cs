@@ -28,10 +28,10 @@ public class PlayerController : MonoBehaviour
     protected GameObject spell;
     [SerializeField]
     protected Transform spawn;
-
-	void OnGUI()
+	
+	protected virtual void OnGUI()
 	{
-		GUI.DrawTexture(new Rect(currentCam.pixelWidth/2 -16, currentCam.pixelHeight/2 , 32, 32), cursorTexture);
+		GUI.DrawTexture(new Rect(currentCam.pixelWidth/2 + currentCam.rect.x * Screen.width -16, currentCam.pixelHeight/2 , 32, 32), cursorTexture);
 	}
 	void Awake()
 	{

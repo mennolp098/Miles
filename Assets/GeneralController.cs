@@ -2,7 +2,7 @@
 using System.Collections;
 using UnityEngine.UI;
 public class GeneralController : MonoBehaviour {
-	public static bool isMultiplayer;
+	public static bool isMultiplayer = true;
 	private float gold;
 	[SerializeField]
 	private Text money;

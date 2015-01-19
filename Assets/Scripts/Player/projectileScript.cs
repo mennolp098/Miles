@@ -37,6 +37,14 @@ public class projectileScript : MonoBehaviour {
 				newRot.y -= 180;
 				hitExplosion.transform.eulerAngles = newRot;
 				Destroy(this.gameObject);
+			} else if(GeneralController.isMultiplayer)
+			{
+				other.GetComponent<HealthController>().SubtractHealth(attackDamage);
+				GameObject hitExplosion = Instantiate(hitExplosionPrefab,this.transform.position,this.transform.rotation) as GameObject;
+				Vector3 newRot = this.transform.eulerAngles;
+				newRot.y -= 180;
+				hitExplosion.transform.eulerAngles = newRot;
+				Destroy(this.gameObject);
 			}
 		}
     }
