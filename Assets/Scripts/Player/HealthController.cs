@@ -15,6 +15,17 @@ public class HealthController : MonoBehaviour {
 	// Use this for initialization
 	void Start () {
 		_health = 100;
+		if(GeneralController.isMultiplayer)
+		{
+			if(GetComponent<Player02Controller>() == null)
+			{
+				respawnCanvas = GameObject.Find("RespawnCanvas01");
+			} else {
+				respawnCanvas = GameObject.Find("RespawnCanvas02");
+			}
+		} else {
+			respawnCanvas = GameObject.Find("RespawnCanvasSingle");
+		}
 	}
 	public void AddHealth(float health)
 	{
@@ -25,7 +36,12 @@ public class HealthController : MonoBehaviour {
 		if(!_invincible && !GetComponent<PlayerController>().death)
 		{
 			_health -= health;
-			GameObject.FindGameObjectWithTag("UI").GetComponent<UIScript>().UpdateHealthBar(_health);
+			if(GetComponent<Player02Controller>() == null)
+			{
+				GameObject.FindGameObjectWithTag("UI").GetComponent<UIScript>().UpdateHealthBar(_health);
+			} else {
+				GameObject.FindGameObjectWithTag("UI").GetComponent<UIScript>().UpdateHealthBarTwo(_health);
+			}
 			if(_health <= 0)
 			{
 				Die();

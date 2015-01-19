@@ -10,7 +10,7 @@ public class TrapBuilder : MonoBehaviour {
 	public float[] allTrapPrices = new float[0];
 	public bool isBuilding = false;
 	public GUIStyle textStyle;
-	public Text costText;
+	protected Text costText;
 	public Camera currentCam;
 
 	protected float _spawnY;
