@@ -15,7 +15,6 @@ public class PlayerController : MonoBehaviour
     protected RotationAxes axes = RotationAxes.MouseXAndY;
     protected float sensitivityX = 15F;
     protected float sensitivityY = 15F;
-
     protected float minimumY = -20F;
     protected float maximumY = 20F;
     protected float rotationY = 0F;
@@ -28,6 +27,11 @@ public class PlayerController : MonoBehaviour
     protected GameObject spell;
     [SerializeField]
     protected Transform spawn;
+
+	protected string horizontalAxisMovement;
+	protected string verticalAxisMovement;
+	protected string horizontalAxisAim;
+	protected string verticalAxisAim;
 	
 	protected virtual void OnGUI()
 	{
@@ -47,16 +51,17 @@ public class PlayerController : MonoBehaviour
 	void Update ()
 	{
 		MovementInput();
+		ShootInput();
 	}
-	protected virtual void MovementInput()
+	protected virtual void ShootInput()
+	{
+		//here comes to shootinput
+	}
+	protected void MovementInput()
 	{
 		if(!death && playerModel.activeInHierarchy)
 		{
-			if(Input.GetKey(KeyCode.Mouse0))
-			{
-				ShootSpell();
-			}
-			Vector3 movement = new Vector3(Input.GetAxis("Horizontal"), 0, Input.GetAxis("Vertical"));
+			Vector3 movement = new Vector3(Input.GetAxis(horizontalAxisMovement), 0, Input.GetAxis(verticalAxisMovement));
 			movement = transform.TransformDirection(movement);
 			movement *= speed;
 			movement.y = -gravity;
@@ -70,9 +75,9 @@ public class PlayerController : MonoBehaviour
 			}
 			if (axes == RotationAxes.MouseXAndY)
 			{
-				float rotationX = transform.localEulerAngles.y + Input.GetAxis("Mouse X") * sensitivityX;
+				float rotationX = transform.localEulerAngles.y + Input.GetAxis(horizontalAxisAim) * sensitivityX;
 				
-				rotationY += Input.GetAxis("Mouse Y") * sensitivityY;
+				rotationY += Input.GetAxis(verticalAxisAim) * sensitivityY;
 				rotationY = Mathf.Clamp (rotationY, minimumY, maximumY);
 				
 				transform.localEulerAngles = new Vector3(0, rotationX, 0);
@@ -80,11 +85,11 @@ public class PlayerController : MonoBehaviour
 			}
 			else if (axes == RotationAxes.MouseX)
 			{
-				transform.Rotate(0, Input.GetAxis("Mouse X") * sensitivityX, 0);
+				transform.Rotate(0, Input.GetAxis(horizontalAxisAim) * sensitivityX, 0);
 			}
 			else
 			{
-				rotationY += Input.GetAxis("Mouse Y") * sensitivityY;
+				rotationY += Input.GetAxis(verticalAxisAim) * sensitivityY;
 				rotationY = Mathf.Clamp (rotationY, minimumY, maximumY);
 				
 				transform.localEulerAngles = new Vector3(-rotationY, transform.localEulerAngles.y, 0);

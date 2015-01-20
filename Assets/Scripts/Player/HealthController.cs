@@ -18,8 +18,10 @@ public class HealthController : MonoBehaviour {
 	}
 	public void AddRespawnCanvas(GameObject canvas)
 	{
+		canvas.SetActive(true);
 		respawnCanvas = canvas;
-		respawnText = canvas.GetComponent<Text>();
+		respawnText = canvas.GetComponentInChildren<Text>();
+		canvas.SetActive(false);
 	}
 	public void AddHealth(float health)
 	{
@@ -30,7 +32,7 @@ public class HealthController : MonoBehaviour {
 		if(!_invincible && !GetComponent<PlayerController>().death)
 		{
 			_health -= health;
-			if(GetComponent<Player02Controller>() == null)
+			if(GetComponent<PlayerTwo>() == null)
 			{
 				GameObject.FindGameObjectWithTag("UI").GetComponent<UIScript>().UpdateHealthBar(_health);
 			} else {
@@ -109,6 +111,7 @@ public class HealthController : MonoBehaviour {
 		GetComponent<PlayerController>().death = false;
 		_health = 100;
 		GameObject.FindGameObjectWithTag("UI").GetComponent<UIScript>().UpdateHealthBar(_health);
+		GameObject.FindGameObjectWithTag("GeneralController").GetComponent<GeneralController>().SubtractGold(25f);
 		_invincible = true;
 		StartCoroutine("InvincibleCounterCouritine");
 	}
