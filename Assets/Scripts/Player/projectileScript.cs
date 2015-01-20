@@ -8,7 +8,7 @@ public class projectileScript : MonoBehaviour {
 	void Start () 
     {
 		Destroy(this.gameObject, 10f);
-		if(GeneralController.isMultiplayer)
+        if (PlayerPrefs.GetInt("multiplayer") == 1)
 		{
 			attackDamage = 5f;
 		} else {
@@ -37,7 +37,8 @@ public class projectileScript : MonoBehaviour {
 				newRot.y -= 180;
 				hitExplosion.transform.eulerAngles = newRot;
 				Destroy(this.gameObject);
-			} else if(GeneralController.isMultiplayer)
+            }
+            else if (PlayerPrefs.GetInt("multiplayer") == 1)
 			{
 				other.GetComponent<HealthController>().SubtractHealth(attackDamage);
 				GameObject hitExplosion = Instantiate(hitExplosionPrefab,this.transform.position,this.transform.rotation) as GameObject;

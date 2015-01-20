@@ -2,7 +2,6 @@
 using System.Collections;
 using UnityEngine.UI;
 public class GeneralController : MonoBehaviour {
-	public static bool isMultiplayer = true;
 	public GameObject RespawnCanvasSingle;
 	public GameObject RespawnCanvas01;
 	public GameObject RespawnCanvas02;
@@ -16,7 +15,7 @@ public class GeneralController : MonoBehaviour {
 	private Text money;
 	void Start () {
 		gold = 100;
-		if(isMultiplayer)
+		if(PlayerPrefs.GetInt("multiplayer") == 1)
 		{
 			GameObject respawnCanvas01 = Instantiate(RespawnCanvas01,RespawnCanvas01.transform.position,RespawnCanvas01.transform.rotation) as GameObject;
 			GameObject respawnCanvas02 = Instantiate(RespawnCanvas02,RespawnCanvas02.transform.position,RespawnCanvas02.transform.rotation) as GameObject;
