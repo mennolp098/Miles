@@ -30,11 +30,13 @@ public class ArrowBehavior : MonoBehaviour {
 				{
 					float amplifiedDamage = _damage * 1.5f;
 					other.gameObject.GetComponent<EnemyBehavior>().GetDmg(amplifiedDamage);
-				} else {
+				} else 
+                {
 					other.gameObject.GetComponent<EnemyBehavior>().GetDmg(_damage);
 				}
 				Destroy(this.gameObject);
-			} else {
+			} else 
+            {
 				Destroy(this.gameObject);
 			}
 		}
@@ -51,8 +53,7 @@ public class ArrowBehavior : MonoBehaviour {
 			{
 				transform.Translate(Vector3.forward * speed * Time.deltaTime);
 			}
-		} 
-		else 
+		} else 
 		{
 			transform.Translate(Vector3.forward * speed * Time.deltaTime);
 		}

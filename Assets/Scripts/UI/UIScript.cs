@@ -5,6 +5,7 @@ using System.Collections;
 public class UIScript : MonoBehaviour {
     [SerializeField]
     private Sprite[] traps;
+    [SerializeField]
     private Image[] images;
 	[SerializeField]
     private Slider healthBarOne;
@@ -15,10 +16,13 @@ public class UIScript : MonoBehaviour {
 	// Use this for initialization
 	void Start () 
     {
-        images = gameObject.GetComponentsInChildren<Image>();
         for (int i = 0; i < 4;i++ )
         {
-            images[i + 2].sprite = traps[PlayerPrefs.GetInt("hotBar"+i)];
+            images[i].sprite = traps[PlayerPrefs.GetInt("hotBar"+i)];
+            if(PlayerPrefs.GetInt("multiplayer") == 1)
+            {
+                images[i +4].sprite = traps[PlayerPrefs.GetInt("hotBar" + i)];
+            }
         }
 	}
 	public void UpdateHealthBar (float newHealth)
