@@ -10,7 +10,6 @@ public class TrapBuilder : MonoBehaviour {
 	public float[] allTrapPrices = new float[0];
 	public bool isBuilding = false;
 	public GUIStyle textStyle;
-	protected Text costText;
 	public Camera currentCam;
 
 	protected float _spawnY;
@@ -20,11 +19,16 @@ public class TrapBuilder : MonoBehaviour {
 	protected List<GameObject> _buildTraps = new List<GameObject>();
 	protected List<GameObject> _allTraps = new List<GameObject>();
 	protected GeneralController _generalController;
-	void Start()
+	protected Text costText;
+	protected KeyCode key01;
+	protected KeyCode key02;
+	protected KeyCode key03;
+	protected KeyCode key04;
+	protected virtual void Start()
 	{
 		_generalController = GameObject.FindGameObjectWithTag("GeneralController").GetComponent<GeneralController>();
 
-		if(GetComponent<Player02Controller>() == null)
+		if(GetComponent<PlayerTwo>() == null)
 		{
 			costText = GameObject.Find ("CostText").GetComponent<Text>();
 		} else {
@@ -48,39 +52,28 @@ public class TrapBuilder : MonoBehaviour {
 
 	protected virtual void Update () {
         KeyInput();
-		if(Input.GetMouseButtonDown(0) && isBuilding)
-		{
-			if(_currentTrap != null)
-			{
-				if(_currentTrap.GetComponent<BuildTrapBehavior>().buildAble)
-				{
-					SpawnTrap();
-				} else {
-					ClearTrap();
-				}
-			}
-			else
-			{
-				ClearTrap();
-			}
-		}
+		BuildInput();
 		if(isBuilding)
 		{
 			CheckWhereToBuild();
 		}
 	}
-	protected virtual void KeyInput()
+	protected virtual void BuildInput()
 	{
-		if(Input.GetKeyDown(KeyCode.Alpha1))
+		//here comes buildinput
+	}
+	protected void KeyInput()
+	{
+		if(Input.GetKeyDown(key01))
 		{
             BuildTrap(0);
-		} else if(Input.GetKeyDown(KeyCode.Alpha2)) 
+		} else if(Input.GetKeyDown(key02)) 
 		{
             BuildTrap(1);
-		} else if(Input.GetKeyDown(KeyCode.Alpha3)) 
+		} else if(Input.GetKeyDown(key03)) 
 		{
             BuildTrap(2);
-		} else if(Input.GetKeyDown(KeyCode.Alpha4)) 
+		} else if(Input.GetKeyDown(key04)) 
 		{
             BuildTrap(3);
 		}
