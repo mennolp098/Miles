@@ -30,6 +30,7 @@ public class GeneralController : MonoBehaviour {
 			GameObject respawnCanvas01 = Instantiate(RespawnCanvasSingle,RespawnCanvasSingle.transform.position,RespawnCanvasSingle.transform.rotation) as GameObject;
 			Instantiate(OnePlayerCanvas,OnePlayerCanvas.transform.position,OnePlayerCanvas.transform.rotation);
 			GameObject playerOne = Instantiate(PlayerSingle,PlayerSingle.transform.position,PlayerSingle.transform.rotation) as GameObject;
+			playerOne.transform.parent = GameObject.FindGameObjectWithTag("Entitys").transform;
 			playerOne.GetComponent<HealthController>().AddRespawnCanvas(respawnCanvas01);
 		}
 		money = GameObject.FindGameObjectWithTag("MoneyText").GetComponent<Text>();

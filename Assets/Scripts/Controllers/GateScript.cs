@@ -6,9 +6,13 @@ public class GateScript : MonoBehaviour
     [SerializeField]
     private int _health;
     [SerializeField]
-    private Canvas loseScreen;
-	[SerializeField]
-	private Canvas uiCanvas;
+    private Canvas _loseScreen;
+
+	private GameObject _uiCanvas;
+	void Start()
+	{
+		_uiCanvas = GameObject.FindGameObjectWithTag("UI");
+	}
 	void OnTriggerEnter(Collider other)
 	{
 		if(other.transform.tag == "Enemy")
@@ -21,12 +25,16 @@ public class GateScript : MonoBehaviour
     public void hit()
     {
         _health--;
-		GameObject.FindGameObjectWithTag("UI").GetComponent<UIScript>().UpdateGateBar(_health);
+		_uiCanvas.GetComponent<UIScript>().UpdateGateBar(_health);
         if(_health <= 0)
         {
-            loseScreen.gameObject.SetActive(true);
-			uiCanvas.gameObject.SetActive(false);
-			GameObject.FindGameObjectWithTag("Player").GetComponent<PlayerController>().YouLost();
+            _loseScreen.gameObject.SetActive(true);
+			_uiCanvas.gameObject.SetActive(false);
+			GameObject[] allPlayers = GameObject.FindGameObjectsWithTag("Player");
+			foreach(GameObject player in allPlayers)
+			{
+				player.GetComponent<PlayerController>().YouLost();
+			}
         }
     }
 }
