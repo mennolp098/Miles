@@ -23,6 +23,14 @@ public class TrapBuilder : MonoBehaviour {
 	void Start()
 	{
 		_generalController = GameObject.FindGameObjectWithTag("GeneralController").GetComponent<GeneralController>();
+
+		if(GetComponent<Player02Controller>() == null)
+		{
+			costText = GameObject.Find ("CostText").GetComponent<Text>();
+		} else {
+			costText = GameObject.Find ("CostTextTwo").GetComponent<Text>();
+		}
+
 		GetTraps();
 		int trapcounter = 0;
 		foreach(GameObject trap in _buildTraps)

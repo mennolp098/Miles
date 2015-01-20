@@ -5,27 +5,21 @@ using UnityEngine.UI;
 public class HealthController : MonoBehaviour {
 	private float _health;
 	private bool _invincible;
-	
+	private GameObject spawnPoint;
+	private Text respawnText;
+	private GameObject respawnCanvas;
+
 	public AudioClip deathSound;
-	public GameObject spawnPoint;
-	public Text respawnText;
-	public GameObject respawnCanvas;
-	//public GameObject character;
 	public GameObject sphere;
 	// Use this for initialization
 	void Start () {
 		_health = 100;
-		if(GeneralController.isMultiplayer)
-		{
-			if(GetComponent<Player02Controller>() == null)
-			{
-				respawnCanvas = GameObject.Find("RespawnCanvas01");
-			} else {
-				respawnCanvas = GameObject.Find("RespawnCanvas02");
-			}
-		} else {
-			respawnCanvas = GameObject.Find("RespawnCanvasSingle");
-		}
+		spawnPoint = GameObject.FindGameObjectWithTag("SpawnPoint");
+	}
+	public void AddRespawnCanvas(GameObject canvas)
+	{
+		respawnCanvas = canvas;
+		respawnText = canvas.GetComponent<Text>();
 	}
 	public void AddHealth(float health)
 	{
